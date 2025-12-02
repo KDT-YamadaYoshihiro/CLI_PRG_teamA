@@ -17,4 +17,9 @@
       <UniqueIdentifier>{7d351ed0-1daa-4f23-83f2-30aebc0e5bab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sakanaba.cpp">
+      <Filter>ソース ファイル\sakanaba</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
