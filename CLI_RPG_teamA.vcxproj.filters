@@ -16,6 +16,12 @@
     <Filter Include="Program\System">
       <UniqueIdentifier>{9597612e-876e-4f68-9936-af7652a4d6e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Program\Graphics">
+      <UniqueIdentifier>{2a8c2277-2b64-4943-8891-bcb688219106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program\Graphics\View">
+      <UniqueIdentifier>{df5d6487-615a-4c60-8996-1c09bb3ff75b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="program\Main.cpp">
