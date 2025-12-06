@@ -26,7 +26,7 @@ public:
 	{
 		if (Instance == nullptr)
 		{
-			Instance = std::make_unique<T>();
+			Instance = new T();
 			Instance->OnCreate();
 			return true;
 		}
@@ -38,25 +38,20 @@ public:
 		if (Instance != nullptr)
 		{
 			Instance->OnDestory();
-			Instance.reset();
+			delete Instance;
 			Instance = nullptr;
 		}
 	}
 
 	static T* GetInstance()
 	{
-		return Instance.get();
+		return Instance;
 	}
 
 protected:
-	Singleton() noexcept
-		:Instance(nullptr)
-	{
-	};
+	Singleton() noexcept = default;
 
-	virtual ~Singleton() noexcept
-	{
-	}
+	virtual ~Singleton() noexcept = default;
 
 	virtual void OnCreate()
 	{
@@ -67,7 +62,7 @@ protected:
 	}
 private:
 
-	static std::unique_ptr<T> Instance;
+	static T* Instance;
 
 	Singleton(const Singleton&) = delete;
 	Singleton(Singleton&&) = delete;
@@ -76,4 +71,4 @@ private:
 };
 
 template<typename T>
-std::unique_ptr<T> Singleton<T>::Instance = nullptr;
+T* Singleton<T>::Instance = nullptr;
