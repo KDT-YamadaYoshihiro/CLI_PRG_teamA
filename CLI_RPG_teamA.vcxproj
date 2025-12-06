@@ -134,7 +134,6 @@
     <ClCompile Include="program\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="program\Graphics\View\View.hpp" />
     <ClInclude Include="program\System\Singleton.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
