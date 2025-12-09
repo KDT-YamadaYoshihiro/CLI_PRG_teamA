@@ -48,6 +48,15 @@ Engine::GameManager* Engine::Engine::GetGameManager() noexcept
 }
 
 /// <summary>
+/// ビューの所得
+/// </summary>
+/// <returns></returns>
+Graphics::View* Engine::Engine::GetView() noexcept
+{
+	return m_view;
+}
+
+/// <summary>
 /// フレーム管理
 /// </summary>
 /// <returns></returns>

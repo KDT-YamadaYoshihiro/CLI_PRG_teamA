@@ -39,6 +39,9 @@
     <ClCompile Include="program\System\Time\Time.cpp">
       <Filter>Program</Filter>
     </ClCompile>
+    <ClCompile Include="program\Application\Player\action\ActionSelector.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="program\System\Utility\Singleton.hpp">
@@ -57,6 +60,18 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="program\System\Time\Time.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\Player\action\ActionCommand.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\Inventory\Item\base\Item.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\Inventory\Item\Healing_Item\Item_Healing.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\System\Input\Key.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

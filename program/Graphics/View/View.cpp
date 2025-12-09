@@ -1,6 +1,10 @@
 #include "Graphics/View/View.hpp"
 #include "System/Utility/Define.hpp"
 
+/// <summary>
+/// 今のハンドル取得
+/// </summary>
+/// <returns></returns>
 HANDLE Graphics::View::GetBackBufferHandle() const
 {
 	return m_sceneBuffer[1 - m_currentBuffer];
@@ -61,6 +65,14 @@ void Graphics::View::ClearBuffer()
 }
 
 /// <summary>
+/// 表示する文字列のクリア
+/// </summary>
+void Graphics::View::AllClear()
+{
+	m_views.clear();
+}
+
+/// <summary>
 /// 生成時の処理
 /// </summary>
 void Graphics::View::OnCreate()
@@ -98,6 +110,8 @@ void Graphics::View::Render()
 		);
 		y++;
 	}
+	//m_views.clear();
+
 }
 
 

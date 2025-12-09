@@ -41,6 +41,11 @@ namespace Graphics
 		void ClearBuffer();
 
 		/// <summary>
+		/// •\¦‚·‚é•¶š—ñ‚ÌƒNƒŠƒA
+		/// </summary>
+		void AllClear();
+
+		/// <summary>
 		/// ¶¬‚Ìˆ—
 		/// </summary>
 		void OnCreate()override;
