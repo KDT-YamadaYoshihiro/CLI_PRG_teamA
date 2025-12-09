@@ -107,6 +107,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>program;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,10 +132,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="program\Engine\Engine.cpp" />
+    <ClCompile Include="program\FrameWork\GameManager\GameManager.cpp" />
+    <ClCompile Include="program\Graphics\View\View.cpp" />
     <ClCompile Include="program\Main.cpp" />
+    <ClCompile Include="program\System\Time\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="program\Engine\Engine.hpp" />
+    <ClInclude Include="program\FrameWork\GameManager\GameManager.hpp" />
+    <ClInclude Include="program\Graphics\View\View.hpp" />
+    <ClInclude Include="program\System\Utility\Define.hpp" />
     <ClInclude Include="program\System\Utility\Singleton.hpp" />
+    <ClInclude Include="program\System\Time\Time.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

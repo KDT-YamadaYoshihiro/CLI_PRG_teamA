@@ -27,9 +27,36 @@
     <ClCompile Include="program\Main.cpp">
       <Filter>Program</Filter>
     </ClCompile>
+    <ClCompile Include="program\Engine\Engine.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\FrameWork\GameManager\GameManager.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Graphics\View\View.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\System\Time\Time.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="program\System\Utility\Singleton.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Engine\Engine.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\FrameWork\GameManager\GameManager.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\System\Utility\Define.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Graphics\View\View.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\System\Time\Time.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
