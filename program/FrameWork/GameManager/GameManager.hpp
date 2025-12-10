@@ -5,13 +5,16 @@ namespace Engine
 {
 	class GameManager : public Singleton<GameManager>
 	{
-	public:
 		GENERATE_SINGLETON_BODY(GameManager)
-
+	public:
 		bool Initialize();		
 		void Run();
 		void Finalize();
 
+		/// <summary>
+		/// ç≈èâÇÃSceneÇÃê∂ê¨
+		/// </summary>
+		void CreateStartScene();
 	private:
 		void OnCreate()override;
 		void OnDestory()override;

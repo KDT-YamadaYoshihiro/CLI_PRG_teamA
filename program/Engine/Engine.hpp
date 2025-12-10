@@ -7,6 +7,11 @@
 
 #include<memory>
 
+#ifndef CLI_ENGINE
+#define CLI_ENGINE 	Engine::Engine::GetInstance()
+
+#endif // !CLI_ENGINE
+
 namespace Engine
 {
 	class Engine : public Singleton<Engine>
@@ -28,6 +33,12 @@ namespace Engine
 		/// </summary>
 		/// <returns></returns>
 		GameManager* GetGameManager()noexcept;
+
+		/// <summary>
+		/// ビューの所得
+		/// </summary>
+		/// <returns></returns>
+		Graphics::View* GetView()noexcept;
 
 		/// <summary>
 		/// フレーム管理
@@ -53,11 +64,16 @@ namespace Engine
 		/// </summary>
 		/// <returns></returns>
 		bool InitializeTimer();
+
+		/// <summary>
+		/// スクリーン管理の初期火
+		/// </summary>
+		/// <returns>true:成功</returns>
+		bool InitializeSceneManager();
+
 	private:
 		GameManager* m_gameManager;
 		Graphics::View* m_view;
 		std::unique_ptr<Time> m_timer;
 	};
-
-
 }

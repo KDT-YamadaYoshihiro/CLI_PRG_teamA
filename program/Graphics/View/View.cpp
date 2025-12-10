@@ -1,10 +1,13 @@
 #include "Graphics/View/View.hpp"
 #include "System/Utility/Define.hpp"
 
-HANDLE Graphics::View::GetBackBufferHandle() const
-{
-	return m_sceneBuffer[1 - m_currentBuffer];
-}
+// 1:Window Console Api 2: std::cout
+#define RENDER_MODE 2
+
+#if RENDER_MODE == 2
+#include<iostream>
+#endif // RENDER_MODE == 1
+
 
 /// <summary>
 /// 初期化
@@ -12,52 +15,14 @@ HANDLE Graphics::View::GetBackBufferHandle() const
 /// <returns>true:成功</returns>
 bool Graphics::View::Initialize()
 {
-	//	メインバッファ
-	m_sceneBuffer[FRONT_BUFFER_INDEX] = GetStdHandle(STD_OUTPUT_HANDLE);
-	m_sceneBuffer[BACK_BUFFER_INDEX] = CreateConsoleScreenBuffer(
-		GENERIC_READ | GENERIC_WRITE,
-		0,
-		NULL,
-		CONSOLE_TEXTMODE_BUFFER,
-		NULL
-	);
+#if RENDER_MODE == 1
+	m_console = GetStdHandle(STD_OUTPUT_HANDLE);
+#elif RENDER_MODE == 2
+	m_views.clear();		
+#endif // RENDER_MODE == 1
 
-	if (m_sceneBuffer[BACK_BUFFER_INDEX] == INVALID_HANDLE_VALUE)
-	{
-		DEBUG_BREAK
-		return false;
-	}
-
-	//	最初の表示
-	SetConsoleActiveScreenBuffer(m_sceneBuffer[m_currentBuffer]);
-
+	isDirty = true;
 	return true;
-}
-
-/// <summary>
-/// バッファの切り替え
-/// </summary>
-void Graphics::View::Flip()
-{
-	SetConsoleActiveScreenBuffer(m_sceneBuffer[m_currentBuffer]);
-
-	//	バッファの切り替え
-	m_currentBuffer = 1 - m_currentBuffer;
-}
-
-void Graphics::View::ClearBuffer()
-{
-
-	HANDLE back = this->GetBackBufferHandle();
-
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
-	GetConsoleScreenBufferInfo(back, &csbi);
-
-	DWORD cellCnt = csbi.dwSize.X * csbi.dwSize.Y;
-	DWORD count;
-
-	FillConsoleOutputCharacter(back, ' ', cellCnt, { 0,0 }, &count);
-	FillConsoleOutputAttribute(back, csbi.wAttributes, cellCnt, { 0,0 }, &count);
 }
 
 /// <summary>
@@ -65,7 +30,6 @@ void Graphics::View::ClearBuffer()
 /// </summary>
 void Graphics::View::OnCreate()
 {
-	m_currentBuffer = 0;
 	this->Initialize();
 }
 
@@ -73,9 +37,43 @@ void Graphics::View::OnCreate()
 /// 表示する文字列の追加
 /// </summary>
 /// <param name="str"></param>
-void Graphics::View::AddString(const std::filesystem::path& str)
+void Graphics::View::AddLine(const std::string& str)
 {
 	m_views.push_back(str);
+	isDirty = true;
+}
+
+/// <summary>
+/// 表示する文字列の削除
+/// </summary>
+void Graphics::View::ClearLines()
+{
+	m_views.clear();
+	isDirty = true;
+}
+
+/// <summary>
+/// 画面をすべて消す
+/// </summary>
+void Graphics::View::ClearScene()
+{
+#if RENDER_MODE == 1
+
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(m_console, &csbi);
+
+	DWORD cellCount = csbi.dwSize.X * csbi.dwSize.Y;
+	DWORD written;
+
+	COORD home = { 0, 0 };
+
+	FillConsoleOutputCharacterA(m_console, ' ', cellCount, home, &written);
+	FillConsoleOutputAttribute(m_console, csbi.wAttributes, cellCount, home, &written);
+
+	SetConsoleCursorPosition(m_console, home);
+#elif RENDER_MODE == 2
+	system("cls");
+#endif // RENDER_MODE == 1
 }
 
 /// <summary>
@@ -83,21 +81,38 @@ void Graphics::View::AddString(const std::filesystem::path& str)
 /// </summary>
 void Graphics::View::Render()
 {
-	HANDLE back = this->GetBackBufferHandle();
-	DWORD written;
-
-	SHORT y = 0;
-	for (auto& view : m_views)
+	if (isDirty == false)
 	{
-		WriteConsoleOutputCharacter(
-			back,
-			view.wstring().c_str(),
-			(DWORD)view.wstring().size(),
-			COORD{ 0, y },
-			&written
-		);
-		y++;
+		return;
 	}
+
+	this->ClearScene();
+
+#if RENDER_MODE == 1
+	COORD pos = { 0,0 };
+	DWORD written;
+	for (const auto& line : m_views)
+	{
+		pos.X = 0;
+		SetConsoleCursorPosition(m_console, pos);
+		WriteConsoleA(
+			m_console,
+			line.c_str(),
+			(DWORD)line.size(),
+			&written,
+			nullptr
+		);
+		pos.Y++;
+	}
+#elif RENDER_MODE == 2
+	for (const auto& line : m_views)
+	{
+		std::cout << line << std::endl;
+	}
+
+#endif // RENDER_MODE == 1
+
+	isDirty = false;
 }
 
 

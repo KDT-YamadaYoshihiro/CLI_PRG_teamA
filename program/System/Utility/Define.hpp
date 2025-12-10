@@ -15,5 +15,7 @@
 #define DEBUG_BREAK 
 #endif // _DEBUG
 
+//	CancelƒAƒNƒVƒ‡ƒ“
+
 
 #endif // !PTR_DEFINE

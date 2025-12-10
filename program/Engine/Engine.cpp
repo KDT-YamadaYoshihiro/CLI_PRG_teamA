@@ -1,5 +1,7 @@
 #include "Engine/Engine.hpp"
 #include "System/Utility/Define.hpp"
+#include "Scene/SceneManager.h"
+
 
 void Engine::Engine::OnCreate()
 {
@@ -16,12 +18,6 @@ bool Engine::Engine::Initialize()
 {
 	bool ret = false;
 
-	//	GameManager
-	ret = this->InitializeGameManager();
-	if (ret == false)
-	{
-		return false;
-	}
 	//	View
 	ret = this->InitializeView();
 	if (ret == false)
@@ -34,7 +30,18 @@ bool Engine::Engine::Initialize()
 	{
 		return false;
 	}
-
+	//	Scene
+	ret = this->InitializeSceneManager();
+	if (ret == false)
+	{
+		return false;
+	}
+	//	GameManager
+	ret = this->InitializeGameManager();
+	if (ret == false)
+	{
+		return false;
+	}
 	return true;
 }
 
@@ -45,6 +52,15 @@ bool Engine::Engine::Initialize()
 Engine::GameManager* Engine::Engine::GetGameManager() noexcept
 {
 	return m_gameManager;
+}
+
+/// <summary>
+/// ビューの所得
+/// </summary>
+/// <returns></returns>
+Graphics::View* Engine::Engine::GetView() noexcept
+{
+	return m_view;
 }
 
 /// <summary>
@@ -102,8 +118,6 @@ bool Engine::Engine::InitializeView()
 		DEBUG_BREAK
 		return false;
 	}
-	m_view->AddString("初期化完了");
-
 	return true;
 }
 
@@ -119,5 +133,15 @@ bool Engine::Engine::InitializeTimer()
 		return false;
 	}
 
+	return true;
+}
+
+/// <summary>
+/// スクリーン管理の初期火
+/// </summary>
+/// <returns>true:成功</returns>
+bool Engine::Engine::InitializeSceneManager()
+{
+	SceneManager::Create();
 	return true;
 }

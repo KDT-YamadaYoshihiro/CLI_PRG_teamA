@@ -5,6 +5,7 @@
 #endif // GENERATE_SINGLETON_BODY
 
 #define GENERATE_SINGLETON_BODY(Class)\
+private:\
 friend class Singleton<Class>;\
 Class()noexcept = default;\
 virtual ~Class()noexcept = default;\
