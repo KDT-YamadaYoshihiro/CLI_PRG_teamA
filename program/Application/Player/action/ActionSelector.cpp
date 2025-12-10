@@ -15,11 +15,12 @@ Battle::ActionResult Battle::ActionSelector::SelectCommand(std::span<const std::
 	while (true)
 	{
 		//	選択項目の追加
-		CLI_ENGINE->GetView()->AddString("-----------------");
-		CLI_ENGINE->GetView()->AddString("1: 攻撃");
-		CLI_ENGINE->GetView()->AddString("2: 魔法");
-		CLI_ENGINE->GetView()->AddString("3: アイテム");
-		CLI_ENGINE->GetView()->AddString("選択してください");
+		CLI_ENGINE->GetView()->AddLine("-----------------");
+		CLI_ENGINE->GetView()->AddLine("1: 攻撃");
+		CLI_ENGINE->GetView()->AddLine("2: 魔法");
+		CLI_ENGINE->GetView()->AddLine("3: アイテム");
+		CLI_ENGINE->GetView()->AddLine("選択してください");
+		CLI_ENGINE->GetView()->Render();
 
 		int input;
 		std::cin >> input;
@@ -57,14 +58,14 @@ Battle::ActionResult Battle::ActionSelector::SelectCommand(std::span<const std::
 				break;
 
 			default:
+
 				break;
 			}
 		}	// if cin.fill
-
 		std::cin.clear();
 		std::cin.ignore(1024, '\n');
 
-		CLI_ENGINE->GetView()->AddString("無効な入力です");
+		CLI_ENGINE->GetView()->AddLine("無効な入力です");
 
 
 	}	//	while
@@ -79,35 +80,40 @@ Battle::ActionResult Battle::ActionSelector::SelectMagic(std::span<const std::st
 	//	選択するまで無限ループ
 	while (true)
 	{
-		CLI_ENGINE->GetView()->AddString("------魔法一覧------");
+		CLI_ENGINE->GetView()->AddLine("------魔法一覧------");
 		for (size_t id = 0; id < MagicNames.size(); id++)
 		{
 			//	IDと魔法名を表示
-			CLI_ENGINE->GetView()->AddString(std::to_string(id) + ": " + MagicNames[id]);
+			CLI_ENGINE->GetView()->AddLine(std::to_string(id) + ": " + MagicNames[id]);
 		}
 
-		CLI_ENGINE->GetView()->AddString("番号を入力してください");
+		CLI_ENGINE->GetView()->AddLine("番号を入力してください");
 
 		if (_kbhit())
 		{
 			int key = _getch();
 			if (key == static_cast<int>(Input::KeyCode::Escape))
 			{
+				std::cin.ignore(1024, '\n');
 				return ActionResult(ePlayerCommand::Magic, -1);
 			}
 		}
+
+		//	このタイミングで表示をする
+		CLI_ENGINE->GetView()->Render();
 
 		//	数値が欲しいのでstd::cinを使います
 		int id = -1;
 		std::cin >> id;
 		if (std::cin.fail() == false && id >= 0 && id < static_cast<int>(MagicNames.size()))
 		{
+			std::cin.ignore(1024, '\n');
 			return ActionResult(ePlayerCommand::Magic,id);
 		}
 
 		std::cin.clear();
 		std::cin.ignore(1024, '\n');
-		CLI_ENGINE->GetView()->AddString("無効な入力です");
+		CLI_ENGINE->GetView()->AddLine("無効な入力です");
 	}
 }
 
@@ -120,14 +126,14 @@ Battle::ActionResult Battle::ActionSelector::SelectItem(std::span<const std::str
 	//	選択するまで無限ループ
 	while (true)
 	{
-		CLI_ENGINE->GetView()->AddString("------魔法一覧------");
+		CLI_ENGINE->GetView()->AddLine("------魔法一覧------");
 		for (size_t id = 0; id < ItemNames.size(); id++)
 		{
 			//	IDと魔法名を表示
-			CLI_ENGINE->GetView()->AddString(std::to_string(id) + ": " + ItemNames[id]);
+			CLI_ENGINE->GetView()->AddLine(std::to_string(id) + ": " + ItemNames[id]);
 		}
 
-		CLI_ENGINE->GetView()->AddString("番号を入力してください");
+		CLI_ENGINE->GetView()->AddLine("番号を入力してください");
 
 		if (_kbhit())
 		{
@@ -137,6 +143,9 @@ Battle::ActionResult Battle::ActionSelector::SelectItem(std::span<const std::str
 				return ActionResult(ePlayerCommand::Magic, -1);
 			}
 		}
+
+		//	このタイミングで表示をする
+		CLI_ENGINE->GetView()->Render();
 
 		//	数値が欲しいのでstd::cinを使います
 		int id = -1;
@@ -148,7 +157,7 @@ Battle::ActionResult Battle::ActionSelector::SelectItem(std::span<const std::str
 
 		std::cin.clear();
 		std::cin.ignore(1024, '\n');
-		CLI_ENGINE->GetView()->AddString("無効な入力です");
+		CLI_ENGINE->GetView()->AddLine("無効な入力です");
 	}
 }
 

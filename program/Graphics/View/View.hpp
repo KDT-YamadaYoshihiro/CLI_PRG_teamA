@@ -3,8 +3,10 @@
 #include<vector>
 #include<array>
 #include<Windows.h>
+#include <string>
 
 #include "System/Utility/Singleton.hpp"
+
 
 
 namespace Graphics
@@ -13,37 +15,12 @@ namespace Graphics
 	{
 		GENERATE_SINGLETON_BODY(View)
 
-		static constexpr UINT FRONT_BUFFER_INDEX = 0;
-		static constexpr UINT BACK_BUFFER_INDEX = 1;
-		static constexpr UINT CONSOLE_BUFFER_MAX = 2;
-
-		/// <summary>
-		/// 今のハンドル取得
-		/// </summary>
-		/// <returns></returns>
-		HANDLE GetBackBufferHandle() const;
-
 	public:
 		/// <summary>
 		/// 初期化
 		/// </summary>
 		/// <returns>true:成功</returns>
 		bool Initialize();
-
-		/// <summary>
-		/// バッファの切り替え
-		/// </summary>
-		void Flip();
-
-		/// <summary>
-		/// バッファのクリア
-		/// </summary>
-		void ClearBuffer();
-
-		/// <summary>
-		/// 表示する文字列のクリア
-		/// </summary>
-		void AllClear();
 
 		/// <summary>
 		/// 生成時の処理
@@ -54,7 +31,17 @@ namespace Graphics
 		/// 表示する文字列の追加
 		/// </summary>
 		/// <param name="str"></param>
-		void AddString(const std::filesystem::path& str);
+		void AddLine(const std::string& str);
+
+		/// <summary>
+		/// 表示する文字列の削除
+		/// </summary>
+		void ClearLines();
+
+		/// <summary>
+		/// 画面をすべて消す
+		/// </summary>
+		void ClearScene();
 
 		/// <summary>
 		/// 表示
@@ -63,18 +50,18 @@ namespace Graphics
 	private:
 
 		/// <summary>
-		/// 画面のバッファ数
-		///	</summary>
-		std::array<HANDLE, CONSOLE_BUFFER_MAX> m_sceneBuffer;
+		/// コンソールのハンドル
+		/// </summary>
+		HANDLE m_console;
 
 		/// <summary>
 		/// 表示する文字列のコレクション
 		/// </summary>
-		std::vector<std::filesystem::path> m_views;
+		std::vector<std::string> m_views;
 
 		/// <summary>
-		/// 今の表バッファのインデックス
+		/// true:コレクションの内容を表示する
 		/// </summary>
-		UINT m_currentBuffer = 0;
+		bool isDirty = true;
 	};
 }

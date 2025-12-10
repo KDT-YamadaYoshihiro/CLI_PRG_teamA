@@ -1,13 +1,36 @@
 #include "TestScene.hpp"
 #include "Engine/Engine.hpp"
 
+#include "Application/Player/action/ActionCommand.hpp"
+
+std::vector<std::string> g_testNames;
+
+#include <iostream>
+
 void TestScene::Initialize()
 {
-	CLI_ENGINE->GetView()->AddString("テスト画面の生成");
+	CLI_ENGINE->GetView()->AddLine("テスト画面の生成");
+
+
+	g_testNames.reserve(9);
+	g_testNames.push_back("1くん");
+	g_testNames.push_back("2くん");
+	g_testNames.push_back("3くん");
+	g_testNames.push_back("4くん");
+	g_testNames.push_back("5くん");
+	g_testNames.push_back("6くん");
+	g_testNames.push_back("7くん");
+	g_testNames.push_back("8くん");
+	g_testNames.push_back("9くん");
 }
 
 void TestScene::Update()
 {
+	auto result = Battle::ActionSelector::SelectCommand(g_testNames, g_testNames);
+	if (result.command != Battle::ePlayerCommand::Attack)
+	{
+		std::cout << g_testNames[result.selectID] << std::endl;
+	}
 }
 
 void TestScene::Render()

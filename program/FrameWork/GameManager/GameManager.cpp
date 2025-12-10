@@ -44,21 +44,14 @@ void Engine::GameManager::Run()
 	{
 		//	時間更新
 
-		//	クリア
-		Graphics::View::GetInstance()->ClearBuffer();
 
 		//	スクリーン更新
 		SceneManager::GetInstance()->Update();
 		SceneManager::GetInstance()->Render();
 
 		//	表示する
-		Graphics::View::GetInstance()->Render();
+		 Graphics::View::GetInstance()->Render();
 
-		//	フレーム制御
-		Engine::GetInstance()->GetTimer()->Wait();
-
-		//	画面のフリップ
-		Graphics::View::GetInstance()->Flip();
 	}
 }
 
