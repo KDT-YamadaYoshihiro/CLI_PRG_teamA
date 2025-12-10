@@ -11,6 +11,8 @@ namespace Chara
 	class CharaBase
 	{
 	public:
+		virtual ~CharaBase() = default;
+
 		/// <summary>
 		/// ダメージ処理を行う
 		/// </summary>

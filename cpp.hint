@@ -1,0 +1,4 @@
+// ヒント ファイルは、Visual Studio IDE が Visual C++ 識別子を解釈するのに役立ちます
+// 関数およびマクロの名前などです。
+// 詳細については次を参照してください https://go.microsoft.com/fwlink/?linkid=865984
+#define PROPERTY(Type, Value) public:void Set##Value(Type value){ Value = value;};Type Get##Value()const{ return Value;};
