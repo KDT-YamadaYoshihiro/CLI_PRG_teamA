@@ -147,6 +147,9 @@
     <ClCompile Include="program\System\Time\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="program\Application\BattleSystem\Calc\BattleCalc.hpp" />
+    <ClInclude Include="program\Application\Charactor\base\CharactorBase.hpp" />
+    <ClInclude Include="program\Application\Charactor\status\CharaStatus.hpp" />
     <ClInclude Include="program\Application\Inventory\Inventory\InventoryManager.hpp" />
     <ClInclude Include="program\Application\Inventory\Item\base\Item.hpp" />
     <ClInclude Include="program\Application\Inventory\Item\Healing_Item\Item_Healing.hpp" />
