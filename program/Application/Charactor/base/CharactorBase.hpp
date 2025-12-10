@@ -27,17 +27,17 @@ namespace Chara
 		*/
 
 		//	–¼‘O
-		PROPERTY(int, m_status.Name);
+		PROPERTY(std::string, m_status.Name,Name);
 		//	Å‘å‘Ì—Í
-		PROPERTY(int, m_status.MaxHP);
+		PROPERTY(int, m_status.MaxHP,MaxHp);
 		//	¡‚Ì‘Ì—Í
-		PROPERTY(int, m_status.HP);
+		PROPERTY(int, m_status.HP,Hp);
 		//	•¨—UŒ‚—Í
-		PROPERTY(int, m_status.Attack);
+		PROPERTY(int, m_status.Attack,Attack);
 		//	–‚–@UŒ‚—Í
-		PROPERTY(int, m_status.MagicAttack);
+		PROPERTY(int, m_status.MagicAttack,MagicAttack);
 		//	–hŒä—Í
-		PROPERTY(int, m_status.Defense);
+		PROPERTY(int, m_status.Defense,Defence);
 
 
 		/// <summary>

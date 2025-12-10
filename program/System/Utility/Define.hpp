@@ -42,12 +42,12 @@ Type Get##Value()const{\
 };\
 
 // Setter & Getter
-#define PROPERTY(Type,Value)\
+#define PROPERTY(Type,Value,Name)\
 public:\
-void Set##Value(Type value){\
+void Set##Name(Type value){\
 	Value = value;\
 };\
-Type Get##Value()const{\
+Type Get##Name()const{\
 	return Value;\
 };\
 

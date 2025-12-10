@@ -10,7 +10,10 @@ namespace Chara
 	class Player : public CharaBase
 	{
 	public:
-		//	移動
+		/// <summary>
+		/// 移動処理
+		/// </summary>
+		/// <param name="Velocity">移動量</param>
 		void Move(const Math::Point& Velocity);
 
 		/// <summary>
@@ -18,9 +21,11 @@ namespace Chara
 		/// </summary>
 
 		//	座標
-		PROPERTY(Math::Point, m_position);
+		PROPERTY(Math::Point, m_position,Position);
 
-		//	アイテム使用
+		/// <summary>
+		/// アイテムの使用
+		/// </summary>
 
 
 	private:

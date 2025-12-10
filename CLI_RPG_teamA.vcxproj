@@ -135,9 +135,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="program\Application\Charactor\Player\Controller\PlayerController.cpp" />
     <ClCompile Include="program\Application\Charactor\Player\Player.cpp" />
     <ClCompile Include="program\Application\Inventory\Inventory\InventoryManager.cpp" />
     <ClCompile Include="program\Application\BattleSystem\action\ActionSelector.cpp" />
+    <ClCompile Include="program\Application\Map\Map.cpp" />
     <ClCompile Include="program\Application\Scene\TestScene.cpp" />
     <ClCompile Include="program\Engine\Engine.cpp" />
     <ClCompile Include="program\FrameWork\GameManager\GameManager.cpp" />
@@ -145,6 +147,7 @@
     <ClCompile Include="program\Main.cpp" />
     <ClCompile Include="program\Scene\DefalutScene\DefalutScene.cpp" />
     <ClCompile Include="program\Scene\SceneManager.cpp" />
+    <ClCompile Include="program\System\Math\Point\Point.cpp" />
     <ClCompile Include="program\System\Time\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +160,8 @@
     <ClInclude Include="program\Application\Inventory\Item\base\Item.hpp" />
     <ClInclude Include="program\Application\Inventory\Item\Healing_Item\Item_Healing.hpp" />
     <ClInclude Include="program\Application\BattleSystem\action\ActionCommand.hpp" />
+    <ClInclude Include="program\Application\Map\Map.hpp" />
+    <ClInclude Include="program\Application\Map\TileCode.hpp" />
     <ClInclude Include="program\Application\Scene\TestScene.hpp" />
     <ClInclude Include="program\Engine\Engine.hpp" />
     <ClInclude Include="program\FrameWork\GameManager\GameManager.hpp" />
