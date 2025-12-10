@@ -1,7 +1,7 @@
 #include "TestScene.hpp"
 #include "Engine/Engine.hpp"
 
-#include "Application/Player/action/ActionCommand.hpp"
+#include "Application/BattleSystem/action/ActionCommand.hpp"
 
 std::vector<std::string> g_testNames;
 
