@@ -10,6 +10,7 @@ namespace Chara
 	struct Status
 	{
 		std::string Name = "Unknown";
+		int MaxHP = 1;
 		int HP = 1;
 		int Attack = 1;
 		int MagicAttack = 1;
