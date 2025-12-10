@@ -32,5 +32,5 @@ bool Game::MapSystem::Map::CanMove(const Math::Point& Next) const noexcept
 /// <returns>データ</returns>
 const MapData& Game::MapSystem::Map::GetMapData()
 {
-    // TODO: return ステートメントをここに挿入します
+    return m_mapData;
 }
