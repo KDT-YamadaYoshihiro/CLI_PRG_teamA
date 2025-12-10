@@ -45,6 +45,15 @@
     <ClCompile Include="program\Application\Inventory\Inventory\InventoryManager.cpp">
       <Filter>Program</Filter>
     </ClCompile>
+    <ClCompile Include="program\Application\Scene\TestScene.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Scene\SceneManager.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Scene\DefalutScene\DefalutScene.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="program\System\Utility\Singleton.hpp">
@@ -78,6 +87,18 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="program\Application\Inventory\Inventory\InventoryManager.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\Scene\TestScene.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Scene\SceneManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Scene\DefalutScene\DefalutScene.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Scene\SceneBase.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

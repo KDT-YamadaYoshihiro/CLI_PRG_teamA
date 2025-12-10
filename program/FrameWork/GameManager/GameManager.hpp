@@ -11,6 +11,10 @@ namespace Engine
 		void Run();
 		void Finalize();
 
+		/// <summary>
+		/// Å‰‚ÌScene‚Ì¶¬
+		/// </summary>
+		void CreateStartScene();
 	private:
 		void OnCreate()override;
 		void OnDestory()override;

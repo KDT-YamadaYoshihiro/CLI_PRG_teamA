@@ -2,9 +2,39 @@
 
 #include "Graphics/View/View.hpp"
 #include "Engine/Engine.hpp"
+#include "Scene/SceneManager.h"
+
+
+#include "Scene/DefalutScene/DefalutScene.h"
+#include "Application/Scene/TestScene.hpp"
+
+#ifdef EXP_SCENE 
+#undef EXP_SCENE 
+#endif // EXP_SCENE
+
+//	-1:TestScene 0:Default 1:Title 2:InGame 3:End
+#define EXP_SCENE -1
+
+namespace Debug
+{
+	void CreateScene()
+	{
+#if EXP_SCENE == -1
+		SceneManager::GetInstance()->ChangeScene<TestScene>();
+#elif EXP_SCENE == 0
+
+#else
+		SceneManager::GetInstance()->ChangeScene<DefalutScene>();
+#endif // EXP_SCENE == 0
+
+	}
+}
+
 
 bool Engine::GameManager::Initialize()
-{
+{	
+	//	画面生成
+	this->CreateStartScene();
 	return true;
 }
 
@@ -18,7 +48,10 @@ void Engine::GameManager::Run()
 		Graphics::View::GetInstance()->ClearBuffer();
 
 		//	スクリーン更新
+		SceneManager::GetInstance()->Update();
+		SceneManager::GetInstance()->Render();
 
+		//	表示する
 		Graphics::View::GetInstance()->Render();
 
 		//	フレーム制御
@@ -32,6 +65,37 @@ void Engine::GameManager::Run()
 void Engine::GameManager::Finalize()
 {
 
+}
+
+/// <summary>
+/// 最初のSceneの生成
+/// </summary>
+void Engine::GameManager::CreateStartScene()
+{
+	/*
+	* デバック中はこっちの処理
+	*/
+#ifdef _DEBUG
+	//	テスト用
+#if EXP_SCENE == -1
+	SceneManager::GetInstance()->ChangeScene<TestScene>();
+
+	//	何もないとき
+#elif EXP_SCENE == 0
+	SceneManager::GetInstance()->ChangeScene<DefalutScene>();
+
+	//	該当しない時
+#else
+#endif // EXP_SCENE == 0
+
+	/*
+	* リリースの時はこっちの処理
+	*/
+#else
+	//	タイトルの生成
+
+#endif // _DEBUG
+	SceneManager::GetInstance()->Initialize();
 }
 
 void Engine::GameManager::OnCreate()

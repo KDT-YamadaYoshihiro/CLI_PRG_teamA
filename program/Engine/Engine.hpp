@@ -64,6 +64,13 @@ namespace Engine
 		/// </summary>
 		/// <returns></returns>
 		bool InitializeTimer();
+
+		/// <summary>
+		/// ƒXƒNƒŠ[ƒ“ŠÇ—‚Ì‰Šú‰Î
+		/// </summary>
+		/// <returns>true:¬Œ÷</returns>
+		bool InitializeSceneManager();
+
 	private:
 		GameManager* m_gameManager;
 		Graphics::View* m_view;

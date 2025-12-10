@@ -1,5 +1,7 @@
 #include "Engine/Engine.hpp"
 #include "System/Utility/Define.hpp"
+#include "Scene/SceneManager.h"
+
 
 void Engine::Engine::OnCreate()
 {
@@ -16,12 +18,6 @@ bool Engine::Engine::Initialize()
 {
 	bool ret = false;
 
-	//	GameManager
-	ret = this->InitializeGameManager();
-	if (ret == false)
-	{
-		return false;
-	}
 	//	View
 	ret = this->InitializeView();
 	if (ret == false)
@@ -34,7 +30,18 @@ bool Engine::Engine::Initialize()
 	{
 		return false;
 	}
-
+	//	Scene
+	ret = this->InitializeSceneManager();
+	if (ret == false)
+	{
+		return false;
+	}
+	//	GameManager
+	ret = this->InitializeGameManager();
+	if (ret == false)
+	{
+		return false;
+	}
 	return true;
 }
 
@@ -111,8 +118,6 @@ bool Engine::Engine::InitializeView()
 		DEBUG_BREAK
 		return false;
 	}
-	m_view->AddString("‰Šú‰»Š®—¹");
-
 	return true;
 }
 
@@ -128,5 +133,15 @@ bool Engine::Engine::InitializeTimer()
 		return false;
 	}
 
+	return true;
+}
+
+/// <summary>
+/// ƒXƒNƒŠ[ƒ“ŠÇ—‚Ì‰Šú‰Î
+/// </summary>
+/// <returns>true:¬Œ÷</returns>
+bool Engine::Engine::InitializeSceneManager()
+{
+	SceneManager::Create();
 	return true;
 }

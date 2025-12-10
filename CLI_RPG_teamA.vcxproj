@@ -137,10 +137,13 @@
   <ItemGroup>
     <ClCompile Include="program\Application\Inventory\Inventory\InventoryManager.cpp" />
     <ClCompile Include="program\Application\Player\action\ActionSelector.cpp" />
+    <ClCompile Include="program\Application\Scene\TestScene.cpp" />
     <ClCompile Include="program\Engine\Engine.cpp" />
     <ClCompile Include="program\FrameWork\GameManager\GameManager.cpp" />
     <ClCompile Include="program\Graphics\View\View.cpp" />
     <ClCompile Include="program\Main.cpp" />
+    <ClCompile Include="program\Scene\DefalutScene\DefalutScene.cpp" />
+    <ClCompile Include="program\Scene\SceneManager.cpp" />
     <ClCompile Include="program\System\Time\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,9 +151,13 @@
     <ClInclude Include="program\Application\Inventory\Item\base\Item.hpp" />
     <ClInclude Include="program\Application\Inventory\Item\Healing_Item\Item_Healing.hpp" />
     <ClInclude Include="program\Application\Player\action\ActionCommand.hpp" />
+    <ClInclude Include="program\Application\Scene\TestScene.hpp" />
     <ClInclude Include="program\Engine\Engine.hpp" />
     <ClInclude Include="program\FrameWork\GameManager\GameManager.hpp" />
     <ClInclude Include="program\Graphics\View\View.hpp" />
+    <ClInclude Include="program\Scene\DefalutScene\DefalutScene.h" />
+    <ClInclude Include="program\Scene\SceneBase.h" />
+    <ClInclude Include="program\Scene\SceneManager.h" />
     <ClInclude Include="program\System\Input\Key.hpp" />
     <ClInclude Include="program\System\Utility\Define.hpp" />
     <ClInclude Include="program\System\Utility\Singleton.hpp" />

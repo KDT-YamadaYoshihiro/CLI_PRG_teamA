@@ -90,7 +90,7 @@ Battle::ActionResult Battle::ActionSelector::SelectMagic(std::span<const std::st
 
 		if (_kbhit())
 		{
-			int key = getch();
+			int key = _getch();
 			if (key == static_cast<int>(Input::KeyCode::Escape))
 			{
 				return ActionResult(ePlayerCommand::Magic, -1);
@@ -131,7 +131,7 @@ Battle::ActionResult Battle::ActionSelector::SelectItem(std::span<const std::str
 
 		if (_kbhit())
 		{
-			int key = getch();
+			int key = _getch();
 			if (key == static_cast<int>(Input::KeyCode::Escape))
 			{
 				return ActionResult(ePlayerCommand::Magic, -1);

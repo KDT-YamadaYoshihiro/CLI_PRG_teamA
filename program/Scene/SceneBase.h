@@ -5,9 +5,10 @@ class SceneBase
 {
 
 public:
+	virtual ~SceneBase() = default;
 
-	// イニシャライズ
-	virtual void Initialize() = 0;
+	// 初期化
+	virtual void Initialize() {};
 
 	// 更新
 	virtual void Update() = 0;
@@ -16,6 +17,6 @@ public:
 	virtual void Render() = 0;
 
 	// 終了()
-	virtual void Release() = 0;
+	virtual void Release() {};
 
 };

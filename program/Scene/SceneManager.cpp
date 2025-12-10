@@ -3,8 +3,13 @@
 
 void SceneManager::Initialize()
 {
-	// 初期シーンの設定などがあればここで行う
-	ChangeScene<DefalutScene>();
+	//	何もないときにデフォルトを生成
+	if(m_currentScene == nullptr)
+	{
+		// 初期シーンの設定などがあればここで行う
+		ChangeScene<DefalutScene>();
+	}
+	m_currentScene->Initialize();
 }
 
 void SceneManager::Update()
@@ -28,7 +33,7 @@ void SceneManager::Release()
 	if (m_currentScene)
 	{
 		m_currentScene->Release();
-		m_currentScene = nullptr;
+		m_currentScene.reset();
 	}
 }
 
