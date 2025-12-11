@@ -6,10 +6,10 @@
 // CSV読み込み基底クラス
 class CSVLoader {
 
-protected:
+public:
 
 	// コンマ区切り
-	std::vector<int> Split(const std::string& line, char delimiter = ',') {
+	static std::vector<int> Split(const std::string& line, char delimiter = ',') {
 
 		std::vector<int> result;
 		std::stringstream ss(line);
@@ -20,10 +20,6 @@ protected:
 		}
 		return result;
 	}
-
-
-public:
-
 
 	~CSVLoader() = default;
 
