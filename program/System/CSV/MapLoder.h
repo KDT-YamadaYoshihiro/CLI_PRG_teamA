@@ -5,8 +5,15 @@
 #include <iostream>
 
 // マップCSV読み込みクラス
-class MapLoder
+class MapLoder : public CSVLoader
 {
+private:
+
+	// 文字列を整数に変換する
+	static int ToInt(const std::string& str) {
+		return std::stoi(str);
+	}
+
 public:
 
 	// マップサイズ
@@ -16,12 +23,8 @@ public:
 	// デストラクタ
 	~MapLoder() = default;
 
-	/// <summary>
-	/// csvファイルからマップデータを読み込む
-	/// </summary>
-	/// <param name="arg_filePath"></param>
-	/// <returns>std::vector<int> mapData </returns>
-	static std::vector<int> Load(const std::string& arg_filePath);
+	// csvファイルからマップデータを読み込む
+	static std::vector<std::vector<int>> Load(const std::string& arg_filePath);
 
 
 };

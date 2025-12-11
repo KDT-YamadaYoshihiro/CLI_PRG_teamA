@@ -1,28 +1,22 @@
 #include "MapLoder.h"
 
-std::vector<int> MapLoder::Load(const std::string& arg_filePath)
+std::vector<std::vector<int>> MapLoder::Load(const std::string& arg_filePath)
 {
 
-    std::ifstream file(arg_filePath);
-    if(!file.is_open()) {
-        std::cerr << "ファイルが開けませんでした。" << arg_filePath << std::endl;
-        return {};
-	}
+	// マップデータ格納用
+	std::vector<std::vector<int>> mapData;
+	// CSVファイル読み込み
+	auto lines = CSVLoader::LoadCSV(arg_filePath);
 
-	std::vector<int> mapData;
-	mapData.reserve(MAP_WIDTH * MAP_HEIGHT);
+	// マップデータ用のメモリ確保
+	mapData.reserve(lines.size());
 
-	std::string line;
-    while (std::getline(file,line))
-    {
-		auto values = CSVLoader::Split(line, ',');
-        for (auto& v : values) {
-            mapData.push_back(v);
-        }
+	// 各行を分割して整数に変換
+    for(auto& line : lines) {
+        mapData.push_back(Split<int>(line, ToInt));
     }
 
-	file.close();
-
+	// マップサイズの確認
     if(mapData.size() != MAP_WIDTH * MAP_HEIGHT) {
         std::cerr << "マップデータのサイズが不正です。" << arg_filePath << std::endl;
         return {};
