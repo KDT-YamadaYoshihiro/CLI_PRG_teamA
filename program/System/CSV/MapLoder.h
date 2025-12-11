@@ -16,7 +16,11 @@ public:
 	// デストラクタ
 	~MapLoder() = default;
 
-	// 読み込み
+	/// <summary>
+	/// csvファイルからマップデータを読み込む
+	/// </summary>
+	/// <param name="arg_filePath"></param>
+	/// <returns>std::vector<int> mapData </returns>
 	static std::vector<int> Load(const std::string& arg_filePath);
 
 

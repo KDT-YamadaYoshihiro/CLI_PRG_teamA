@@ -8,7 +8,12 @@ class CSVLoader {
 
 public:
 
-	// コンマ区切り
+	/// <summary>
+	/// CSVの1行を分割してint型のベクターで返す
+	/// </summary>
+	/// <param name="line"></param>
+	/// <param name="delimiter"></param>
+	/// <returns>std::vector<int> result </returns>
 	static std::vector<int> Split(const std::string& line, char delimiter = ',') {
 
 		std::vector<int> result;
