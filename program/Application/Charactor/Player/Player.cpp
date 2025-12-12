@@ -1,7 +1,7 @@
 #include"Application/Charactor/Player/Player.hpp"
 
 Chara::Player::Player(const Chara::Status& Status)
-	:CharaBase(Status)
+	:CharaBase(Status), m_position()
 {
 }
 

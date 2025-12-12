@@ -6,8 +6,8 @@ namespace Math
 	class Point
 	{
 	public:
-		int x;
-		int y;
+		int x = 0;
+		int y = 0;
 
 		static const Point Up;
 		static const Point Down;
