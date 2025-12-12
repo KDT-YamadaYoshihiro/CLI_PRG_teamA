@@ -39,9 +39,6 @@
     <ClCompile Include="program\System\Time\Time.cpp">
       <Filter>Program</Filter>
     </ClCompile>
-    <ClCompile Include="program\Application\Player\action\ActionSelector.cpp">
-      <Filter>Program</Filter>
-    </ClCompile>
     <ClCompile Include="program\Application\Inventory\Inventory\InventoryManager.cpp">
       <Filter>Program</Filter>
     </ClCompile>
@@ -52,6 +49,24 @@
       <Filter>Program</Filter>
     </ClCompile>
     <ClCompile Include="program\Scene\DefalutScene\DefalutScene.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Application\Charactor\Player\Controller\PlayerController.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Application\Charactor\Player\Player.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Application\BattleSystem\action\ActionSelector.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Application\Map\Map.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\System\Math\Point\Point.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\System\CSV\MapLoder.cpp">
       <Filter>Program</Filter>
     </ClCompile>
   </ItemGroup>
@@ -72,9 +87,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="program\System\Time\Time.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="program\Application\Player\action\ActionCommand.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="program\Application\Inventory\Item\base\Item.hpp">
@@ -101,5 +113,41 @@
     <ClInclude Include="program\Scene\SceneBase.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="program\Application\Charactor\Player\Controller\PlayerController.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\Charactor\Player\Player.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\BattleSystem\Calc\BattleCalc.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\Charactor\base\CharactorBase.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\Charactor\status\CharaStatus.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\BattleSystem\action\ActionCommand.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\Map\Map.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\Map\TileCode.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\System\Math\Point\Point.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\System\CSV\CSVLoader.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\System\CSV\MapLoder.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

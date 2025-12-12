@@ -147,6 +147,7 @@
     <ClCompile Include="program\Main.cpp" />
     <ClCompile Include="program\Scene\DefalutScene\DefalutScene.cpp" />
     <ClCompile Include="program\Scene\SceneManager.cpp" />
+    <ClCompile Include="program\System\CSV\MapLoder.cpp" />
     <ClCompile Include="program\System\Math\Point\Point.cpp" />
     <ClCompile Include="program\System\Time\Time.cpp" />
   </ItemGroup>
@@ -169,6 +170,8 @@
     <ClInclude Include="program\Scene\DefalutScene\DefalutScene.h" />
     <ClInclude Include="program\Scene\SceneBase.h" />
     <ClInclude Include="program\Scene\SceneManager.h" />
+    <ClInclude Include="program\System\CSV\CSVLoader.h" />
+    <ClInclude Include="program\System\CSV\MapLoder.h" />
     <ClInclude Include="program\System\Input\Key.hpp" />
     <ClInclude Include="program\System\Math\Point\Point.hpp" />
     <ClInclude Include="program\System\Utility\Define.hpp" />

@@ -1,4 +1,6 @@
 #include "MapLoder.h"
+#include "System/Utility/Define.hpp"
+
 
 std::vector<std::vector<int>> MapLoder::Load(const std::string& arg_filePath)
 {
@@ -17,9 +19,15 @@ std::vector<std::vector<int>> MapLoder::Load(const std::string& arg_filePath)
     }
 
 	// マップサイズの確認
-    if(mapData.size() != MAP_WIDTH * MAP_HEIGHT) {
-        std::cerr << "マップデータのサイズが不正です。" << arg_filePath << std::endl;
-        return {};
+	if (mapData.size() <= 0 )
+	{
+		DEBUG_BREAK;
+		return std::vector<std::vector<int>>();
+	}
+	else if (mapData[0].size() <= 0)
+	{
+		DEBUG_BREAK;
+		return std::vector<std::vector<int>>();
 	}
 
     // 呼び出し側がデータを保持
