@@ -11,6 +11,10 @@ namespace Chara
 	class CharaBase
 	{
 	public:
+		//	初期化
+		CharaBase(const Chara::Status& Status)
+			:m_status(Status){ }
+
 		virtual ~CharaBase() = default;
 
 		/// <summary>
@@ -57,6 +61,16 @@ namespace Chara
 		{
 			return m_status;
 		}
+
+		/// <summary>
+		/// ステータスのセット
+		/// </summary>
+		/// <param name="Status"></param>
+		void SetStatus(const Chara::Status& Status)
+		{
+			m_status = Status;
+		}
+
 	protected:
 		/// <summary>
 		///	ステータス
