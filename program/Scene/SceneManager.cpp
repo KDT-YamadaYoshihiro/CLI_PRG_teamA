@@ -10,7 +10,7 @@ void SceneManager::Initialize()
 	if(m_currentScene == nullptr)
 	{
 		// ‰ŠúƒV[ƒ“‚Ìİ’è‚È‚Ç‚ª‚ ‚ê‚Î‚±‚±‚Ås‚¤
-		ChangeScene<TitleScene>();
+		ChangeScene<DefalutScene>();
 	}
 	m_currentScene->Initialize();
 }
