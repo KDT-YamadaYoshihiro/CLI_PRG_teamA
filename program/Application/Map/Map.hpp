@@ -13,12 +13,18 @@ namespace Game::MapSystem
 {
 	class Map
 	{
+	public:
 		/// <summary>
 		/// マップの文字列変換
 		/// </summary>
 		void UpdateMapString();
 
-	public:
+		/// <summary>
+		/// マップの表示の追加
+		/// </summary>
+		void RenderMapString();
+
+
 		/// <summary>
 		/// 移動可能かどうか
 		/// </summary>
@@ -50,6 +56,8 @@ namespace Game::MapSystem
 		/// <returns>データ</returns>
 		const MapData& GetMapData();
 
+		std::vector<std::string> GetLines();
+
 	private:
 		/// <summary>
 		/// マップデータのコレクション
@@ -60,5 +68,10 @@ namespace Game::MapSystem
 		/// マップデータを変換したコレクション
 		/// </summary>
 		MapDataString m_mapDataString;
+
+		/// <summary>
+		/// 表示するマップデータ
+		/// </summary>
+		std::vector<std::string> m_views;
 	};
 }

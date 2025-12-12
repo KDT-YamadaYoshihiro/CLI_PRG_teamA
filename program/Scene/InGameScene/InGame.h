@@ -2,6 +2,9 @@
 #include "../program/Scene/SceneBase.h"
 #include "Application/State/enum/StateEnum.hpp"
 #include "Application/Map/Map.hpp"
+#include"Application/Charactor/Player/Player.hpp"
+
+#include<memory>
 
 
 class InGameScene : public SceneBase
@@ -30,4 +33,9 @@ private:
 	/// マップ関係
 	/// </summary>
 	Game::MapSystem::Map m_map;
+
+	/// <summary>
+	/// プレイヤー
+	/// </summary>
+	std::unique_ptr<Chara::Player> m_player;
 };

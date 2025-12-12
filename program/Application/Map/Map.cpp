@@ -1,5 +1,7 @@
 #include "Map.hpp"
 
+#include "Graphics/View/View.hpp"
+
 /// <summary>
 /// マップの文字列変換
 /// </summary>
@@ -8,32 +10,37 @@ void Game::MapSystem::Map::UpdateMapString()
     //  初期状態に戻す
     const int Height = m_mapData.size();
     const int Width = m_mapData[0].size();
-    m_mapDataString.clear();
-    m_mapDataString.resize(Height);
-    m_mapDataString[0].resize(Width);
+    m_views.clear();
+    m_views.resize(Height);
 
-    for (int h = 0; h < m_mapData.size(); h++)
+    for (int h = 0; h < Height; h++)
     {
-        for (int w = 0; w < m_mapData[h].size(); w++)
+        for (int w = 0; w < Width; w++)
         {
             int value = m_mapData[h][w];
             switch (value)
             {
             case static_cast<int>(Game::MapSystem::TileType::Load):
-                m_mapDataString[h][w] = "+";
+                m_views[h] += "+";
                 break;
             case static_cast<int>(Game::MapSystem::TileType::Stairm):
-                m_mapDataString[h][w] = "@";
+                m_views[h] += "@";
                 break;
             case static_cast<int>(Game::MapSystem::TileType::Wall):
-                m_mapDataString[h][w] = "=";
+                m_views[h] += "=";
                 break;
             default:
-                m_mapDataString[h][w] = "？";
+                m_views[h] += "？";
                 break;
             }
+
         }
     }
+}
+
+void Game::MapSystem::Map::RenderMapString()
+{
+    
 }
 
 /// <summary>
@@ -71,6 +78,11 @@ bool Game::MapSystem::Map::CanMove(const Math::Point& Next) const noexcept
 const MapData& Game::MapSystem::Map::GetMapData()
 {
     return m_mapData;
+}
+
+std::vector<std::string> Game::MapSystem::Map::GetLines()
+{
+    return m_views;
 }
 
 /// <summary>
