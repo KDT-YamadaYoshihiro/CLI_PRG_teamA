@@ -11,6 +11,12 @@ namespace Chara
 	{
 	public:
 		/// <summary>
+		/// 初期化
+		/// </summary>
+		/// <param name="Status"></param>
+		Player(const Chara::Status& Status);
+
+		/// <summary>
 		/// 移動処理
 		/// </summary>
 		/// <param name="Velocity">移動量</param>
@@ -26,7 +32,6 @@ namespace Chara
 		/// <summary>
 		/// アイテムの使用
 		/// </summary>
-
 
 	private:
 		/// <summary>
