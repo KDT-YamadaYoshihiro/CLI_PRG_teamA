@@ -7,11 +7,17 @@
 
 //	長いので
 using MapData = std::vector<std::vector<int>>;
+using MapDataString = std::vector<std::vector<std::string>>;
 
 namespace Game::MapSystem
 {
 	class Map
 	{
+		/// <summary>
+		/// マップの文字列変換
+		/// </summary>
+		void UpdateMapString();
+
 	public:
 		/// <summary>
 		/// 移動可能かどうか
@@ -21,13 +27,38 @@ namespace Game::MapSystem
 		bool CanMove(const Math::Point& Next)const noexcept;
 
 		/// <summary>
+		/// マップの状態更新
+		/// </summary>
+		/// <param name="Next"></param>
+		void Update(const Math::Point& Next);
+
+		/// <summary>
+		/// マップデータのセット
+		/// </summary>
+		/// <param name="MapData"></param>
+		void SetMapData(const std::vector<std::vector<int>>& MapData);
+
+		/// <summary>
+		/// マップデータを文字列に変換する
+		/// </summary>
+		/// <returns></returns>
+		MapDataString GetMapString()const;
+
+		/// <summary>
 		/// マップデータの取得
 		/// </summary>
 		/// <returns>データ</returns>
 		const MapData& GetMapData();
 
 	private:
-		//	マップデータのコレクションを持つ
+		/// <summary>
+		/// マップデータのコレクション
+		/// </summary>
 		MapData m_mapData;
+
+		/// <summary>
+		/// マップデータを変換したコレクション
+		/// </summary>
+		MapDataString m_mapDataString;
 	};
 }

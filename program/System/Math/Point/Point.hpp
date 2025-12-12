@@ -13,6 +13,7 @@ namespace Math
 		static const Point Down;
 		static const Point Left;
 		static const Point Right;
+		static const Point Zero;
 
 		//	==,!=,<,<=,>,>=のオーバーロード
 		auto operator<=>(const Point& other) const = default;

@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="program\Application\BattleSystem\System\BattleSystem.cpp" />
     <ClCompile Include="program\Application\Charactor\Player\Controller\PlayerController.cpp" />
     <ClCompile Include="program\Application\Charactor\Player\Player.cpp" />
     <ClCompile Include="program\Application\Inventory\Inventory\InventoryManager.cpp" />
@@ -146,12 +147,14 @@
     <ClCompile Include="program\Graphics\View\View.cpp" />
     <ClCompile Include="program\Main.cpp" />
     <ClCompile Include="program\Scene\DefalutScene\DefalutScene.cpp" />
+    <ClCompile Include="program\Scene\InGameScene\InGame.cpp" />
     <ClCompile Include="program\Scene\SceneManager.cpp" />
     <ClCompile Include="program\System\CSV\MapLoder.cpp" />
     <ClCompile Include="program\System\Math\Point\Point.cpp" />
     <ClCompile Include="program\System\Time\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="program\Application\BattleSystem\System\BattleSystem.hpp" />
     <ClInclude Include="program\Application\Charactor\Player\Controller\PlayerController.hpp" />
     <ClInclude Include="program\Application\Charactor\Player\Player.hpp" />
     <ClInclude Include="program\Application\BattleSystem\Calc\BattleCalc.hpp" />
@@ -164,10 +167,12 @@
     <ClInclude Include="program\Application\Map\Map.hpp" />
     <ClInclude Include="program\Application\Map\TileCode.hpp" />
     <ClInclude Include="program\Application\Scene\TestScene.hpp" />
+    <ClInclude Include="program\Application\State\enum\StateEnum.hpp" />
     <ClInclude Include="program\Engine\Engine.hpp" />
     <ClInclude Include="program\FrameWork\GameManager\GameManager.hpp" />
     <ClInclude Include="program\Graphics\View\View.hpp" />
     <ClInclude Include="program\Scene\DefalutScene\DefalutScene.h" />
+    <ClInclude Include="program\Scene\InGameScene\InGame.h" />
     <ClInclude Include="program\Scene\SceneBase.h" />
     <ClInclude Include="program\Scene\SceneManager.h" />
     <ClInclude Include="program\System\CSV\CSVLoader.h" />

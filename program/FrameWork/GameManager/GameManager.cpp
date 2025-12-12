@@ -84,6 +84,7 @@ void Engine::GameManager::CreateStartScene()
 	/*
 	* リリースの時はこっちの処理
 	*/
+
 #else
 	//	タイトルの生成
 
