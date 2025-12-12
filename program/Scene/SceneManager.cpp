@@ -1,5 +1,8 @@
 #include "SceneManager.h"
+#include "../System/Input/Key.hpp"
 #include "../program/Scene/DefalutScene/DefalutScene.h"
+#include "InGameScene/InGame.h"
+#include "TitleScene/Title.h"
 
 void SceneManager::Initialize()
 {
@@ -14,6 +17,12 @@ void SceneManager::Initialize()
 
 void SceneManager::Update()
 {
+	// ÉLÅ[ÇÃì¸óÕ
+	if(Input::GetKey().code == Input::KeyCode::Space)
+	{
+		ChangeScene<InGameScene>();
+	}
+
 	if (m_currentScene)
 	{
 		m_currentScene->Update();
