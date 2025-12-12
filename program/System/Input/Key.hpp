@@ -8,6 +8,7 @@ namespace Input
         // シングルコード系
         Escape = 27,
         Enter = 13,
+		Space = 32,
 
         // 特殊キーの先頭
         SpecialPrefix = 224,
