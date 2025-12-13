@@ -18,8 +18,14 @@ class Factory
 
 public:
 
+	// 初期化
+	Factory();
+
+	// デストラクタ
+	virtual ~Factory() = default;
+
 	// 指定したIDでキャラクターを生成する
-	static std::shared_ptr<Chara::CharaBase> CreateCharacter(const std::string& arg_charaId);
+	static std::unique_ptr<Chara::CharaBase> CreateCharacter(const std::string& arg_charaId);
 
 };
 
