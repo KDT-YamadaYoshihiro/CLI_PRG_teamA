@@ -1,7 +1,6 @@
 #pragma once
 #include"Application/Charactor/base/CharactorBase.hpp"
 #include"System/Math/Point/Point.hpp"
-
 #include<vector>
 
 

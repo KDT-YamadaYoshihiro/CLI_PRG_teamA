@@ -8,3 +8,6 @@ const Math::Point Math::Point::Down = { 0,1 };
 const Math::Point Math::Point::Left = { -1,0 };
 //	âE
 const Math::Point Math::Point::Right = { 1,0 };
+
+//	É[Éç
+const Math::Point Math::Point::Zero = { 0,0 };

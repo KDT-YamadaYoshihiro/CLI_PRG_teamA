@@ -7,13 +7,14 @@
 
 #include "Scene/DefalutScene/DefalutScene.h"
 #include "Application/Scene/TestScene.hpp"
+#include "Scene/InGameScene/InGame.h"
 
 #ifdef EXP_SCENE 
 #undef EXP_SCENE 
 #endif // EXP_SCENE
 
 //	-1:TestScene 0:Default 1:Title 2:InGame 3:End
-#define EXP_SCENE -1
+#define EXP_SCENE 2
 
 namespace Debug
 {
@@ -23,6 +24,8 @@ namespace Debug
 		SceneManager::GetInstance()->ChangeScene<TestScene>();
 #elif EXP_SCENE == 0
 
+#elif EXP_SCENE == 2
+		SceneManager::GetInstance()->ChangeScene<InGameScene>();
 #else
 		SceneManager::GetInstance()->ChangeScene<DefalutScene>();
 #endif // EXP_SCENE == 0
@@ -76,6 +79,8 @@ void Engine::GameManager::CreateStartScene()
 	//	何もないとき
 #elif EXP_SCENE == 0
 	SceneManager::GetInstance()->ChangeScene<DefalutScene>();
+#elif EXP_SCENE == 2
+	SceneManager::GetInstance()->ChangeScene<InGameScene>();
 
 	//	該当しない時
 #else
@@ -84,6 +89,7 @@ void Engine::GameManager::CreateStartScene()
 	/*
 	* リリースの時はこっちの処理
 	*/
+
 #else
 	//	タイトルの生成
 
