@@ -24,27 +24,25 @@ namespace Math
 			this->y += other.y;
 			return *this;
 		}
+		Point& operator-=(const Point& other)
+		{
+			this->x -= other.x;
+			this->y -= other.y;
+			return *this;
+		}
 
 	};
 
+	//	‰ÁŽZ
 	inline Point operator+(Point lhs, const Point& rhs)
 	{
 		lhs += rhs;
 		return lhs;
 	}
-	//inline Point operator-(Point lhs, const Point& rhs)
-	//{
-	//	lhs += rhs;
-	//	return lhs;
-	//}
-	//inline Point operator+(Point lhs, const Point& rhs)
-	//{
-	//	lhs += rhs;
-	//	return lhs;
-	//}
-	//inline Point operator+(Point lhs, const Point& rhs)
-	//{
-	//	lhs += rhs;
-	//	return lhs;
-	//}
+	//	Œ¸ŽZ
+	inline Point operator-(Point lhs, const Point& rhs)
+	{
+		lhs -= rhs;
+		return lhs;
+	}
 }
