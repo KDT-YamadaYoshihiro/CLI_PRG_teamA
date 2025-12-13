@@ -179,6 +179,7 @@
     <ClInclude Include="program\System\Input\Key.hpp" />
     <ClInclude Include="program\System\Math\Point\Point.hpp" />
     <ClInclude Include="program\System\Utility\Define.hpp" />
+    <ClInclude Include="program\System\Utility\Random.hpp" />
     <ClInclude Include="program\System\Utility\Singleton.hpp" />
     <ClInclude Include="program\System\Time\Time.hpp" />
   </ItemGroup>
