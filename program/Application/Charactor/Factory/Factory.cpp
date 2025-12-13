@@ -1,23 +1,27 @@
-#include <iostream>
 #include "Factory.h"
 #include "Application/Charactor/base/CharactorBase.hpp"
 
-Factory::Factory()
+/// <summary>
+/// ステータスデータの設定
+/// </summary>
+void Chara::Factory::OnCreate()
 {
 	// キャラクターデータの初期化
-	m_characeterData.enmplace("Hero", Chara::Status{ "勇者",120,120,18,10,12});
-	m_characeterData.emplace( "Goblin", Chara::Status{"Goblin",50,50,10,0,4});
-	m_characeterData.emplace( "wolf", Chara::Status{"ウルフ",70,70,14,0,6});
+	m_characterData.emplace(static_cast<int>(Chara::ID::HERO), Chara::Status{ "勇者",		120,120, 18, 10, 12 });
+	m_characterData.emplace(static_cast<int>(Chara::ID::GOBLIN), Chara::Status{ "ゴブリン",	 50, 50, 10,  0,  4 });
+	m_characterData.emplace(static_cast<int>(Chara::ID::WOLF), Chara::Status{ "ウルフ",		 70, 70, 14,  0,  6 });
 }
 
-std::unique_ptr<Chara::CharaBase> Factory::CreateCharacter(const std::string& arg_charaName)
+
+// 指定したIDでキャラクターを生成する
+std::unique_ptr<Chara::CharaBase> Chara::Factory::CreateCharacter(int arg_charaId)
 {
 	// キャラクターステータスを検索
-	auto it = m_characeterData.find(arg_charaName);
-	if (it == m_characeterData.end())
+	auto it = m_characterData.find(arg_charaId);
+	if (it == m_characterData.end())
 	{
 		// ステータスが見つからなかったら
-		std::cout << "ステータスが見つかりません: " << arg_charaName << std::endl;
+		std::cout << "ステータスが見つかりません: " << arg_charaId << std::endl;
 		return nullptr;
 	}
 
@@ -25,5 +29,5 @@ std::unique_ptr<Chara::CharaBase> Factory::CreateCharacter(const std::string& ar
 	Chara::Status status = it->second;
 
 	// キャラクターオブジェクトを生成して返す
-	return std::unique_ptr<Chara::CharaBase>(status);
+	return std::make_unique<Chara::CharaBase>(status);
 }
