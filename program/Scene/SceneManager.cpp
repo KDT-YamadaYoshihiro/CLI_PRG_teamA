@@ -18,10 +18,10 @@ void SceneManager::Initialize()
 void SceneManager::Update()
 {
 	// ƒL[‚Ì“ü—Í
-	if(Input::GetKey().code == Input::KeyCode::Space)
-	{
-		ChangeScene<InGameScene>();
-	}
+	//if(Input::GetKey().code == Input::KeyCode::Space)
+	//{
+	//	ChangeScene<InGameScene>();
+	//}
 
 	if (m_currentScene)
 	{
