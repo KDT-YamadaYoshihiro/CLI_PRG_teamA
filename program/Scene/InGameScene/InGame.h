@@ -42,4 +42,9 @@ private:
 	/// プレイヤー
 	/// </summary>
 	std::unique_ptr<Chara::Player> m_player;
+
+	/// <summary>
+	/// 今のマップの番号
+	/// </summary>
+	int m_mapNum = 1;
 };
