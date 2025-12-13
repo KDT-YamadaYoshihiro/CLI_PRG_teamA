@@ -7,20 +7,26 @@
 /// </summary>
 void Game::MapSystem::Map::UpdateMapString()
 {
+    m_views.clear();
+
+    if (m_mapData.empty() == true)
+    {
+        return;
+    }
+
     //  初期状態に戻す
     const int Height = m_mapData.size();
-    const int Width = m_mapData[0].size();
-    m_views.clear();
+
     m_views.resize(Height);
 
-    for (int h = 0; h < Height; h++)
+    for (size_t h = 0; h < Height; h++)
     {
-        for (int w = 0; w < Width; w++)
+        for (size_t w = 0; w < m_mapData[h].size(); w++)
         {
             int value = m_mapData[h][w];
             switch (value)
             {
-            case static_cast<int>(Game::MapSystem::TileType::Load):
+            case static_cast<int>(Game::MapSystem::TileType::Road):
                 m_views[h] += "+";
                 break;
             case static_cast<int>(Game::MapSystem::TileType::Stairm):
@@ -30,7 +36,7 @@ void Game::MapSystem::Map::UpdateMapString()
                 m_views[h] += "=";
                 break;
             default:
-                m_views[h] += "？";
+                m_views[h] += "?";
                 break;
             }
 
@@ -57,9 +63,17 @@ bool Game::MapSystem::Map::CanMove(const Math::Point& Next) const noexcept
     }
 
     //  移動先がマップ外ならfalse
-    if (Next.x < 0 || Next.y < 0 || Next.x >= m_mapData[0].size() || Next.y >= m_mapData.size())
+    if (Next.x < 0 || Next.y < 0 || Next.y >= m_mapData.size())
     {
         return false;
+    }
+
+    for (auto& line : m_mapData)
+    {
+        if (Next.x >= line.size())
+        {
+            return false;
+        }
     }
 
     //  移動したい場所が移動可能かどうか
@@ -106,7 +120,11 @@ void Game::MapSystem::Map::Update(const Math::Point& Next)
 /// <param name="MapData"></param>
 void Game::MapSystem::Map::SetMapData(const std::vector<std::vector<int>>& MapData)
 {
+    //  データの更新
     m_mapData = MapData;
+
+    //  表示する文字列の更新
+    this->UpdateMapString();
 }
 
 /// <summary>

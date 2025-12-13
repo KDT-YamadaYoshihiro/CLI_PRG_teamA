@@ -7,6 +7,24 @@
 #include "Graphics/View/View.hpp"
 
 
+void InGameScene::RenderMapWithPlayer()
+{
+	//	プレイヤーの表示位置を更新する
+	Math::Point position = m_player->GetPosition();
+
+
+	std::vector<std::string> temp_mapline;
+
+	temp_mapline = m_map.GetLines();
+	temp_mapline[position.y][position.x] = 'P';
+
+	//	表示するプレイヤーの番号の所だけ変更する
+	for (auto line : temp_mapline)
+	{
+		Graphics::View::GetInstance()->AddLine(line);
+	}
+}
+
 // コンストラクタ・デストラクタ
 InGameScene::InGameScene()
 {
@@ -28,13 +46,13 @@ void InGameScene::Initialize()
 	//	仮のマップ生成
 	std::vector<std::vector<int>> data;
 	data.resize(10);
-	data[0].resize(10);
-	m_map.SetMapData(data);
-	m_map.UpdateMapString();
-	for (auto line : m_map.GetLines())
+	for (auto& line : data)
 	{
-		Graphics::View::GetInstance()->AddLine(line);
+		line.resize(10);
 	}
+	m_map.SetMapData(data);
+
+	RenderMapWithPlayer();
 }
 	
 // 更新
@@ -45,10 +63,10 @@ void InGameScene::Update()
 	case Game::GameState::Field:
 		{
 		//	プレイヤーの移動入力
-		Math::Point next = Player::Controller::GetInputVelocity();
-
+		Math::Point velocity = Player::Controller::GetInputVelocity();
+		Math::Point next = m_player->GetPosition() + velocity;
 		//	移動入力があったかどうかの判定
-		if (next == Math::Point::Zero)
+		if (velocity == Math::Point::Zero)
 		{
 			return;
 		}
@@ -59,16 +77,15 @@ void InGameScene::Update()
 			return;
 		}
 
-		//	文字列をすべて削除
+		////	文字列をすべて削除
 		Graphics::View::GetInstance()->ClearLines();
 
-		//	移動できるならプレイヤーの移動をして
-		m_player->Move(next);
-		
-		//	プレイヤーの表示位置を更新する
-		Math::Point position = m_player->GetPosition();
-			
+		m_map.UpdateMapString();
 
+		//	移動できるならプレイヤーの移動をして
+		m_player->Move(velocity);
+		
+		RenderMapWithPlayer();
 
 		}
 

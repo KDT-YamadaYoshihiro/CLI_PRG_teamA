@@ -26,4 +26,25 @@ namespace Math
 		}
 
 	};
+
+	inline Point operator+(Point lhs, const Point& rhs)
+	{
+		lhs += rhs;
+		return lhs;
+	}
+	//inline Point operator-(Point lhs, const Point& rhs)
+	//{
+	//	lhs += rhs;
+	//	return lhs;
+	//}
+	//inline Point operator+(Point lhs, const Point& rhs)
+	//{
+	//	lhs += rhs;
+	//	return lhs;
+	//}
+	//inline Point operator+(Point lhs, const Point& rhs)
+	//{
+	//	lhs += rhs;
+	//	return lhs;
+	//}
 }
