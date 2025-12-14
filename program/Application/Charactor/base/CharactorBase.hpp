@@ -26,6 +26,19 @@ namespace Chara
 			m_status.HP -= damage;
 		}
 
+		/// <summary>
+		///	回復処理を行う
+		/// </summary>
+		/// <param name="heal"></param>
+		void Heal(int heal)
+		{
+			m_status.HP += heal;
+			if (m_status.HP > m_status.MaxHP)
+			{
+				m_status.HP = m_status.MaxHP;
+			}
+		}
+
 		/*
 		* アクセサ
 		*/
