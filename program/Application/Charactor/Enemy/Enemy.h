@@ -8,6 +8,14 @@ namespace Chara
 	/// </summary>
 	class Enemy : public Chara::CharaBase
 	{
+		
+		public:
+		//	‰Šú‰»
+		Enemy(const Chara::Status& Status)
+			:CharaBase(Status) {}
+		virtual ~Enemy() = default;
+
+		void Attack(Chara::CharaBase& target);
 
 	};
 }
