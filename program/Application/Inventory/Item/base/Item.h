@@ -4,7 +4,7 @@
 
 namespace Chara
 {
-	class Player;
+	class CharaBase;
 }
 
 namespace Inventory
@@ -28,7 +28,7 @@ namespace Inventory
 		virtual ~Item() = default;
 
 		// アイテム使用時の処理
-		virtual void Use(Chara::Player* player) = 0;
+		virtual void Use(Chara::CharaBase* character) = 0;
 
 		// アイテムの名前を取得
 		const std::string GetName() const { return m_name; }

@@ -23,7 +23,7 @@ namespace Inventory
 			return m_heal;
 		}
 
-		void Use(Chara::Player* player) override;
+		void Use(Chara::CharaBase* character) override;
 
 	};
 }

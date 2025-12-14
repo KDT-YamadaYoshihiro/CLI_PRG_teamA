@@ -1,16 +1,16 @@
 #include "Item_Healing.h"
 #include "Application/Charactor/Player/Player.hpp"
 
-void Inventory::Item_Healing::Use(Chara::Player* player)
+void Inventory::Item_Healing::Use(Chara::CharaBase* character)
 {
 
 	// プレイヤーが存在しない場合は処理しない
-	if(!player)
+	if(!character)
 	{
 		return;
 	}
 
 	// プレイヤーの体力を回復する
-	player->Heal(m_heal);
+	character->Heal(m_heal);
 
 }

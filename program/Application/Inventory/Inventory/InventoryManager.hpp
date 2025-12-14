@@ -1,5 +1,5 @@
 #pragma once
-#include"System/Utility/Singleton.hpp"
+#include "System/Utility/Singleton.hpp"
 #include "Application/Inventory/Item/base/Item.h"
 
 #include<vector>
@@ -7,7 +7,7 @@
 
 namespace Chara
 {
-	class Player;
+	class CharaBase;
 }
 
 namespace Inventory
@@ -35,13 +35,13 @@ namespace Inventory
 		/// </summary>
 		/// <param name="index"></param>
 		/// <param name="player"></param>
-		void UseItem(int index, Chara::Player* player);
+		void UseItem(int index, Chara::CharaBase* character);
 
 		/// <summary>
 		/// ƒAƒCƒeƒ€‚Ì”‚ğæ“¾‚·‚é
 		/// </summary>
 		/// <returns></returns>
-		size_t GetItemCount() const;
+		int GetItemCount() const;
 
 
 	private:

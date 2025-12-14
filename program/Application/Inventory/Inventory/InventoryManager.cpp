@@ -1,4 +1,5 @@
 #include "InventoryManager.hpp"
+#include "Application/Charactor/base/CharactorBase.hpp"
 
 std::vector<std::string> Inventory::InventoryManager::GetAllNames()
 {
@@ -24,7 +25,7 @@ void Inventory::InventoryManager::AddItem(std::unique_ptr<Item> item)
 	m_items.push_back(std::move(item));
 }
 
-void Inventory::InventoryManager::UseItem(int index, Chara::Player* player)
+void Inventory::InventoryManager::UseItem(int index, Chara::CharaBase* character)
 {
 	// インデックスが範囲外かどうかをチェック
     if(index >= m_items.size())
@@ -34,13 +35,13 @@ void Inventory::InventoryManager::UseItem(int index, Chara::Player* player)
 	}
 
 	// アイテムの使用処理を呼び出す
-    m_items[index]->Use(player);
+    m_items[index]->Use(character);
 	// 使用したアイテムをインベントリから削除する
 	m_items.erase(m_items.begin() + index);
 
 }
 
-size_t Inventory::InventoryManager::GetItemCount() const
+int Inventory::InventoryManager::GetItemCount() const
 {
 	return m_items.size();
 }
