@@ -13,6 +13,11 @@ class InGameScene : public SceneBase
 	/// マップにプレイヤーを適応して表示する
 	/// </summary>
 	void RenderMapWithPlayer();
+
+	/// <summary>
+	/// マップの表示
+	/// </summary>
+	void RenderMap();
 public:
 	// コンストラクタ・デストラクタ
 	InGameScene();

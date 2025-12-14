@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="program\Application\BattleSystem\action\Executor\CommandExecutor.cpp" />
     <ClCompile Include="program\Application\BattleSystem\System\BattleSystem.cpp" />
     <ClCompile Include="program\Application\Charactor\Player\Controller\PlayerController.cpp" />
     <ClCompile Include="program\Application\Charactor\Player\Player.cpp" />
@@ -155,6 +156,7 @@
     <ClCompile Include="program\System\Time\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="program\Application\BattleSystem\action\Executor\CommandExecutor.hpp" />
     <ClInclude Include="program\Application\BattleSystem\System\BattleSystem.hpp" />
     <ClInclude Include="program\Application\Charactor\Player\Controller\PlayerController.hpp" />
     <ClInclude Include="program\Application\Charactor\Player\Player.hpp" />

@@ -5,7 +5,8 @@
 #include "Application/BattleSystem/System/BattleSystem.hpp"
 #include "Application/Charactor/Player/Controller/PlayerController.hpp"
 #include "Graphics/View/View.hpp"
-
+#include "System/Input/Key.hpp"
+#include "Engine/Engine.hpp"
 
 void InGameScene::RenderMapWithPlayer()
 {
@@ -17,6 +18,19 @@ void InGameScene::RenderMapWithPlayer()
 
 	temp_mapline = m_map.GetLines();
 	temp_mapline[position.y][position.x] = 'P';
+
+	//	表示するプレイヤーの番号の所だけ変更する
+	for (auto line : temp_mapline)
+	{
+		Graphics::View::GetInstance()->AddLine(line);
+	}
+}
+
+void InGameScene::RenderMap()
+{
+	std::vector<std::string> temp_mapline;
+
+	temp_mapline = m_map.GetLines();
 
 	//	表示するプレイヤーの番号の所だけ変更する
 	for (auto line : temp_mapline)
@@ -61,6 +75,18 @@ void InGameScene::Update()
 	switch (m_state)
 	{
 	case Game::GameState::Field:
+
+#ifdef _DEBUG
+		//	キー入力でバトル切り替える
+		if (_kbhit())
+		{
+			if (Input::GetKey().code == Input::KeyCode::Space)
+			{
+				m_state = Game::GameState::Battle;
+			}
+		}
+#endif // _DEBUG
+
 		{
 		//	プレイヤーの移動入力
 		Math::Point velocity = Player::Controller::GetInputVelocity();
@@ -89,13 +115,20 @@ void InGameScene::Update()
 
 		}
 
+
 		//	移動したらランダムエンカウント（確率）
 			//	エンカウントした場合は、バトル状態にする	
 			//	しなかった場合は上に戻る
 
 		break;
 	case Game::GameState::Battle:
-		Battle::BattleSystem::GetInstance()->Update();
+		Battle::BattleSystem::GetInstance()->Update(m_player.get());
+		if (Battle::BattleSystem::GetInstance()->IsFinish())
+		{
+			m_state = Game::GameState::Field;
+			CLI_ENGINE->GetView()->ClearLines();
+			this->RenderMapWithPlayer();
+		}
 		break;
 	default:
 		break;

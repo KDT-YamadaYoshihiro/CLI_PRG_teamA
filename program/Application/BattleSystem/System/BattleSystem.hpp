@@ -1,5 +1,7 @@
 #pragma once
 #include "System/Utility/Singleton.hpp"
+#include "Application/BattleSystem/action/ActionCommand.hpp"
+#include "Application/Charactor/Player/Player.hpp"
 
 namespace Battle
 {
@@ -11,7 +13,7 @@ namespace Battle
 		/// <summary>
 		/// バトル中の状態更新
 		/// </summary>
-		void Update();
+		void Update(Chara::Player* player);
 
 
 		/// <summary>

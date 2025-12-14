@@ -1,6 +1,6 @@
 #include "System/Time/Time.hpp"
 #include<Windows.h>
-
+#include<thread>
 
 Engine::Time::Time()
 	:m_sleepMilSeconds(16)
@@ -35,6 +35,17 @@ int Engine::Time::GetMonitorRefreshRate()
 /// </summary>
 void Engine::Time::Wait()
 {
-	m_sleepMilSeconds = 1000 / GetMonitorRefreshRate();
-	Sleep(m_sleepMilSeconds);
+
+}
+
+/// <summary>
+/// ŽžŠÔ‚ðŽ~‚ß‚é
+/// </summary>
+void Engine::Time::Sleep(std::chrono::seconds second)
+{
+	std::this_thread::sleep_for(second);
+}
+void Engine::Time::Sleep(std::chrono::milliseconds mil)
+{
+	std::this_thread::sleep_for(mil);
 }
