@@ -1,6 +1,7 @@
 #include "Map.hpp"
 
 #include "Graphics/View/View.hpp"
+#include "Application/Map/TileCode.hpp"
 
 /// <summary>
 /// マップの文字列変換
@@ -29,7 +30,7 @@ void Game::MapSystem::Map::UpdateMapString()
             case static_cast<int>(Game::MapSystem::TileType::Road):
                 m_views[h] += "+";
                 break;
-            case static_cast<int>(Game::MapSystem::TileType::Stairm):
+            case static_cast<int>(Game::MapSystem::TileType::Stair):
                 m_views[h] += "@";
                 break;
             case static_cast<int>(Game::MapSystem::TileType::Wall):
@@ -97,6 +98,26 @@ const MapData& Game::MapSystem::Map::GetMapData()
 std::vector<std::string> Game::MapSystem::Map::GetLines()
 {
     return m_views;
+}
+
+/// <summary>
+/// プレイヤーと階段の位置が当たっているかどうか
+/// </summary>
+/// <param name="player"></param>
+/// <returns></returns>
+bool Game::MapSystem::Map::IsPlayerAtStairs(const Math::Point& player)
+{
+    if (m_mapData.empty())
+    {
+        return false;
+    }
+
+    //　プレイヤーの位置が階段ならTRUE
+    if (m_mapData[player.y][player.x] == static_cast<int>(Game::MapSystem::TileType::Stair))
+    {
+        return true;
+    }
+    return false;
 }
 
 /// <summary>

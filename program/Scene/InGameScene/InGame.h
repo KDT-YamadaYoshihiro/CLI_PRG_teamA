@@ -18,6 +18,12 @@ class InGameScene : public SceneBase
 	/// マップの表示
 	/// </summary>
 	void RenderMap();
+
+	/// <summary>
+	/// 階層の更新と再読み込み
+	/// </summary>
+	void MoveToNextFloor();
+
 public:
 	// コンストラクタ・デストラクタ
 	InGameScene();
@@ -52,4 +58,6 @@ private:
 	/// 今のマップの番号
 	/// </summary>
 	int m_mapNum = 1;
+
+	const int STATE_MAX = 10;
 };

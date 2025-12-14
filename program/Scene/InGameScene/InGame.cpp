@@ -7,9 +7,13 @@
 #include "Graphics/View/View.hpp"
 #include "System/Input/Key.hpp"
 #include "Engine/Engine.hpp"
+#include "Scene/SceneManager.h"
 
 void InGameScene::RenderMapWithPlayer()
 {
+	CLI_ENGINE->GetView()->ClearLines();
+	CLI_ENGINE->GetView()->AddLine(std::to_string(m_mapNum) + "階層目 / 10階層");
+
 	//	プレイヤーの表示位置を更新する
 	Math::Point position = m_player->GetPosition();
 
@@ -39,6 +43,28 @@ void InGameScene::RenderMap()
 	}
 }
 
+void InGameScene::MoveToNextFloor()
+{
+	//	階層の番号のインクリメント
+	m_mapNum++;
+
+	//	データの読み込み
+	//	今は読込がないので仮のマップ生成
+	std::vector<std::vector<int>> data;
+	data.resize(10);
+	for (auto& line : data)
+	{
+		line.resize(10);
+	}
+	data[5][5] = 2;
+	m_map.SetMapData(data);
+
+	//	プレイヤーは0,0スタートで
+	m_player->SetPosition({ 0,0 });
+
+	RenderMapWithPlayer();
+}
+
 // コンストラクタ・デストラクタ
 InGameScene::InGameScene()
 {
@@ -64,6 +90,7 @@ void InGameScene::Initialize()
 	{
 		line.resize(10);
 	}
+	data[5][5] = 2;
 	m_map.SetMapData(data);
 
 	RenderMapWithPlayer();
@@ -113,7 +140,27 @@ void InGameScene::Update()
 		
 		RenderMapWithPlayer();
 
+
+		// 階段かどうか
+		if (m_map.IsPlayerAtStairs(next))
+		{
+			CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(10));
+
+			//	番号のインクリメント
+			if (STATE_MAX == m_mapNum)
+			{
+				//	ゲームクリアのシーンに変更する
+
+			}
+
+			//	次の階層にする
+			this->MoveToNextFloor();
+
+			return;
 		}
+
+		}
+
 
 
 		//	移動したらランダムエンカウント（確率）

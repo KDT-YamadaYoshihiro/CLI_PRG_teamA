@@ -5,6 +5,8 @@
 #include"System/Math/Point/Point.hpp"
 #include"Application/Map/TileCode.hpp"
 
+#include"System/Math/Point/Point.hpp"
+
 //	長いので
 using MapData = std::vector<std::vector<int>>;
 using MapDataString = std::vector<std::vector<std::string>>;
@@ -57,6 +59,13 @@ namespace Game::MapSystem
 		const MapData& GetMapData();
 
 		std::vector<std::string> GetLines();
+
+		/// <summary>
+		/// プレイヤーと階段の位置が当たっているかどうか
+		/// </summary>
+		/// <param name="player"></param>
+		/// <returns></returns>
+		bool IsPlayerAtStairs(const Math::Point& player);
 
 	private:
 		/// <summary>
