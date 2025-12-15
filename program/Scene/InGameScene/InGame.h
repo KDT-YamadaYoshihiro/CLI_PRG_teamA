@@ -5,7 +5,7 @@
 #include"Application/Charactor/Player/Player.hpp"
 #include "Application/Charactor/Enemy/Enemy.h"
 #include "Application/BattleSystem/Encount/EncountSystem.h"
-
+#include "Application/Inventory/Inventory/InventoryManager.hpp"
 
 #include<memory>
 #include<vector>
@@ -72,6 +72,8 @@ private:
 	/// エンカウントを管理するクラス
 	/// </summary>
 	EncountSystem encount;
+
+
 
 	/// <summary>
 	/// 今のマップの番号
