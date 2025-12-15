@@ -1,8 +1,9 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <stdlib.h>
 #include "Title.h"
+#include "../../Engine/Engine.hpp"
 
-// ƒRƒ“ƒXƒgƒ‰ƒNƒ^EƒfƒXƒgƒ‰ƒNƒ^
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ»ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 TitleScene::TitleScene()
 {
 }
@@ -11,25 +12,36 @@ TitleScene::~TitleScene()
 	this->Release();
 }
 
-// ‰Šú‰»
+// åˆæœŸåŒ–
 void TitleScene::Initialize()
 {
-	std::cout << "TitleScene Create()" << std::endl;
+	engine->GetView()->ClearScene();
+
+	engine->GetView()->AddLine(" ------------------------------------------------------ ");
+	engine->GetView()->AddLine(" ---   #####  #       ###   ######  ######   #####  --- ");
+	engine->GetView()->AddLine(" ---  #     # #        #    #     # #     # #     # --- ");
+	engine->GetView()->AddLine(" ---  #       #        #    ######  ######  #       --- ");
+	engine->GetView()->AddLine(" ---  #       #        #    #   #   #       #  #### --- ");
+	engine->GetView()->AddLine(" ---  #     # #        #    #    #  #       #     # --- ");
+	engine->GetView()->AddLine(" ---   #####  ####### ###   #     # #        #####  --- ");
+	engine->GetView()->AddLine(" ------------------------------------------------------ ");
+	engine->GetView()->AddLine(" ---             Ket Push to Game START             --- ");
 }
 
-// XV
+// æ›´æ–°
 void TitleScene::Update()
 {
 }
 
-// •`‰æ
+// æç”»
 void TitleScene::Render()
 {
+	
 }
 
-// ‰ğ•ú
+// è§£æ”¾
 void TitleScene::Release()
 {
-	// ƒRƒ“ƒ\[ƒ‹‰æ–Ê‚ÌƒŠƒZƒbƒg
+	// ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ç”»é¢ã®ãƒªã‚»ãƒƒãƒˆ
 	std::system("cls");
 }
