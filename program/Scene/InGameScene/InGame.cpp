@@ -198,6 +198,16 @@ void InGameScene::Update()
 		}
 
 		Battle::BattleSystem::GetInstance()->Update(m_player.get(), tep_enemys);
+		
+		//	敵をコレクションから削除する
+		std::erase_if(
+			m_enemys,
+			[](const std::unique_ptr<Chara::Enemy>& enemy)
+			{
+				return enemy->GetHp() <= 0;
+			});
+
+		//	プレイヤーが生存しているかどうか
 		if (m_player->IsDead())
 		{
 			/*
@@ -207,6 +217,7 @@ void InGameScene::Update()
 			return;
 		}
 
+		//	バトル終了していてまだプレイヤーが死亡していなかったら
 		if (Battle::BattleSystem::GetInstance()->IsFinish())
 		{
 			m_state = Game::GameState::Field;

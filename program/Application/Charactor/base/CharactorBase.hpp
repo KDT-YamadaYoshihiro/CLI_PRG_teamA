@@ -2,6 +2,8 @@
 #include "Application/Charactor/status/CharaStatus.hpp"
 #include "System/Utility/Define.hpp"
 
+#include <string>
+
 namespace Chara
 {
 
@@ -83,6 +85,14 @@ namespace Chara
 		{
 			m_status = Status;
 		}
+
+
+		/// <summary>
+		/// ステータス
+		/// </summary>
+		/// <returns></returns>
+		std::string GetStatusString();
+
 
 	protected:
 		/// <summary>
