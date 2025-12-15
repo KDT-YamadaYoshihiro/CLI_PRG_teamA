@@ -11,6 +11,5 @@ void Chara::Enemy::Attack(Chara::CharaBase& target, int damage)
 
 	// ダメージ適用
 	target.ApplyDamage(damage);
-
 }
 

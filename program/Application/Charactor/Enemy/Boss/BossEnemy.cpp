@@ -19,10 +19,6 @@ void Chara::BossEnemy::FireBreath(Chara::CharaBase& target,int damage)
 	{
 		return;
 	}
-
-	// ダメージ計算処理（炎の息吹は魔法攻撃力を使用する）
-	int damage = this->GetMagicAttack() - target.GetDefence();
-
 	// ダメージ適用（魔法攻撃力を使用）
 	target.ApplyDamage(this->GetMagicAttack());
 }
