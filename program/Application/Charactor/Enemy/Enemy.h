@@ -15,7 +15,7 @@ namespace Chara
 			:CharaBase(Status) {}
 		virtual ~Enemy() = default;
 
-		void Attack(Chara::CharaBase& target);
+		void Attack(Chara::CharaBase& target, int damage);
 
 	};
 }

@@ -13,9 +13,9 @@ namespace Chara
 		virtual ~BossEnemy() = default;
 
 		// ’ÊíUŒ‚
-		void Attack(Chara::CharaBase& target);
+		void Attack(Chara::CharaBase& target, int damage);
 		// ‰Š‚Ì‘§
-		void FireBreath(Chara::CharaBase& target);
+		void FireBreath(Chara::CharaBase& target,int damage);
 
 	};
 

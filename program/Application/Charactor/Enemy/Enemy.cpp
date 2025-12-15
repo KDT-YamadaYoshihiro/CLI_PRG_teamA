@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-void Chara::Enemy::Attack(Chara::CharaBase& target)
+void Chara::Enemy::Attack(Chara::CharaBase& target, int damage)
 {
 
 	// 対象が死亡していたら処理しない
@@ -8,9 +8,6 @@ void Chara::Enemy::Attack(Chara::CharaBase& target)
 	{
 		return;
 	}
-
-	// ダメージ計算処理
-	int damage = this->GetAttack() - target.GetDefence();
 
 	// ダメージ適用
 	target.ApplyDamage(damage);

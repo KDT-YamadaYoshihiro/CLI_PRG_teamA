@@ -1,6 +1,6 @@
 #include "BossEnemy.h"
 
-void Chara::BossEnemy::Attack(Chara::CharaBase& target)
+void Chara::BossEnemy::Attack(Chara::CharaBase& target, int damage)
 {
 	// 対象が死亡していたら処理しない
 	if(target.IsDead())
@@ -8,15 +8,11 @@ void Chara::BossEnemy::Attack(Chara::CharaBase& target)
 		return;
 	}
 
-	// ダメージ計算処理
-	int damage = this->GetAttack() - target.GetDefence();
-
-
 	// ダメージ適用
 	target.ApplyDamage(damage);
 }
 
-void Chara::BossEnemy::FireBreath(Chara::CharaBase& target)
+void Chara::BossEnemy::FireBreath(Chara::CharaBase& target,int damage)
 {
 	// 対象が死亡していたら処理しない
 	if(target.IsDead())
