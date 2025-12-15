@@ -2,7 +2,6 @@
 
 #include<span>
 #include<string>
-#include"Application/Inventory/Item/base/Item.hpp";
 
 namespace Battle
 {
