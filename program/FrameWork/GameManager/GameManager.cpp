@@ -8,13 +8,17 @@
 #include "Scene/DefalutScene/DefalutScene.h"
 #include "Application/Scene/TestScene.hpp"
 #include "Scene/InGameScene/InGame.h"
+#include "Scene/TitleScene/Title.h"
+#include "Scene/GameClearScene/GameClear.h"
+#include "Scene/GameOverScene/GameOver.h"
 
 #ifdef EXP_SCENE 
 #undef EXP_SCENE 
 #endif // EXP_SCENE
 
 //	-1:TestScene 0:Default 1:Title 2:InGame 3:End
-#define EXP_SCENE 2
+// 3 にクリアの画面　4 にゲームオーバーの画面　を追加しました
+#define EXP_SCENE 4
 
 namespace Debug
 {
@@ -24,8 +28,19 @@ namespace Debug
 		SceneManager::GetInstance()->ChangeScene<TestScene>();
 #elif EXP_SCENE == 0
 
+#elif EXP_SCENE == 1
+		SceneManager::GetInstance()->ChangeScene<TitleScene>();
+
 #elif EXP_SCENE == 2
 		SceneManager::GetInstance()->ChangeScene<InGameScene>();
+
+#elif EXP_SCENE == 3
+		SceneManager::GetInstance()->ChangeScene<GameClearScene>();
+
+#elif EXP_SCENE == 4
+		SceneManager::GetInstance()->ChangeScene<GameOverScene>();
+		
+
 #else
 		SceneManager::GetInstance()->ChangeScene<DefalutScene>();
 #endif // EXP_SCENE == 0
@@ -79,8 +94,14 @@ void Engine::GameManager::CreateStartScene()
 	//	何もないとき
 #elif EXP_SCENE == 0
 	SceneManager::GetInstance()->ChangeScene<DefalutScene>();
+#elif EXP_SCENE == 1
+	SceneManager::GetInstance()->ChangeScene<TitleScene>();
 #elif EXP_SCENE == 2
 	SceneManager::GetInstance()->ChangeScene<InGameScene>();
+#elif EXP_SCENE == 3
+	SceneManager::GetInstance()->ChangeScene<GameClearScene>();
+#elif EXP_SCENE == 4
+	SceneManager::GetInstance()->ChangeScene<GameOverScene>();
 
 	//	該当しない時
 #else

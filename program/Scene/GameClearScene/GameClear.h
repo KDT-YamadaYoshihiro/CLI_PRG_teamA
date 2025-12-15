@@ -2,15 +2,13 @@
 #include "../program/Scene/SceneBase.h"
 #include "../../Engine/Engine.hpp"
 
-class TitleScene : public SceneBase
+class GameClearScene : public SceneBase
 {
-public:
+	public:
 	// コンストラクタ・デストラクタ
-	TitleScene();
-	virtual ~TitleScene();
-
+	GameClearScene();
+	virtual ~GameClearScene();
 	Engine::Engine* engine = Engine::Engine::GetInstance();
-
 	// SceneBaseの仮想関数をオーバーライド
 	// 初期化
 	void Initialize() override;
