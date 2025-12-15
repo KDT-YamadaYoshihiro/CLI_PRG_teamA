@@ -12,7 +12,7 @@ namespace Battle
 		/// <param name="Attack">攻撃力</param>
 		/// <param name="Defence">防御力</param>
 		/// <returns>ダメージ値</returns>
-		int CalcDamage(const int Attack,const int Defence)
+		static int CalcDamage(const int Attack,const int Defence)
 		{
 			//	クリティカルなどをいれるならここで入れてください。
 			int attack = Attack;

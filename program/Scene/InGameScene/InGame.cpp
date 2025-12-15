@@ -5,10 +5,17 @@
 #include "Application/BattleSystem/System/BattleSystem.hpp"
 #include "Application/Charactor/Player/Controller/PlayerController.hpp"
 #include "Graphics/View/View.hpp"
+#include "System/Input/Key.hpp"
+#include "Engine/Engine.hpp"
+#include "Scene/SceneManager.h"
 
+#include "Scene/GameClear/GameClear.hpp"
 
 void InGameScene::RenderMapWithPlayer()
 {
+	CLI_ENGINE->GetView()->ClearLines();
+	CLI_ENGINE->GetView()->AddLine(std::to_string(m_mapNum) + "階層目 / " + std::to_string(STATE_MAX) + "階層");
+
 	//	プレイヤーの表示位置を更新する
 	Math::Point position = m_player->GetPosition();
 
@@ -23,6 +30,39 @@ void InGameScene::RenderMapWithPlayer()
 	{
 		Graphics::View::GetInstance()->AddLine(line);
 	}
+}
+
+void InGameScene::RenderMap()
+{
+	std::vector<std::string> temp_mapline;
+
+	temp_mapline = m_map.GetLines();
+
+	//	表示するプレイヤーの番号の所だけ変更する
+	for (auto line : temp_mapline)
+	{
+		Graphics::View::GetInstance()->AddLine(line);
+	}
+}
+
+void InGameScene::MoveToNextFloor()
+{
+
+	//	データの読み込み
+	//	今は読込がないので仮のマップ生成
+	std::vector<std::vector<int>> data;
+	data.resize(10);
+	for (auto& line : data)
+	{
+		line.resize(10);
+	}
+	data[5][5] = 2;
+	m_map.SetMapData(data);
+
+	//	プレイヤーは0,0スタートで
+	m_player->SetPosition({ 0,0 });
+
+	RenderMapWithPlayer();
 }
 
 // コンストラクタ・デストラクタ
@@ -50,6 +90,7 @@ void InGameScene::Initialize()
 	{
 		line.resize(10);
 	}
+	data[5][5] = 2;
 	m_map.SetMapData(data);
 
 	RenderMapWithPlayer();
@@ -61,6 +102,18 @@ void InGameScene::Update()
 	switch (m_state)
 	{
 	case Game::GameState::Field:
+
+#ifdef _DEBUG
+		//	キー入力でバトル切り替える
+		if (_kbhit())
+		{
+			if (Input::GetKey().code == Input::KeyCode::Space)
+			{
+				m_state = Game::GameState::Battle;
+			}
+		}
+#endif // _DEBUG
+
 		{
 		//	プレイヤーの移動入力
 		Math::Point velocity = Player::Controller::GetInputVelocity();
@@ -87,7 +140,32 @@ void InGameScene::Update()
 		
 		RenderMapWithPlayer();
 
+
+		// 階段かどうか
+		if (m_map.IsPlayerAtStairs(next))
+		{
+			//CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(10));
+			
+			//	階層の番号のインクリメント
+			m_mapNum++;
+
+			//	番号のインクリメント
+			if (STATE_MAX < m_mapNum)
+			{
+				//	ゲームクリアのシーンに変更する
+				SceneManager::GetInstance()->ChangeScene<GameClearScene>();
+				return;
+			}
+
+			//	次の階層にする
+			this->MoveToNextFloor();
+
+			return;
 		}
+
+		}
+
+
 
 		//	移動したらランダムエンカウント（確率）
 			//	エンカウントした場合は、バトル状態にする	
@@ -95,7 +173,13 @@ void InGameScene::Update()
 
 		break;
 	case Game::GameState::Battle:
-		Battle::BattleSystem::GetInstance()->Update();
+		Battle::BattleSystem::GetInstance()->Update(m_player.get());
+		if (Battle::BattleSystem::GetInstance()->IsFinish())
+		{
+			m_state = Game::GameState::Field;
+			CLI_ENGINE->GetView()->ClearLines();
+			this->RenderMapWithPlayer();
+		}
 		break;
 	default:
 		break;

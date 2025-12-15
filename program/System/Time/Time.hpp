@@ -1,4 +1,5 @@
 #pragma once
+#include <chrono>
 
 namespace Engine
 {
@@ -19,6 +20,12 @@ namespace Engine
 		/// ‹^—“I‚ÈV-Sync‚È‚Ì‚Å¸“x‚Í‚¨@‚µ
 		/// </summary>
 		void Wait();
+
+		/// <summary>
+		/// ŠÔ‚ğ~‚ß‚é
+		/// </summary>
+		static void Sleep(std::chrono::seconds second);
+		static void Sleep(std::chrono::milliseconds mil);
 
 	private:
 		int m_sleepMilSeconds;

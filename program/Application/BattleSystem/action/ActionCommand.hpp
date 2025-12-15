@@ -41,6 +41,7 @@ public:
 	/// <returns></returns>
 	static ActionResult SelectCommand(std::span<const std::string> MagicNames, std::span<const std::string> ItemNames);
 
+
 private:
 	/// <summary>
 	///	–‚–@‚Ì‘I‘ð

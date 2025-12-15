@@ -7,6 +7,6 @@ namespace Game::MapSystem
 	{
 		Road = 0,	//	“¹
 		Wall,	//	•Ç
-		Stairm	//	ŠK’i
+		Stair	//	ŠK’i
 	};
 }

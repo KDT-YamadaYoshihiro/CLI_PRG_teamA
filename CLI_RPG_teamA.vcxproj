@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="program\Application\BattleSystem\action\Executor\CommandExecutor.cpp" />
     <ClCompile Include="program\Application\BattleSystem\System\BattleSystem.cpp" />
     <ClCompile Include="program\Application\Charactor\Player\Controller\PlayerController.cpp" />
     <ClCompile Include="program\Application\Charactor\Player\Player.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="program\Graphics\View\View.cpp" />
     <ClCompile Include="program\Main.cpp" />
     <ClCompile Include="program\Scene\DefalutScene\DefalutScene.cpp" />
+    <ClCompile Include="program\Scene\GameClear\GameClear.cpp" />
     <ClCompile Include="program\Scene\InGameScene\InGame.cpp" />
     <ClCompile Include="program\Scene\SceneManager.cpp" />
     <ClCompile Include="program\Scene\TitleScene\Title.cpp" />
@@ -155,6 +157,7 @@
     <ClCompile Include="program\System\Time\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="program\Application\BattleSystem\action\Executor\CommandExecutor.hpp" />
     <ClInclude Include="program\Application\BattleSystem\System\BattleSystem.hpp" />
     <ClInclude Include="program\Application\Charactor\Player\Controller\PlayerController.hpp" />
     <ClInclude Include="program\Application\Charactor\Player\Player.hpp" />
@@ -173,6 +176,7 @@
     <ClInclude Include="program\FrameWork\GameManager\GameManager.hpp" />
     <ClInclude Include="program\Graphics\View\View.hpp" />
     <ClInclude Include="program\Scene\DefalutScene\DefalutScene.h" />
+    <ClInclude Include="program\Scene\GameClear\GameClear.hpp" />
     <ClInclude Include="program\Scene\InGameScene\InGame.h" />
     <ClInclude Include="program\Scene\SceneBase.h" />
     <ClInclude Include="program\Scene\SceneManager.h" />
