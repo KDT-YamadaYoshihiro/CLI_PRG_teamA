@@ -9,6 +9,9 @@ namespace Chara
 	class Player : public CharaBase
 	{
 	public:
+
+		Player() = default;
+
 		/// <summary>
 		/// ‰Šú‰»
 		/// </summary>

@@ -11,13 +11,32 @@
 /// <summary>
 /// バトル中の状態更新
 /// </summary>
-void Battle::BattleSystem::Update(Chara::Player* player)
+void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara::Enemy*>& enemys)
 {
 	m_isFinishd = false;
 
+	//CLI_ENGINE->GetTimer()->Sleep(std::chrono::seconds(1));
+
+	if (enemys.empty())
+	{
+		m_isFinishd = true;
+		return;
+	}
+
+	//	全消し
 	CLI_ENGINE->GetView()->ClearLines();
 
 	CLI_ENGINE->GetView()->AddLine("-----------------");
+
+	//	プレイヤーのステータス表示
+	CLI_ENGINE->GetView()->AddLine(player->GetStatusString() + "\n");
+	//	敵ステータス表示
+	for (auto& enemy : enemys)
+	{
+		CLI_ENGINE->GetView()->AddLine(enemy->GetStatusString());
+	}
+
+	CLI_ENGINE->GetView()->AddLine("\n-----------------");
 	CLI_ENGINE->GetView()->AddLine("プレイヤーのターン");
 
 	//	テスト用のデータ
@@ -26,6 +45,7 @@ void Battle::BattleSystem::Update(Chara::Player* player)
 	Items.push_back("ポーション");
 	Items.push_back("ポーション");
 	Items.push_back("ハイポーション");
+
 	std::vector<std::string> magic; 
 	magic.push_back("ファイア");
 	magic.push_back("サンダー");
@@ -37,18 +57,56 @@ void Battle::BattleSystem::Update(Chara::Player* player)
 	//	行動の実行
 	CLI_ENGINE->GetView()->ClearLines();
 
+	//	プレイヤーのステータス表示
+	CLI_ENGINE->GetView()->AddLine(player->GetStatusString() + "\n");
+	//	敵ステータス表示
+	for (auto& enemy : enemys)
+	{
+		CLI_ENGINE->GetView()->AddLine(enemy->GetStatusString());
+	}
+
 
 	//	プレイヤーの攻撃 プレイヤー攻撃力、敵防御力
 	auto player_attack = Battle::BattleCalc::CalcDamage(player->GetAttack(),10);
 
+	//	殴り先を選択肢して殴る
+
+
 	//	敵の生存判定
-		//	生存していたら敵のターン
-		//	生存してなかったらバトル終了（フラグを立てる）
-		//	関数のリターン
+	//	全滅しているとき
+	if (enemys.empty())
+	{
+		//	バトルを終了する
+		m_isFinishd = true;
+		return;
+	}
 
 	//	敵の行動（攻撃）
+	for (auto& enemy : enemys)
+	{
+		//	敵の攻撃とダメージ計算
+		auto damage = Battle::BattleCalc::CalcDamage(enemy->GetAttack(),player->GetDefence());
+		player->ApplyDamage(damage);
 
-	//	プレイヤーの生存判定
+		//	攻撃ログを流す
+		std::string log = "\n" + enemy->GetName() + "の攻撃";
+		CLI_ENGINE->GetView()->AddLine(log);
+		log.clear();
+		//	被弾ログを流す
+		log = player->GetName() + "に" + std::to_string(damage) + "のダメージ\n";
+		CLI_ENGINE->GetView()->AddLine(log);
+	}
+
+	//	表示
+	CLI_ENGINE->GetView()->Render();
+
+	//	プレイヤーのが死亡していたら
+	//	バトル終了
+	if (player->IsDead())
+	{
+		m_isFinishd = true;
+		return;
+	}
 
 	//	上に戻る
 

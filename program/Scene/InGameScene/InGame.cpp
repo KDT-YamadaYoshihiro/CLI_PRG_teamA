@@ -9,6 +9,9 @@
 #include "Engine/Engine.hpp"
 #include "Scene/SceneManager.h"
 
+#include "Application/Charactor/Factory/Factory.h"
+#include "System/Utility/Random.hpp"
+
 #include "Scene/GameClear/GameClear.hpp"
 
 void InGameScene::RenderMapWithPlayer()
@@ -18,7 +21,6 @@ void InGameScene::RenderMapWithPlayer()
 
 	//	プレイヤーの表示位置を更新する
 	Math::Point position = m_player->GetPosition();
-
 
 	std::vector<std::string> temp_mapline;
 
@@ -47,7 +49,6 @@ void InGameScene::RenderMap()
 
 void InGameScene::MoveToNextFloor()
 {
-
 	//	データの読み込み
 	//	今は読込がないので仮のマップ生成
 	std::vector<std::vector<int>> data;
@@ -65,6 +66,21 @@ void InGameScene::MoveToNextFloor()
 	RenderMapWithPlayer();
 }
 
+/// <summary>
+/// 敵の生成
+/// </summary>
+void InGameScene::CreateEnemy()
+{
+	m_enemys.clear();
+
+	int create_num = Random::Range(1, 3);
+	for (size_t i = 0; i < create_num;i++)
+	{
+		int status_num = Random::Range(1, 2);
+		m_enemys.push_back(Chara::Factory::GetInstance()->CreateCharacter<Chara::Enemy>(status_num));
+	}
+}
+
 // コンストラクタ・デストラクタ
 InGameScene::InGameScene()
 {
@@ -79,9 +95,12 @@ InGameScene::~InGameScene()
 void InGameScene::Initialize()
 {
 	Battle::BattleSystem::Create();
-
+	Chara::Factory::Create();
 	//	今はファクトリ実装前なのでこのようにしてやります。
-	m_player = std::make_unique<Chara::Player>(Chara::Status{});
+	m_player = Chara::Factory::GetInstance()->CreateCharacter<Chara::Player>(0);
+	CreateEnemy();
+
+
 
 	//	仮のマップ生成
 	std::vector<std::vector<int>> data;
@@ -115,71 +134,98 @@ void InGameScene::Update()
 #endif // _DEBUG
 
 		{
-		//	プレイヤーの移動入力
-		Math::Point velocity = Player::Controller::GetInputVelocity();
-		Math::Point next = m_player->GetPosition() + velocity;
-		//	移動入力があったかどうかの判定
-		if (velocity == Math::Point::Zero)
-		{
-			return;
-		}
-			
-		//	移動できるかどうかの判定
-		if (m_map.CanMove(next) == false)
-		{
-			return;
-		}
-
-		////	文字列をすべて削除
-		Graphics::View::GetInstance()->ClearLines();
-
-		m_map.UpdateMapString();
-
-		//	移動できるならプレイヤーの移動をして
-		m_player->Move(velocity);
-		
-		RenderMapWithPlayer();
-
-
-		// 階段かどうか
-		if (m_map.IsPlayerAtStairs(next))
-		{
-			//CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(10));
-			
-			//	階層の番号のインクリメント
-			m_mapNum++;
-
-			//	番号のインクリメント
-			if (STATE_MAX < m_mapNum)
+			//	プレイヤーの移動入力
+			Math::Point velocity = Player::Controller::GetInputVelocity();
+			Math::Point next = m_player->GetPosition() + velocity;
+			//	移動入力があったかどうかの判定
+			if (velocity == Math::Point::Zero)
 			{
-				//	ゲームクリアのシーンに変更する
-				SceneManager::GetInstance()->ChangeScene<GameClearScene>();
 				return;
 			}
 
-			//	次の階層にする
-			this->MoveToNextFloor();
+			//	移動できるかどうかの判定
+			if (m_map.CanMove(next) == false)
+			{
+				return;
+			}
 
-			return;
+			////	文字列をすべて削除
+			Graphics::View::GetInstance()->ClearLines();
+
+			m_map.UpdateMapString();
+
+			//	移動できるならプレイヤーの移動をして
+			m_player->Move(velocity);
+
+			RenderMapWithPlayer();
+
+
+			// 階段かどうか
+			if (m_map.IsPlayerAtStairs(next))
+			{
+				//CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(10));
+
+				//	階層の番号のインクリメント
+				m_mapNum++;
+
+				//	番号のインクリメント
+				if (STATE_MAX < m_mapNum)
+				{
+					//	ゲームクリアのシーンに変更する
+					SceneManager::GetInstance()->ChangeScene<GameClearScene>();
+					return;
+				}
+
+				//	次の階層にする
+				this->MoveToNextFloor();
+
+				return;
+			}
+
 		}
-
-		}
-
-
-
 		//	移動したらランダムエンカウント（確率）
 			//	エンカウントした場合は、バトル状態にする	
 			//	しなかった場合は上に戻る
 
 		break;
 	case Game::GameState::Battle:
-		Battle::BattleSystem::GetInstance()->Update(m_player.get());
+	{
+		std::vector<Chara::Enemy*> tep_enemys;
+		tep_enemys.reserve(m_enemys.size());
+		for (auto& enemy : m_enemys)
+		{
+			tep_enemys.push_back(enemy.get());
+		}
+
+		Battle::BattleSystem::GetInstance()->Update(m_player.get(), tep_enemys);
+		
+		//	敵をコレクションから削除する
+		std::erase_if(
+			m_enemys,
+			[](const std::unique_ptr<Chara::Enemy>& enemy)
+			{
+				return enemy->GetHp() <= 0;
+			});
+
+		//	プレイヤーが生存しているかどうか
+		if (m_player->IsDead())
+		{
+			/*
+			* ゲームオーバーに飛ばす
+			*/
+
+			return;
+		}
+
+		//	バトル終了していてまだプレイヤーが死亡していなかったら
 		if (Battle::BattleSystem::GetInstance()->IsFinish())
 		{
 			m_state = Game::GameState::Field;
 			CLI_ENGINE->GetView()->ClearLines();
 			this->RenderMapWithPlayer();
 		}
+
+	}
 		break;
 	default:
 		break;

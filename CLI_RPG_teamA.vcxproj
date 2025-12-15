@@ -137,10 +137,13 @@
   <ItemGroup>
     <ClCompile Include="program\Application\BattleSystem\action\Executor\CommandExecutor.cpp" />
     <ClCompile Include="program\Application\BattleSystem\System\BattleSystem.cpp" />
+    <ClCompile Include="program\Application\Charactor\base\CharactorBase.cpp" />
+    <ClCompile Include="program\Application\Charactor\Factory\Factory.cpp" />
     <ClCompile Include="program\Application\Charactor\Player\Controller\PlayerController.cpp" />
     <ClCompile Include="program\Application\Charactor\Player\Player.cpp" />
     <ClCompile Include="program\Application\Inventory\Inventory\InventoryManager.cpp" />
     <ClCompile Include="program\Application\BattleSystem\action\ActionSelector.cpp" />
+    <ClCompile Include="program\Application\Inventory\Item\Healing_Item\Item_Healing.cpp" />
     <ClCompile Include="program\Application\Map\Map.cpp" />
     <ClCompile Include="program\Application\Scene\TestScene.cpp" />
     <ClCompile Include="program\Engine\Engine.cpp" />
@@ -159,13 +162,16 @@
   <ItemGroup>
     <ClInclude Include="program\Application\BattleSystem\action\Executor\CommandExecutor.hpp" />
     <ClInclude Include="program\Application\BattleSystem\System\BattleSystem.hpp" />
+    <ClInclude Include="program\Application\Charactor\Factory\Factory.h" />
     <ClInclude Include="program\Application\Charactor\Player\Controller\PlayerController.hpp" />
     <ClInclude Include="program\Application\Charactor\Player\Player.hpp" />
     <ClInclude Include="program\Application\BattleSystem\Calc\BattleCalc.hpp" />
     <ClInclude Include="program\Application\Charactor\base\CharactorBase.hpp" />
     <ClInclude Include="program\Application\Charactor\status\CharaStatus.hpp" />
     <ClInclude Include="program\Application\Inventory\Inventory\InventoryManager.hpp" />
+    <ClInclude Include="program\Application\Inventory\Item\base\Item.h" />
     <ClInclude Include="program\Application\Inventory\Item\base\Item.hpp" />
+    <ClInclude Include="program\Application\Inventory\Item\Healing_Item\Item_Healing.h" />
     <ClInclude Include="program\Application\Inventory\Item\Healing_Item\Item_Healing.hpp" />
     <ClInclude Include="program\Application\BattleSystem\action\ActionCommand.hpp" />
     <ClInclude Include="program\Application\Map\Map.hpp" />
