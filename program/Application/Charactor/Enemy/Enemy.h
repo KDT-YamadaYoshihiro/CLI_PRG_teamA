@@ -12,10 +12,10 @@ namespace Chara
 		public:
 		//	‰Šú‰»
 		Enemy(const Chara::Status& Status)
-			:CharaBase(Status) {}
-		virtual ~Enemy() = default;
+			:CharaBase(Status) 
+		{}
 
-		void Attack(Chara::CharaBase& target, int damage);
+		virtual ~Enemy() = default;
 
 	};
 }
