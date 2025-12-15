@@ -18,7 +18,7 @@
 
 //	-1:TestScene 0:Default 1:Title 2:InGame 3:End
 // 3 にクリアの画面　4 にゲームオーバーの画面　を追加しました
-#define EXP_SCENE 4
+#define EXP_SCENE 1
 
 namespace Debug
 {
@@ -115,7 +115,7 @@ void Engine::GameManager::CreateStartScene()
 	//	タイトルの生成
 
 #endif // _DEBUG
-	SceneManager::GetInstance()->Initialize();
+	/*SceneManager::GetInstance()->Initialize();*/
 }
 
 void Engine::GameManager::OnCreate()

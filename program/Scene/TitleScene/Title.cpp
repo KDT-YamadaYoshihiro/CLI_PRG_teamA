@@ -3,6 +3,11 @@
 #include "Title.h"
 #include "../../Engine/Engine.hpp"
 
+#include "Scene/SceneManager.h"
+#include "Scene/InGameScene/InGame.h"
+
+#include "System/Input/Key.hpp"
+
 // コンストラクタ・デストラクタ
 TitleScene::TitleScene()
 {
@@ -25,12 +30,20 @@ void TitleScene::Initialize()
 	engine->GetView()->AddLine(" ---  #     # #        #    #    #  #       #     # --- ");
 	engine->GetView()->AddLine(" ---   #####  ####### ###   #     # #        #####  --- ");
 	engine->GetView()->AddLine(" ------------------------------------------------------ ");
-	engine->GetView()->AddLine(" ---             Ket Push to Game START             --- ");
+	engine->GetView()->AddLine(" ---            SPACE Ket Push to Game START        --- ");
 }
 
 // 更新
 void TitleScene::Update()
 {
+	if (_kbhit())
+	{
+		if (Input::GetKey().code == Input::KeyCode::Space)
+		{
+			SceneManager::GetInstance()->ChangeScene<InGameScene>();
+			return;
+		}
+	}
 }
 
 // 描画
