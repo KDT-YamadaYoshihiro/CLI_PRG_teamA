@@ -1,5 +1,7 @@
 #include "Factory.h"
 #include "Application/Charactor/base/CharactorBase.hpp"
+#include "Application/Charactor/Player/Player.hpp"
+#include "Application/Charactor/Enemy/Enemy.h"
 
 /// <summary>
 /// ステータスデータの設定
@@ -14,20 +16,4 @@ void Chara::Factory::OnCreate()
 
 
 // 指定したIDでキャラクターを生成する
-std::unique_ptr<Chara::CharaBase> Chara::Factory::CreateCharacter(int arg_charaId)
-{
-	// キャラクターステータスを検索
-	auto it = m_characterData.find(arg_charaId);
-	if (it == m_characterData.end())
-	{
-		// ステータスが見つからなかったら
-		std::cout << "ステータスが見つかりません: " << arg_charaId << std::endl;
-		return nullptr;
-	}
 
-	// ステートをコピー
-	Chara::Status status = it->second;
-
-	// キャラクターオブジェクトを生成して返す
-	return std::make_unique<Chara::CharaBase>(status);
-}

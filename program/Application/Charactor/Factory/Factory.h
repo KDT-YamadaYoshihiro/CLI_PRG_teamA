@@ -37,7 +37,27 @@ namespace Chara
 	public:
 
 		// 指定したIDでキャラクターを生成する
-		std::unique_ptr<Chara::CharaBase> CreateCharacter(int arg_charaId);
+		template<typename T>
+		std::unique_ptr<T> CreateCharacter(int arg_charaId);
 
 	};
+
+	template<typename T>
+	inline std::unique_ptr<T> Factory::CreateCharacter(int arg_charaId)
+	{
+		// キャラクターステータスを検索
+		auto it = m_characterData.find(arg_charaId);
+		if (it == m_characterData.end())
+		{
+			// ステータスが見つからなかったら
+			std::cout << "ステータスが見つかりません: " << arg_charaId << std::endl;
+			return nullptr;
+		}
+
+		// ステートをコピー
+		Chara::Status status = it->second;
+
+		// キャラクターオブジェクトを生成して返す
+		return std::make_unique<T>(status);
+	}
 }

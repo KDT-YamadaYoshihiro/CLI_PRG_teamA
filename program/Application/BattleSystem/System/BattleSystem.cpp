@@ -11,7 +11,7 @@
 /// <summary>
 /// バトル中の状態更新
 /// </summary>
-void Battle::BattleSystem::Update(Chara::Player* player)
+void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara::Enemy*>& enemys)
 {
 	m_isFinishd = false;
 
@@ -42,13 +42,35 @@ void Battle::BattleSystem::Update(Chara::Player* player)
 	auto player_attack = Battle::BattleCalc::CalcDamage(player->GetAttack(),10);
 
 	//	敵の生存判定
-		//	生存していたら敵のターン
-		//	生存してなかったらバトル終了（フラグを立てる）
-		//	関数のリターン
+	//	全滅しているとき
+	if (enemys.empty())
+	{
+		//	バトルを終了する
+		m_isFinishd = true;
+		return;
+	}
 
 	//	敵の行動（攻撃）
+	for (auto& enemy : enemys)
+	{
+		//	
+		auto damage = Battle::BattleCalc::CalcDamage(enemy->GetAttack(),player->GetDefence());
+		player->ApplyDamage(damage);
 
-	//	プレイヤーの生存判定
+		//	攻撃ログを流す
+		std::string log = enemy->GetName() + "の攻撃";
+		CLI_ENGINE->GetView()->AddLine(log);
+		log.clear();
+		//	被弾ログを流す
+		log = player->GetName() + "に" + std::to_string(damage) + "のダメージ\n";
+	}
+
+	//	プレイヤーのが死亡していたら
+	//	バトル終了
+	if (player->IsDead())
+	{
+		m_isFinishd = true;
+	}
 
 	//	上に戻る
 

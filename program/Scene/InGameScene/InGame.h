@@ -3,8 +3,10 @@
 #include "Application/State/enum/StateEnum.hpp"
 #include "Application/Map/Map.hpp"
 #include"Application/Charactor/Player/Player.hpp"
+#include "Application/Charactor/Enemy/Enemy.h"
 
 #include<memory>
+#include<vector>
 
 
 class InGameScene : public SceneBase
@@ -23,6 +25,11 @@ class InGameScene : public SceneBase
 	/// 階層の更新と再読み込み
 	/// </summary>
 	void MoveToNextFloor();
+
+	/// <summary>
+	/// 敵の生成
+	/// </summary>
+	void CreateEnemy();
 
 public:
 	// コンストラクタ・デストラクタ
@@ -53,6 +60,11 @@ private:
 	/// プレイヤー
 	/// </summary>
 	std::unique_ptr<Chara::Player> m_player;
+
+	/// <summary>
+	/// 敵のコレクション
+	/// </summary>
+	std::vector<std::unique_ptr<Chara::Enemy>> m_enemys;
 
 	/// <summary>
 	/// 今のマップの番号

@@ -2,6 +2,9 @@
 #include "System/Utility/Singleton.hpp"
 #include "Application/BattleSystem/action/ActionCommand.hpp"
 #include "Application/Charactor/Player/Player.hpp"
+#include "Application/Charactor/Enemy/Enemy.h"
+
+#include<vector>
 
 namespace Battle
 {
@@ -13,8 +16,7 @@ namespace Battle
 		/// <summary>
 		/// バトル中の状態更新
 		/// </summary>
-		void Update(Chara::Player* player);
-
+		void Update(Chara::Player* player, const std::vector<Chara::Enemy*>& enemys);
 
 		/// <summary>
 		/// 終了判定
@@ -26,6 +28,7 @@ namespace Battle
 		}
 
 	private:
+
 		/// <summary>
 		///	終了しているかどうか
 		/// </summary>
