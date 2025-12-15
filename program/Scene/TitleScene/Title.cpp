@@ -20,7 +20,7 @@ TitleScene::~TitleScene()
 // 初期化
 void TitleScene::Initialize()
 {
-	engine->GetView()->ClearScene();
+	engine->GetView()->ClearLines();
 
 	engine->GetView()->AddLine(" ------------------------------------------------------ ");
 	engine->GetView()->AddLine(" ---   #####  #       ###   ######  ######   #####  --- ");

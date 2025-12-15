@@ -12,6 +12,8 @@
 #include "Application/Charactor/Factory/Factory.h"
 #include "System/Utility/Random.hpp"
 
+#include "Scene/GameOverScene/GameOver.h"
+#include "Scene/GameClearScene/GameClear.h"
 
 void InGameScene::RenderMapWithPlayer()
 {
@@ -171,7 +173,7 @@ void InGameScene::Update()
 				if (STATE_MAX < m_mapNum)
 				{
 					//	ゲームクリアのシーンに変更する
-					//SceneManager::GetInstance()->ChangeScene<GameClearScene>();
+					SceneManager::GetInstance()->ChangeScene<GameClearScene>();
 					return;
 				}
 
@@ -212,6 +214,7 @@ void InGameScene::Update()
 			/*
 			* ゲームオーバーに飛ばす
 			*/
+			SceneManager::GetInstance()->ChangeScene<GameOverScene>();
 
 			return;
 		}
