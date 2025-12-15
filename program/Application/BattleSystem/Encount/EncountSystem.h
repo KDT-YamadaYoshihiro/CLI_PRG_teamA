@@ -7,7 +7,7 @@ class EncountSystem
 private:
 
 	// エンカウント率
-	int m_encountRate = 0.1; 
+	float m_encountRate = 0.1; 
 
 public:
 	// エンカウント判定
