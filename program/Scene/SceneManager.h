@@ -40,4 +40,5 @@ void SceneManager::ChangeScene()
 		m_currentScene->Release();
 	}
 	m_currentScene = std::make_unique<T>();
+	m_currentScene->Initialize();
 }

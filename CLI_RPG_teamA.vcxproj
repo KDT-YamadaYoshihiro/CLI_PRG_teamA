@@ -148,6 +148,7 @@
     <ClCompile Include="program\Graphics\View\View.cpp" />
     <ClCompile Include="program\Main.cpp" />
     <ClCompile Include="program\Scene\DefalutScene\DefalutScene.cpp" />
+    <ClCompile Include="program\Scene\GameClear\GameClear.cpp" />
     <ClCompile Include="program\Scene\InGameScene\InGame.cpp" />
     <ClCompile Include="program\Scene\SceneManager.cpp" />
     <ClCompile Include="program\Scene\TitleScene\Title.cpp" />
@@ -175,7 +176,7 @@
     <ClInclude Include="program\FrameWork\GameManager\GameManager.hpp" />
     <ClInclude Include="program\Graphics\View\View.hpp" />
     <ClInclude Include="program\Scene\DefalutScene\DefalutScene.h" />
-    <ClInclude Include="program\Scene\GameOver\GameClear.hpp" />
+    <ClInclude Include="program\Scene\GameClear\GameClear.hpp" />
     <ClInclude Include="program\Scene\InGameScene\InGame.h" />
     <ClInclude Include="program\Scene\SceneBase.h" />
     <ClInclude Include="program\Scene\SceneManager.h" />

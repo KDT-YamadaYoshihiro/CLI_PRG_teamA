@@ -9,10 +9,12 @@
 #include "Engine/Engine.hpp"
 #include "Scene/SceneManager.h"
 
+#include "Scene/GameClear/GameClear.hpp"
+
 void InGameScene::RenderMapWithPlayer()
 {
 	CLI_ENGINE->GetView()->ClearLines();
-	CLI_ENGINE->GetView()->AddLine(std::to_string(m_mapNum) + "階層目 / 10階層");
+	CLI_ENGINE->GetView()->AddLine(std::to_string(m_mapNum) + "階層目 / " + std::to_string(STATE_MAX) + "階層");
 
 	//	プレイヤーの表示位置を更新する
 	Math::Point position = m_player->GetPosition();
@@ -45,8 +47,6 @@ void InGameScene::RenderMap()
 
 void InGameScene::MoveToNextFloor()
 {
-	//	階層の番号のインクリメント
-	m_mapNum++;
 
 	//	データの読み込み
 	//	今は読込がないので仮のマップ生成
@@ -144,13 +144,17 @@ void InGameScene::Update()
 		// 階段かどうか
 		if (m_map.IsPlayerAtStairs(next))
 		{
-			CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(10));
+			//CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(10));
+			
+			//	階層の番号のインクリメント
+			m_mapNum++;
 
 			//	番号のインクリメント
-			if (STATE_MAX == m_mapNum)
+			if (STATE_MAX < m_mapNum)
 			{
 				//	ゲームクリアのシーンに変更する
-
+				SceneManager::GetInstance()->ChangeScene<GameClearScene>();
+				return;
 			}
 
 			//	次の階層にする
