@@ -73,9 +73,9 @@ void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara
 		Battle::Action::Attack(player, enemys);
 		break;
 	case Battle::ePlayerCommand::Magic:
-		Battle::Action::ItemUse(player, inventoryManager);
 		break;
 	case Battle::ePlayerCommand::Item:
+		Battle::Action::ItemUse(player, inventoryManager,action.selectID);
 		break;
 
 	default:

@@ -46,40 +46,14 @@ void Battle::Action::Attack(Chara::Player* player, std::vector<Chara::Enemy*> en
 
 }
 
-void Battle::Action::ItemUse(Chara::Player* player, Inventory::InventoryManager* inventoryManager)
+void Battle::Action::ItemUse(Chara::Player* player, Inventory::InventoryManager* inventoryManager, int use_number)
 {
-
-	// cinを使用して入力
-	int number = inventoryManager->GetItemCount();
-
-	if (inventoryManager->GetItemCount() > 1)
-	{
-		std::string count = std::to_string(inventoryManager->GetItemCount() - 1);
-		// 対象の選択案内
-		CLI_ENGINE->GetView()->AddLine("対象を０から" + count + "の中から選んでください");
-		CLI_ENGINE->GetView()->Render();
-		std::cin >> number;
-		// 選択範囲内になるまでループ
-		while (number >= inventoryManager->GetItemCount())
-		{
-			// 対象の選択案内
-			//CLI_ENGINE->GetView()->AddLine("選択範囲外です。もう一度入力してください");
-			std::cout << "選択範囲外です。もう一度入力してください" << std::endl;
-			//CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
-			std::cin >> number;
-		}
-	}
-	else
-	{
-		number = 0;
-	}
-
-	// 選択アイテムを使用
-	inventoryManager->UseItem(number, player);
-
 	// ログを出す
-	CLI_ENGINE->GetView()->AddLine("\n" + player->GetName() + "は" + inventoryManager->GetAllNames()[number]+ "を使用した。");
+	CLI_ENGINE->GetView()->AddLine("\n" + player->GetName() + "は" + inventoryManager->GetAllNames()[use_number] + "を使用した。");
 	CLI_ENGINE->GetView()->Render();
 	CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
+
+	// 選択アイテムを使用
+	inventoryManager->UseItem(use_number, player);
 
 }

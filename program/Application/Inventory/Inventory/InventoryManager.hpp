@@ -43,7 +43,6 @@ namespace Inventory
 		/// <returns></returns>
 		int GetItemCount() const;
 
-
 	private:
 		/// <summary>
 		/// プレイヤーの所持しているインベントリ

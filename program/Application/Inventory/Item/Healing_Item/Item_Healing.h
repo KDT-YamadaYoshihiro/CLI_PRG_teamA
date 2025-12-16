@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "Application/Inventory/Item/base/Item.h"
 
 namespace Inventory
@@ -12,8 +13,8 @@ namespace Inventory
 
 	public:
 
-		Item_Healing(int heal)
-			:Item("Potion"), m_heal(heal)
+		Item_Healing(std::string name, int heal)
+			:Item(name), m_heal(heal)
 		{
 		}
 

@@ -106,9 +106,13 @@ void InGameScene::Initialize()
 	//CreateEnemy();
 	m_inventoryManager = std::make_unique<Inventory::InventoryManager>();
 
-	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>(30));
-	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>(30));
-	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>(30));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("初級ポーション",30));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("初級ポーション",30));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("初級ポーション",30));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("中級ポーション", 50));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("中級ポーション", 50));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("上級ポーション", 120));
+
 
 	// 初期のマップデータ
 	std::vector<std::vector<int>> data = MapLoder::Load("Assets/MapData/MapData_1.csv");

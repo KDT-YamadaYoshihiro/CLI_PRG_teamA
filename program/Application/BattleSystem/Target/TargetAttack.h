@@ -27,7 +27,7 @@ namespace Battle {
 		// プレイヤーがエネミーの攻撃対象を選択
 		static void Attack(Chara::Player* plyaer, std::vector<Chara::Enemy*> enemyList);
 		// プレイヤーがアイテムを選択
-		static void ItemUse(Chara::Player* player, Inventory::InventoryManager* inventoryManager);
+		static void ItemUse(Chara::Player* player, Inventory::InventoryManager* inventoryManager, int use_number);
 	};
 }
 
