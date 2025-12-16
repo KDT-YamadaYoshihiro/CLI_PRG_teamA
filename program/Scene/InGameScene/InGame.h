@@ -73,6 +73,7 @@ private:
 	/// </summary>
 	EncountSystem encount;
 
+	std::unique_ptr<Inventory::InventoryManager> m_inventoryManager;
 
 
 	/// <summary>

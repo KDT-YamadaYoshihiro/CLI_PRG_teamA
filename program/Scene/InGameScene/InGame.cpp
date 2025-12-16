@@ -16,6 +16,9 @@
 #include "Scene/GameOverScene/GameOver.h"
 #include "Scene/GameClearScene/GameClear.h"
 
+#include "Application/Inventory/Item/Healing_Item/Item_Healing.h"
+
+
 void InGameScene::RenderMapWithPlayer()
 {
 	CLI_ENGINE->GetView()->ClearLines();
@@ -101,6 +104,14 @@ void InGameScene::Initialize()
 	//	今はファクトリ実装前なのでこのようにしてやります。
 	m_player = Chara::Factory::GetInstance()->CreateCharacter<Chara::Player>(0);
 	//CreateEnemy();
+	m_inventoryManager = std::make_unique<Inventory::InventoryManager>();
+
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("初級ポーション",30));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("初級ポーション",30));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("初級ポーション",30));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("中級ポーション", 50));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("中級ポーション", 50));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("上級ポーション", 120));
 
 
 	// 初期のマップデータ
@@ -214,7 +225,7 @@ void InGameScene::Update()
 			tep_enemys.push_back(enemy.get());
 		}
 
-		Battle::BattleSystem::GetInstance()->Update(m_player.get(), tep_enemys);
+		Battle::BattleSystem::GetInstance()->Update(m_player.get(), tep_enemys,m_inventoryManager.get());
 		
 		//	敵をコレクションから削除する
 		std::erase_if(
