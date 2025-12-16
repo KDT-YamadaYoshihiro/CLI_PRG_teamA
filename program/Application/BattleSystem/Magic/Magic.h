@@ -5,10 +5,8 @@
 
 #include <iostream>
 
-#include "../Target/TargetAttack.h"
-using namespace Chara;
-#include "Manager/Manager.h"
-using namespace Magic;
+#include "Application/BattleSystem/Target/TargetAttack.h"
+#include "Application/BattleSystem/Magic/Manager/MagicManager.h"
 
 namespace Magic 
 {
@@ -18,9 +16,7 @@ namespace Magic
 		~MagicAction() = default;
 
 	public:
-
 		// UŒ‚‘ÎÛ‚ğ‘I‘ğ
-		static void MagicAttack(Player* player, std::vector<Enemy*>enemylist,int index);
-
+		static void MagicAttack(Chara::Player* player, std::vector<Chara::Enemy*>enemylist,int index);
 	};
 }

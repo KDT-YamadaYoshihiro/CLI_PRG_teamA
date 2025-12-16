@@ -4,7 +4,8 @@
 #include "Application/BattleSystem/Calc/BattleCalc.hpp"
 #include "Engine/Engine.hpp"
 
-void Magic::MagicAction::MagicAttack(Player* player, std::vector<Enemy*> enemylist,int index)
+
+void Magic::MagicAction::MagicAttack(Chara::Player* player, std::vector<Chara::Enemy*> enemylist,int index)
 {
 	// cinを使用して入力
 	int number = enemylist.size();
@@ -31,7 +32,7 @@ void Magic::MagicAction::MagicAttack(Player* player, std::vector<Enemy*> enemyli
 	}
 
 	// 魔法用のダメージ計算
-	Magic::Manager manager;
+	static Magic::Manager manager;
 	Data magicData = manager.GetMagicData(index);
 
 	// 計算値を対象に与える。
@@ -44,4 +45,5 @@ void Magic::MagicAction::MagicAttack(Player* player, std::vector<Enemy*> enemyli
 	CLI_ENGINE->GetView()->AddLine("\n" + player->GetName() + "は" + enemylist[number]->GetName() + "に" + magicData.Name + "で" + log_damage + "を与えた。");
 	CLI_ENGINE->GetView()->Render();
 	CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
+
 }

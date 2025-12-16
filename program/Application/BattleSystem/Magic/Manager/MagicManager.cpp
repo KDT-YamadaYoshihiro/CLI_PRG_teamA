@@ -1,4 +1,4 @@
-#include "Manager.h"
+#include "MagicManager.h"
 #include <iostream>
 #include <System/Utility/Define.hpp>
 
