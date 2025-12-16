@@ -1,6 +1,7 @@
 #include "Application/BattleSystem/action/ActionCommand.hpp"
 #include "Engine/Engine.hpp"
 #include "System/Input/Key.hpp"
+#include "../Magic/Magic.h"
 
 #include<iostream>
 
@@ -140,7 +141,7 @@ Battle::ActionResult Battle::ActionSelector::SelectItem(std::span<const std::str
 			int key = _getch();
 			if (key == static_cast<int>(Input::KeyCode::Escape))
 			{
-				return ActionResult(ePlayerCommand::Magic, -1);
+				return ActionResult(ePlayerCommand::Item, -1);
 			}
 		}
 
@@ -152,7 +153,7 @@ Battle::ActionResult Battle::ActionSelector::SelectItem(std::span<const std::str
 		std::cin >> id;
 		if (std::cin.fail() == false && id >= 0 && id < static_cast<int>(ItemNames.size()))
 		{
-			return ActionResult(ePlayerCommand::Magic, id);
+			return ActionResult(ePlayerCommand::Item, id);
 		}
 
 		std::cin.clear();

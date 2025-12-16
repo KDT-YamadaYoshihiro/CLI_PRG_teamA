@@ -8,6 +8,7 @@
 #include<string>
 
 #include "Application/BattleSystem/Target/TargetAttack.h"
+#include "../Magic/Magic.h"
 
 /// <summary>
 /// バトル中の状態更新
@@ -73,6 +74,7 @@ void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara
 		Battle::Action::Attack(player, enemys);
 		break;
 	case Battle::ePlayerCommand::Magic:
+		Magic::MagicAction::MagicAttack(player, enemys, action.selectID);
 		break;
 	case Battle::ePlayerCommand::Item:
 		break;

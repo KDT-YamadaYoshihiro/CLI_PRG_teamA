@@ -23,5 +23,15 @@ namespace Battle
 			//	Å’á•ÛØ:‚P
 			return  damage >= 1 ? damage : 1;
 		}
+
+		static int CalcMagicDamage(const int MagicPower, const int MagicDamage, const int Defence)
+		{
+			//	ƒNƒŠƒeƒBƒJƒ‹‚È‚Ç‚ð‚¢‚ê‚é‚È‚ç‚±‚±‚Å“ü‚ê‚Ä‚­‚¾‚³‚¢B
+			int magicPower = MagicPower;
+			//	ŒvŽZ
+			int damage = (MagicPower) - (Defence / 4);
+			//	Å’á•ÛØ:‚P
+			return  damage >= 1 ? damage : 1;
+		}
 	};
 }
