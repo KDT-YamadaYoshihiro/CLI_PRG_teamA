@@ -9,6 +9,7 @@
 #include "Engine/Engine.hpp"
 #include "Scene/SceneManager.h"
 
+#include "System/CSV/MapLoder.h"
 #include "Application/Charactor/Factory/Factory.h"
 #include "System/Utility/Random.hpp"
 
@@ -51,18 +52,18 @@ void InGameScene::RenderMap()
 void InGameScene::MoveToNextFloor()
 {
 	//	データの読み込み
-	//	今は読込がないので仮のマップ生成
-	std::vector<std::vector<int>> data;
+	char filePath[64];
+	sprintf_s(filePath, "Assets/MapData/Mapdata_%d.csv", m_mapNum);
+	std::vector<std::vector<int>> data = MapLoder::Load(filePath);
 	data.resize(10);
 	for (auto& line : data)
 	{
-		line.resize(10);
+		line.resize(20);
 	}
-	data[5][5] = 2;
 	m_map.SetMapData(data);
 
-	//	プレイヤーは0,0スタートで
-	m_player->SetPosition({ 0,0 });
+	//	プレイヤーは1,1スタートで
+	m_player->SetPosition({ 1,1 });
 
 	RenderMapWithPlayer();
 }
@@ -102,17 +103,18 @@ void InGameScene::Initialize()
 	//CreateEnemy();
 
 
-
-	//	仮のマップ生成
-	std::vector<std::vector<int>> data;
+	// 初期のマップデータ
+	std::vector<std::vector<int>> data = MapLoder::Load("Assets/MapData/MapData_1.csv");
 	data.resize(10);
 	for (auto& line : data)
 	{
-		line.resize(10);
+		line.resize(20);
 	}
-	data[5][5] = 2;
+	
 	m_map.SetMapData(data);
 
+	//	プレイヤーは1,1スタートで
+	m_player->SetPosition({ 1,1 });
 	RenderMapWithPlayer();
 }
 	
