@@ -39,7 +39,7 @@ public:
 
 #if NO_ENCOUNT == 0
 		// エンカウント率を増加させる
-		m_encountRate += 0.05f;
+		m_encountRate += 0.005f;
 #endif // NO_ENCOUNT
 
 
