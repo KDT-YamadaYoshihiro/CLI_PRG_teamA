@@ -3,6 +3,7 @@
 #include "Application/Charactor/Enemy/Enemy.h"
 #include "Application/BattleSystem/Calc/BattleCalc.hpp"
 #include "Engine/Engine.hpp"
+#include "Application/Inventory/Inventory/InventoryManager.hpp"
 
 void Battle::Action::Attack(Chara::Player* player, std::vector<Chara::Enemy*> enemyList)
 {
@@ -42,5 +43,17 @@ void Battle::Action::Attack(Chara::Player* player, std::vector<Chara::Enemy*> en
 	CLI_ENGINE->GetView()->AddLine("\n" + player->GetName() + "は" + enemyList[number]->GetName() + "に" + log_damage + "を与えた。");
 	CLI_ENGINE->GetView()->Render();
 	CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
+
+}
+
+void Battle::Action::ItemUse(Chara::Player* player, Inventory::InventoryManager* inventoryManager, int use_number)
+{
+	// ログを出す
+	CLI_ENGINE->GetView()->AddLine("\n" + player->GetName() + "は" + inventoryManager->GetAllNames()[use_number] + "を使用した。");
+	CLI_ENGINE->GetView()->Render();
+	CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
+
+	// 選択アイテムを使用
+	inventoryManager->UseItem(use_number, player);
 
 }

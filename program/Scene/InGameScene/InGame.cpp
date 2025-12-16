@@ -16,15 +16,15 @@
 #include "Scene/GameOverScene/GameOver.h"
 #include "Scene/GameClearScene/GameClear.h"
 
-#undef START_STAGE_NUM
-#define START_STAGE_NUM 1
+#include "Application/Inventory/Item/Healing_Item/Item_Healing.h"
+
 
 void InGameScene::RenderMapWithPlayer()
 {
 	CLI_ENGINE->GetView()->ClearLines();
-	CLI_ENGINE->GetView()->AddLine(std::to_string(m_mapNum) + "ŠK‘w–Ú / " + std::to_string(STATE_MAX) + "ŠK‘w");
+	CLI_ENGINE->GetView()->AddLine(std::to_string(m_mapNum) + "éšå±¤ç›® / " + std::to_string(STATE_MAX) + "éšå±¤");
 
-	//	ƒvƒŒƒCƒ„[‚Ì•\¦ˆÊ’u‚ğXV‚·‚é
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®è¡¨ç¤ºä½ç½®ã‚’æ›´æ–°ã™ã‚‹
 	Math::Point position = m_player->GetPosition();
 
 	std::vector<std::string> temp_mapline;
@@ -32,7 +32,7 @@ void InGameScene::RenderMapWithPlayer()
 	temp_mapline = m_map.GetLines();
 	temp_mapline[position.y][position.x] = 'P';
 
-	//	•\¦‚·‚éƒvƒŒƒCƒ„[‚Ì”Ô†‚ÌŠ‚¾‚¯•ÏX‚·‚é
+	//	è¡¨ç¤ºã™ã‚‹ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç•ªå·ã®æ‰€ã ã‘å¤‰æ›´ã™ã‚‹
 	for (auto line : temp_mapline)
 	{
 		Graphics::View::GetInstance()->AddLine(line);
@@ -45,7 +45,7 @@ void InGameScene::RenderMap()
 
 	temp_mapline = m_map.GetLines();
 
-	//	•\¦‚·‚éƒvƒŒƒCƒ„[‚Ì”Ô†‚ÌŠ‚¾‚¯•ÏX‚·‚é
+	//	è¡¨ç¤ºã™ã‚‹ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç•ªå·ã®æ‰€ã ã‘å¤‰æ›´ã™ã‚‹
 	for (auto line : temp_mapline)
 	{
 		Graphics::View::GetInstance()->AddLine(line);
@@ -54,7 +54,7 @@ void InGameScene::RenderMap()
 
 void InGameScene::MoveToNextFloor()
 {
-	//	ƒf[ƒ^‚Ì“Ç‚İ‚İ
+	//	ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿
 	char filePath[64];
 	sprintf_s(filePath, "Assets/MapData/Mapdata_%d.csv", m_mapNum);
 	std::vector<std::vector<int>> data = MapLoder::Load(filePath);
@@ -65,24 +65,24 @@ void InGameScene::MoveToNextFloor()
 	}
 	m_map.SetMapData(data);
 
-	//	ƒvƒŒƒCƒ„[‚Ì‘Ì—Í‘S‰ñ•œ
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½“åŠ›å…¨å›å¾©
 	m_player->SetHp(m_player->GetMaxHp());
 
-	//	ƒvƒŒƒCƒ„[‚Í1,1ƒXƒ^[ƒg‚Å
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¯1,1ã‚¹ã‚¿ãƒ¼ãƒˆã§
 	m_player->SetPosition({ 1,1 });
 
-	//	ƒ}ƒbƒv‚ÆƒvƒŒƒCƒ„[‚Ì•`‰æ
+	//	ãƒãƒƒãƒ—ã¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æç”»
 	RenderMapWithPlayer();
 }
 
 /// <summary>
-/// “G‚Ì¶¬
+/// æ•µã®ç”Ÿæˆ
 /// </summary>
 void InGameScene::CreateEnemy()
 {
 	m_enemys.clear();
 
-	//	true:ÅIƒtƒƒA false:‚»‚ê–¢–‚ÌƒtƒƒA
+	//	true:æœ€çµ‚ãƒ•ãƒ­ã‚¢ false:ãã‚Œæœªæº€ã®ãƒ•ãƒ­ã‚¢
 	const bool isLastFloor = STATE_MAX <= m_mapNum;
 
 	if (isLastFloor == false)
@@ -101,7 +101,7 @@ void InGameScene::CreateEnemy()
 }
 
 /// <summary>
-/// ƒ{ƒX‚Ì¶¬
+/// ãƒœã‚¹ã®ç”Ÿæˆ
 /// </summary>
 void InGameScene::CreateBoss()
 {
@@ -109,7 +109,7 @@ void InGameScene::CreateBoss()
 	m_enemys.push_back(Chara::Factory::GetInstance()->CreateCharacter<Chara::Enemy>(static_cast<int>(Chara::ID::BOSS)));
 }
 
-// ƒRƒ“ƒXƒgƒ‰ƒNƒ^EƒfƒXƒgƒ‰ƒNƒ^
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ»ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 InGameScene::InGameScene()
 {
 }
@@ -119,17 +119,25 @@ InGameScene::~InGameScene()
 	this->Release();
 }
 
-// ‰Šú‰»
+// åˆæœŸåŒ–
 void InGameScene::Initialize()
 {
 	Battle::BattleSystem::Create();
 	Chara::Factory::Create();
-	//	¡‚Íƒtƒ@ƒNƒgƒŠÀ‘•‘O‚È‚Ì‚Å‚±‚Ì‚æ‚¤‚É‚µ‚Ä‚â‚è‚Ü‚·B
+	//	ä»Šã¯ãƒ•ã‚¡ã‚¯ãƒˆãƒªå®Ÿè£…å‰ãªã®ã§ã“ã®ã‚ˆã†ã«ã—ã¦ã‚„ã‚Šã¾ã™ã€‚
 	m_player = Chara::Factory::GetInstance()->CreateCharacter<Chara::Player>(0);
 	//CreateEnemy();
+	m_inventoryManager = std::make_unique<Inventory::InventoryManager>();
+
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("åˆç´šãƒãƒ¼ã‚·ãƒ§ãƒ³",30));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("åˆç´šãƒãƒ¼ã‚·ãƒ§ãƒ³",30));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("åˆç´šãƒãƒ¼ã‚·ãƒ§ãƒ³",30));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("ä¸­ç´šãƒãƒ¼ã‚·ãƒ§ãƒ³", 50));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("ä¸­ç´šãƒãƒ¼ã‚·ãƒ§ãƒ³", 50));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>("ä¸Šç´šãƒãƒ¼ã‚·ãƒ§ãƒ³", 120));
 
 
-	// ‰Šú‚Ìƒ}ƒbƒvƒf[ƒ^
+	// åˆæœŸã®ãƒãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿
 	char filePath[64];
 	sprintf_s(filePath, "Assets/MapData/Mapdata_%d.csv", m_mapNum);
 	std::vector<std::vector<int>> data = MapLoder::Load(filePath);
@@ -141,12 +149,12 @@ void InGameScene::Initialize()
 	
 	m_map.SetMapData(data);
 
-	//	ƒvƒŒƒCƒ„[‚Í1,1ƒXƒ^[ƒg‚Å
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¯1,1ã‚¹ã‚¿ãƒ¼ãƒˆã§
 	m_player->SetPosition({ 1,1 });
 	RenderMapWithPlayer();
 }
 	
-// XV
+// æ›´æ–°
 void InGameScene::Update()
 {
 	switch (m_state)
@@ -154,7 +162,7 @@ void InGameScene::Update()
 	case Game::GameState::Field:
 
 #ifdef _DEBUG
-		//	ƒL[“ü—Í‚Åƒoƒgƒ‹Ø‚è‘Ö‚¦‚é
+		//	ã‚­ãƒ¼å…¥åŠ›ã§ãƒãƒˆãƒ«åˆ‡ã‚Šæ›¿ãˆã‚‹
 		if (_kbhit())
 		{
 			if (Input::GetKey().code == Input::KeyCode::Space)
@@ -165,49 +173,49 @@ void InGameScene::Update()
 #endif // _DEBUG
 
 		{
-			//	ƒvƒŒƒCƒ„[‚ÌˆÚ“®“ü—Í
+			//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•å…¥åŠ›
 			Math::Point velocity = Player::Controller::GetInputVelocity();
 			Math::Point next = m_player->GetPosition() + velocity;
-			//	ˆÚ“®“ü—Í‚ª‚ ‚Á‚½‚©‚Ç‚¤‚©‚Ì”»’è
+			//	ç§»å‹•å…¥åŠ›ãŒã‚ã£ãŸã‹ã©ã†ã‹ã®åˆ¤å®š
 			if (velocity == Math::Point::Zero)
 			{
 				return;
 			}
 
-			//	ˆÚ“®‚Å‚«‚é‚©‚Ç‚¤‚©‚Ì”»’è
+			//	ç§»å‹•ã§ãã‚‹ã‹ã©ã†ã‹ã®åˆ¤å®š
 			if (m_map.CanMove(next) == false)
 			{
 				return;
 			}
 
-			////	•¶š—ñ‚ğ‚·‚×‚Äíœ
+			////	æ–‡å­—åˆ—ã‚’ã™ã¹ã¦å‰Šé™¤
 			Graphics::View::GetInstance()->ClearLines();
 
 			m_map.UpdateMapString();
 
-			//	ˆÚ“®‚Å‚«‚é‚È‚çƒvƒŒƒCƒ„[‚ÌˆÚ“®‚ğ‚µ‚Ä
+			//	ç§»å‹•ã§ãã‚‹ãªã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•ã‚’ã—ã¦
 			m_player->Move(velocity);
 
 			RenderMapWithPlayer();
 
 
-			// ŠK’i‚©‚Ç‚¤‚©
+			// éšæ®µã‹ã©ã†ã‹
 			if (m_map.IsPlayerAtStairs(next))
 			{
 				//CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(10));
 
-				//	ŠK‘w‚Ì”Ô†‚ÌƒCƒ“ƒNƒŠƒƒ“ƒg
+				//	éšå±¤ã®ç•ªå·ã®ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆ
 				m_mapNum++;
 
-				//	”Ô†‚ÌƒCƒ“ƒNƒŠƒƒ“ƒg
+				//	ç•ªå·ã®ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆ
 				if (STATE_MAX < m_mapNum)
 				{
-					//	ƒQ[ƒ€ƒNƒŠƒA‚ÌƒV[ƒ“‚É•ÏX‚·‚é
+					//	ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢ã®ã‚·ãƒ¼ãƒ³ã«å¤‰æ›´ã™ã‚‹
 					SceneManager::GetInstance()->ChangeScene<GameClearScene>();
 					return;
 				}
 
-				//	Ÿ‚ÌŠK‘w‚É‚·‚é
+				//	æ¬¡ã®éšå±¤ã«ã™ã‚‹
 				this->MoveToNextFloor();
 
 				return;
@@ -215,27 +223,27 @@ void InGameScene::Update()
 
 		}
 		{
-			//	ˆÚ“®‚µ‚½‚çƒ‰ƒ“ƒ_ƒ€ƒGƒ“ƒJƒEƒ“ƒgiŠm—¦j
-				//	ƒGƒ“ƒJƒEƒ“ƒg‚µ‚½ê‡‚ÍAƒoƒgƒ‹ó‘Ô‚É‚·‚é	
-				//	‚µ‚È‚©‚Á‚½ê‡‚Íã‚É–ß‚é
+			//	ç§»å‹•ã—ãŸã‚‰ãƒ©ãƒ³ãƒ€ãƒ ã‚¨ãƒ³ã‚«ã‚¦ãƒ³ãƒˆï¼ˆç¢ºç‡ï¼‰
+				//	ã‚¨ãƒ³ã‚«ã‚¦ãƒ³ãƒˆã—ãŸå ´åˆã¯ã€ãƒãƒˆãƒ«çŠ¶æ…‹ã«ã™ã‚‹	
+				//	ã—ãªã‹ã£ãŸå ´åˆã¯ä¸Šã«æˆ»ã‚‹
 			bool isBossEncount = m_map.IsPlayerAtBoss(m_player->GetPosition());
 			if (isBossEncount == true)
 			{
-				//	Ø‚è‘Ö‚¦
+				//	åˆ‡ã‚Šæ›¿ãˆ
 				m_state = Game::GameState::Battle;
 				this->CreateBoss();
-				CLI_ENGINE->GetView()->AddLine("========ƒ{ƒX‚ÌoŒ»========");
+				CLI_ENGINE->GetView()->AddLine("========ãƒœã‚¹ã®å‡ºç¾========");
 				CLI_ENGINE->GetView()->Render();
 				CLI_ENGINE->GetTimer()->Sleep(std::chrono::seconds(1));
 			}
 			else if (encount.IsEncount())
 			{
 
-				//	“G‚Ì¶¬
+				//	æ•µã®ç”Ÿæˆ
 				CreateEnemy();
 
-				//	ƒGƒ“ƒJƒEƒ“ƒg’Ê’m
-				CLI_ENGINE->GetView()->AddLine("“G‚ª”ò‚Ño‚µ‚Ä‚«‚½I");
+				//	ã‚¨ãƒ³ã‚«ã‚¦ãƒ³ãƒˆé€šçŸ¥
+				CLI_ENGINE->GetView()->AddLine("æ•µãŒé£›ã³å‡ºã—ã¦ããŸï¼");
 				CLI_ENGINE->GetView()->Render();
 				CLI_ENGINE->GetTimer()->Sleep(std::chrono::seconds(1));
 			}
@@ -253,9 +261,9 @@ void InGameScene::Update()
 			tep_enemys.push_back(enemy.get());
 		}
 
-		Battle::BattleSystem::GetInstance()->Update(m_player.get(), tep_enemys);
+		Battle::BattleSystem::GetInstance()->Update(m_player.get(), tep_enemys,m_inventoryManager.get());
 		
-		//	“G‚ğƒRƒŒƒNƒVƒ‡ƒ“‚©‚çíœ‚·‚é
+		//	æ•µã‚’ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã‹ã‚‰å‰Šé™¤ã™ã‚‹
 		std::erase_if(
 			m_enemys,
 			[](const std::unique_ptr<Chara::Enemy>& enemy)
@@ -263,14 +271,14 @@ void InGameScene::Update()
 				return enemy->GetHp() <= 0;
 			});
 
-		//	ƒvƒŒƒCƒ„[‚ª¶‘¶‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
+		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒç”Ÿå­˜ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹
 		if (m_player->IsDead())
 		{
 			/*
-			* ƒQ[ƒ€ƒI[ƒo[‚É”ò‚Î‚·
+			* ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ã«é£›ã°ã™
 			*/
 
-			CLI_ENGINE->GetView()->AddLine("ƒvƒŒƒCƒ„[‚Í€–S‚µ‚½B");
+			CLI_ENGINE->GetView()->AddLine("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¯æ­»äº¡ã—ãŸã€‚");
 			CLI_ENGINE->GetView()->Render();
 			CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
 			SceneManager::GetInstance()->ChangeScene<GameOverScene>();
@@ -278,10 +286,10 @@ void InGameScene::Update()
 			return;
 		}
 
-		//	ƒoƒgƒ‹I—¹‚µ‚Ä‚¢‚Ä‚Ü‚¾ƒvƒŒƒCƒ„[‚ª€–S‚µ‚Ä‚¢‚È‚©‚Á‚½‚ç
+		//	ãƒãƒˆãƒ«çµ‚äº†ã—ã¦ã„ã¦ã¾ã ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒæ­»äº¡ã—ã¦ã„ãªã‹ã£ãŸã‚‰
 		if (Battle::BattleSystem::GetInstance()->IsFinish())
 		{
-			CLI_ENGINE->GetView()->AddLine("ƒvƒŒƒCƒ„[‚ÍŸ—˜‚µ‚½!");
+			CLI_ENGINE->GetView()->AddLine("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¯å‹åˆ©ã—ãŸ!");
 			CLI_ENGINE->GetView()->Render();
 			CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
 
@@ -297,14 +305,14 @@ void InGameScene::Update()
 	}
 }
 	
-// •`‰æ
+// æç”»
 void InGameScene::Render()
 {
 }
 
-// ‰ğ•ú
+// è§£æ”¾
 void InGameScene::Release()
 {
-	// ƒRƒ“ƒ\[ƒ‹‰æ–Ê‚ÌƒŠƒZƒbƒg
+	// ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ç”»é¢ã®ãƒªã‚»ãƒƒãƒˆ
 	std::system("cls");
 }

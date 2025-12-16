@@ -3,6 +3,7 @@
 #include "Application/BattleSystem/action/ActionCommand.hpp"
 #include "Application/Charactor/Player/Player.hpp"
 #include "Application/Charactor/Enemy/Enemy.h"
+#include "Application/Inventory/Inventory/InventoryManager.hpp"
 
 #include<vector>
 
@@ -16,7 +17,7 @@ namespace Battle
 		/// <summary>
 		/// バトル中の状態更新
 		/// </summary>
-		void Update(Chara::Player* player, const std::vector<Chara::Enemy*>& enemys);
+		void Update(Chara::Player* player, const std::vector<Chara::Enemy*>& enemys,Inventory::InventoryManager* inventoryManager);
 
 		/// <summary>
 		/// 終了判定
@@ -33,5 +34,6 @@ namespace Battle
 		///	終了しているかどうか
 		/// </summary>
 		bool m_isFinishd = false;
+
 	};
 }
