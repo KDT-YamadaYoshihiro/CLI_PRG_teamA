@@ -11,6 +11,11 @@ namespace Chara
 	class Enemy;
 }
 
+namespace Inventory
+{
+	class InventoryManager;
+}
+
 namespace Battle {
 
 	class Action
@@ -21,6 +26,8 @@ namespace Battle {
 	public:
 		// プレイヤーがエネミーの攻撃対象を選択
 		static void Attack(Chara::Player* plyaer, std::vector<Chara::Enemy*> enemyList);
+		// プレイヤーがアイテムを選択
+		static void ItemUse(Chara::Player* player, Inventory::InventoryManager* inventoryManager);
 	};
 }
 

@@ -8,11 +8,10 @@
 #include<string>
 
 #include "Application/BattleSystem/Target/TargetAttack.h"
-
 /// <summary>
 /// バトル中の状態更新
 /// </summary>
-void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara::Enemy*>& enemys)
+void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara::Enemy*>& enemys,Inventory::InventoryManager* inventoryManager)
 {
 	m_isFinishd = false;
 
@@ -41,11 +40,12 @@ void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara
 	CLI_ENGINE->GetView()->AddLine("プレイヤーのターン");
 
 	//	テスト用のデータ
-	std::vector<std::string> Items;
-	Items.push_back("ポーション");
-	Items.push_back("ポーション");
-	Items.push_back("ポーション");
-	Items.push_back("ハイポーション");
+	//std::vector<std::string> Items;
+	//Items.push_back("ポーション");
+	//Items.push_back("ポーション");
+	//Items.push_back("ポーション");
+	//Items.push_back("ハイポーション");
+
 
 	std::vector<std::string> magic; 
 	magic.push_back("ファイア");
@@ -53,7 +53,7 @@ void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara
 	magic.push_back("フリーザ");
 
 	//	プレイヤーの行動選択
-	auto action = ActionSelector::SelectCommand(magic, Items);
+	auto action = ActionSelector::SelectCommand(magic, inventoryManager->GetAllNames());
 
 	//	不要な文字列の削除
 	CLI_ENGINE->GetView()->ClearLines();
@@ -73,6 +73,7 @@ void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara
 		Battle::Action::Attack(player, enemys);
 		break;
 	case Battle::ePlayerCommand::Magic:
+		Battle::Action::ItemUse(player, inventoryManager);
 		break;
 	case Battle::ePlayerCommand::Item:
 		break;

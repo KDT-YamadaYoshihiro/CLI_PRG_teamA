@@ -16,6 +16,9 @@
 #include "Scene/GameOverScene/GameOver.h"
 #include "Scene/GameClearScene/GameClear.h"
 
+#include "Application/Inventory/Item/Healing_Item/Item_Healing.h"
+
+
 void InGameScene::RenderMapWithPlayer()
 {
 	CLI_ENGINE->GetView()->ClearLines();
@@ -101,7 +104,11 @@ void InGameScene::Initialize()
 	//	今はファクトリ実装前なのでこのようにしてやります。
 	m_player = Chara::Factory::GetInstance()->CreateCharacter<Chara::Player>(0);
 	//CreateEnemy();
+	m_inventoryManager = std::make_unique<Inventory::InventoryManager>();
 
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>(30));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>(30));
+	m_inventoryManager->AddItem(std::make_unique<Inventory::Item_Healing>(30));
 
 	// 初期のマップデータ
 	std::vector<std::vector<int>> data = MapLoder::Load("Assets/MapData/MapData_1.csv");
@@ -214,7 +221,7 @@ void InGameScene::Update()
 			tep_enemys.push_back(enemy.get());
 		}
 
-		Battle::BattleSystem::GetInstance()->Update(m_player.get(), tep_enemys);
+		Battle::BattleSystem::GetInstance()->Update(m_player.get(), tep_enemys,m_inventoryManager.get());
 		
 		//	敵をコレクションから削除する
 		std::erase_if(

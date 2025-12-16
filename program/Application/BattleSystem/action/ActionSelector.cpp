@@ -126,7 +126,7 @@ Battle::ActionResult Battle::ActionSelector::SelectItem(std::span<const std::str
 	//	選択するまで無限ループ
 	while (true)
 	{
-		CLI_ENGINE->GetView()->AddLine("------魔法一覧------");
+		CLI_ENGINE->GetView()->AddLine("------アイテム一覧------");
 		for (size_t id = 0; id < ItemNames.size(); id++)
 		{
 			//	IDと魔法名を表示
@@ -140,7 +140,7 @@ Battle::ActionResult Battle::ActionSelector::SelectItem(std::span<const std::str
 			int key = _getch();
 			if (key == static_cast<int>(Input::KeyCode::Escape))
 			{
-				return ActionResult(ePlayerCommand::Magic, -1);
+				return ActionResult(ePlayerCommand::Item, -1);
 			}
 		}
 
@@ -152,7 +152,7 @@ Battle::ActionResult Battle::ActionSelector::SelectItem(std::span<const std::str
 		std::cin >> id;
 		if (std::cin.fail() == false && id >= 0 && id < static_cast<int>(ItemNames.size()))
 		{
-			return ActionResult(ePlayerCommand::Magic, id);
+			return ActionResult(ePlayerCommand::Item, id);
 		}
 
 		std::cin.clear();
