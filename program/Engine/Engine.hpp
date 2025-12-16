@@ -8,8 +8,7 @@
 #include<memory>
 
 #ifndef CLI_ENGINE
-#define CLI_ENGINE 	Engine::Engine::GetInstance()
-
+#define CLI_ENGINE Engine::Engine::GetInstance()
 #endif // !CLI_ENGINE
 
 namespace Engine

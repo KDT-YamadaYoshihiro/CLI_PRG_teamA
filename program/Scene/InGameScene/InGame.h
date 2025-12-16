@@ -85,7 +85,7 @@ private:
 	/// <summary>
 	/// ¡‚Ìƒ}ƒbƒv‚Ì”Ô†
 	/// </summary>
-	int m_mapNum = 10;
+	int m_mapNum = 1;
 
 	const int STATE_MAX = 10;
 };
