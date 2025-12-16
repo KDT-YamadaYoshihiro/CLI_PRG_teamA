@@ -238,12 +238,14 @@ void InGameScene::Update()
 			}
 			else if (encount.IsEncount())
 			{
+				//	切り替え
+				m_state = Game::GameState::Battle;
 
 				//	敵の生成
 				CreateEnemy();
 
 				//	エンカウント通知
-				CLI_ENGINE->GetView()->AddLine("");
+				CLI_ENGINE->GetView()->AddLine("敵の出現！");
 				CLI_ENGINE->GetView()->Render();
 				CLI_ENGINE->GetTimer()->Sleep(std::chrono::seconds(1));
 			}
