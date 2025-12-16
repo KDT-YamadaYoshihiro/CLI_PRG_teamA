@@ -80,5 +80,5 @@ private:
 	/// </summary>
 	int m_mapNum = 1;
 
-	const int STATE_MAX = 2;
+	const int STATE_MAX = 10;
 };
