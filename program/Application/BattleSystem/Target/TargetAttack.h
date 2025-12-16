@@ -18,9 +18,9 @@ namespace Battle {
 		
 		Action() = default;
 		~Action() = default;
-
+	public:
 		// プレイヤーがエネミーの攻撃対象を選択
-		void Attack(Chara::Player* plyaer, std::vector<Chara::Enemy> enemyList);
+		static void Attack(Chara::Player* plyaer, std::vector<Chara::Enemy*> enemyList);
 	};
 }
 

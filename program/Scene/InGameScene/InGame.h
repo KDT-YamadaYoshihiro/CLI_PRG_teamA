@@ -4,6 +4,8 @@
 #include "Application/Map/Map.hpp"
 #include"Application/Charactor/Player/Player.hpp"
 #include "Application/Charactor/Enemy/Enemy.h"
+#include "Application/BattleSystem/Encount/EncountSystem.h"
+#include "Application/Inventory/Inventory/InventoryManager.hpp"
 
 #include<memory>
 #include<vector>
@@ -65,6 +67,13 @@ private:
 	/// 敵のコレクション
 	/// </summary>
 	std::vector<std::unique_ptr<Chara::Enemy>> m_enemys;
+
+	/// <summary>
+	/// エンカウントを管理するクラス
+	/// </summary>
+	EncountSystem encount;
+
+
 
 	/// <summary>
 	/// 今のマップの番号

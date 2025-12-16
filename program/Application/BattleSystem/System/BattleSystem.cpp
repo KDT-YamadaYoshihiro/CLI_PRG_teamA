@@ -7,6 +7,7 @@
 #include<vector>
 #include<string>
 
+#include "Application/BattleSystem/Target/TargetAttack.h"
 
 /// <summary>
 /// バトル中の状態更新
@@ -54,7 +55,7 @@ void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara
 	//	プレイヤーの行動選択
 	auto action = ActionSelector::SelectCommand(magic, Items);
 
-	//	行動の実行
+	//	不要な文字列の削除
 	CLI_ENGINE->GetView()->ClearLines();
 
 	//	プレイヤーのステータス表示
@@ -65,11 +66,20 @@ void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara
 		CLI_ENGINE->GetView()->AddLine(enemy->GetStatusString());
 	}
 
+	//	行動の選択によって内容を変更する
+	switch (action.command)
+	{
+	case Battle::ePlayerCommand::Attack:
+		Battle::Action::Attack(player, enemys);
+		break;
+	case Battle::ePlayerCommand::Magic:
+		break;
+	case Battle::ePlayerCommand::Item:
+		break;
 
-	//	プレイヤーの攻撃 プレイヤー攻撃力、敵防御力
-	auto player_attack = Battle::BattleCalc::CalcDamage(player->GetAttack(),10);
-
-	//	殴り先を選択肢して殴る
+	default:
+		break;
+	};
 
 
 	//	敵の生存判定
@@ -81,6 +91,8 @@ void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara
 		return;
 	}
 
+	CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
+
 	//	敵の行動（攻撃）
 	for (auto& enemy : enemys)
 	{
@@ -91,10 +103,14 @@ void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara
 		//	攻撃ログを流す
 		std::string log = "\n" + enemy->GetName() + "の攻撃";
 		CLI_ENGINE->GetView()->AddLine(log);
+		CLI_ENGINE->GetView()->Render();
+		CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
 		log.clear();
 		//	被弾ログを流す
 		log = player->GetName() + "に" + std::to_string(damage) + "のダメージ\n";
 		CLI_ENGINE->GetView()->AddLine(log);
+		CLI_ENGINE->GetView()->Render();
+		CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
 	}
 
 	//	表示

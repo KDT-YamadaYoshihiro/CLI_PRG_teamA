@@ -12,6 +12,8 @@
 #include "Application/Charactor/Factory/Factory.h"
 #include "System/Utility/Random.hpp"
 
+#include "Scene/GameOverScene/GameOver.h"
+#include "Scene/GameClearScene/GameClear.h"
 
 void InGameScene::RenderMapWithPlayer()
 {
@@ -97,7 +99,7 @@ void InGameScene::Initialize()
 	Chara::Factory::Create();
 	//	今はファクトリ実装前なのでこのようにしてやります。
 	m_player = Chara::Factory::GetInstance()->CreateCharacter<Chara::Player>(0);
-	CreateEnemy();
+	//CreateEnemy();
 
 
 
@@ -171,7 +173,7 @@ void InGameScene::Update()
 				if (STATE_MAX < m_mapNum)
 				{
 					//	ゲームクリアのシーンに変更する
-					//SceneManager::GetInstance()->ChangeScene<GameClearScene>();
+					SceneManager::GetInstance()->ChangeScene<GameClearScene>();
 					return;
 				}
 
@@ -185,6 +187,20 @@ void InGameScene::Update()
 		//	移動したらランダムエンカウント（確率）
 			//	エンカウントした場合は、バトル状態にする	
 			//	しなかった場合は上に戻る
+		if (encount.IsEncount())
+		{
+			//	切り替え
+			m_state = Game::GameState::Battle;
+
+			//	敵の生成
+			CreateEnemy();
+
+			//	エンカウント通知
+			CLI_ENGINE->GetView()->AddLine("敵が飛び出してきた！");
+			CLI_ENGINE->GetView()->Render();
+			CLI_ENGINE->GetTimer()->Sleep(std::chrono::seconds(1));
+		}
+
 
 		break;
 	case Game::GameState::Battle:
@@ -212,6 +228,7 @@ void InGameScene::Update()
 			/*
 			* ゲームオーバーに飛ばす
 			*/
+			SceneManager::GetInstance()->ChangeScene<GameOverScene>();
 
 			return;
 		}
