@@ -67,6 +67,13 @@ namespace Game::MapSystem
 		/// <returns></returns>
 		bool IsPlayerAtStairs(const Math::Point& player);
 
+		/// <summary>
+		/// プレイヤーとボスのシンボルエンカウントを処理をする
+		/// </summary>
+		/// <param name="player"></param>
+		/// <returns>true:衝突している</returns>
+		bool IsPlayerAtBoss(const Math::Point& player);
+
 	private:
 		/// <summary>
 		/// マップデータのコレクション

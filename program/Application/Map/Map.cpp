@@ -36,6 +36,9 @@ void Game::MapSystem::Map::UpdateMapString()
             case static_cast<int>(Game::MapSystem::TileType::Wall):
                 m_views[h] += "=";
                 break;
+            case static_cast<int>(Game::MapSystem::TileType::Boss):
+                m_views[h] += "B";
+                break;
             default:
                 m_views[h] += "?";
                 break;
@@ -117,6 +120,28 @@ bool Game::MapSystem::Map::IsPlayerAtStairs(const Math::Point& player)
     {
         return true;
     }
+    return false;
+}
+
+/// <summary>
+/// プレイヤーとボスのシンボルエンカウントを処理をする
+/// </summary>
+/// <param name="player"></param>
+/// <returns>true:衝突している</returns>
+bool Game::MapSystem::Map::IsPlayerAtBoss(const Math::Point& player)
+{
+    //  マップデータが空になったら
+    if (m_mapData.empty())
+    {
+        return false;
+    }
+
+    //　プレイヤーの位置が階段ならTRUE
+    if (m_mapData[player.y][player.x] == static_cast<int>(Game::MapSystem::TileType::Boss))
+    {
+        return true;
+    }
+
     return false;
 }
 

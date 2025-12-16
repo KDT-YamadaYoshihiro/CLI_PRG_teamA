@@ -16,6 +16,9 @@
 #include "Scene/GameOverScene/GameOver.h"
 #include "Scene/GameClearScene/GameClear.h"
 
+#undef START_STAGE_NUM
+#define START_STAGE_NUM 1
+
 void InGameScene::RenderMapWithPlayer()
 {
 	CLI_ENGINE->GetView()->ClearLines();
@@ -62,9 +65,13 @@ void InGameScene::MoveToNextFloor()
 	}
 	m_map.SetMapData(data);
 
+	//	プレイヤーの体力全回復
+	m_player->SetHp(m_player->GetMaxHp());
+
 	//	プレイヤーは1,1スタートで
 	m_player->SetPosition({ 1,1 });
 
+	//	マップとプレイヤーの描画
 	RenderMapWithPlayer();
 }
 
@@ -75,12 +82,31 @@ void InGameScene::CreateEnemy()
 {
 	m_enemys.clear();
 
-	int create_num = Random::Range(1, 3);
-	for (size_t i = 0; i < create_num;i++)
+	//	true:最終フロア false:それ未満のフロア
+	const bool isLastFloor = STATE_MAX <= m_mapNum;
+
+	if (isLastFloor == false)
 	{
-		int status_num = Random::Range(1, 2);
-		m_enemys.push_back(Chara::Factory::GetInstance()->CreateCharacter<Chara::Enemy>(status_num));
+		int create_num = Random::Range(1, 3);
+		for (size_t i = 0; i < create_num; i++)
+		{
+			int status_num = Random::Range(1, 2);
+			m_enemys.push_back(Chara::Factory::GetInstance()->CreateCharacter<Chara::Enemy>(status_num));
+		}
+		return;
 	}
+	else
+	{
+	}
+}
+
+/// <summary>
+/// ボスの生成
+/// </summary>
+void InGameScene::CreateBoss()
+{
+	m_enemys.clear();
+	m_enemys.push_back(Chara::Factory::GetInstance()->CreateCharacter<Chara::Enemy>(static_cast<int>(Chara::ID::BOSS)));
 }
 
 // コンストラクタ・デストラクタ
@@ -104,7 +130,9 @@ void InGameScene::Initialize()
 
 
 	// 初期のマップデータ
-	std::vector<std::vector<int>> data = MapLoder::Load("Assets/MapData/MapData_1.csv");
+	char filePath[64];
+	sprintf_s(filePath, "Assets/MapData/Mapdata_%d.csv", m_mapNum);
+	std::vector<std::vector<int>> data = MapLoder::Load(filePath);
 	data.resize(10);
 	for (auto& line : data)
 	{
@@ -186,21 +214,32 @@ void InGameScene::Update()
 			}
 
 		}
-		//	移動したらランダムエンカウント（確率）
-			//	エンカウントした場合は、バトル状態にする	
-			//	しなかった場合は上に戻る
-		if (encount.IsEncount())
 		{
-			//	切り替え
-			m_state = Game::GameState::Battle;
+			//	移動したらランダムエンカウント（確率）
+				//	エンカウントした場合は、バトル状態にする	
+				//	しなかった場合は上に戻る
+			bool isBossEncount = m_map.IsPlayerAtBoss(m_player->GetPosition());
+			if (isBossEncount == true)
+			{
+				//	切り替え
+				m_state = Game::GameState::Battle;
+				this->CreateBoss();
+				CLI_ENGINE->GetView()->AddLine("========ボスの出現========");
+				CLI_ENGINE->GetView()->Render();
+				CLI_ENGINE->GetTimer()->Sleep(std::chrono::seconds(1));
+			}
+			else if (encount.IsEncount())
+			{
 
-			//	敵の生成
-			CreateEnemy();
+				//	敵の生成
+				CreateEnemy();
 
-			//	エンカウント通知
-			CLI_ENGINE->GetView()->AddLine("敵が飛び出してきた！");
-			CLI_ENGINE->GetView()->Render();
-			CLI_ENGINE->GetTimer()->Sleep(std::chrono::seconds(1));
+				//	エンカウント通知
+				CLI_ENGINE->GetView()->AddLine("敵が飛び出してきた！");
+				CLI_ENGINE->GetView()->Render();
+				CLI_ENGINE->GetTimer()->Sleep(std::chrono::seconds(1));
+			}
+
 		}
 
 
@@ -230,6 +269,10 @@ void InGameScene::Update()
 			/*
 			* ゲームオーバーに飛ばす
 			*/
+
+			CLI_ENGINE->GetView()->AddLine("プレイヤーは死亡した。");
+			CLI_ENGINE->GetView()->Render();
+			CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
 			SceneManager::GetInstance()->ChangeScene<GameOverScene>();
 
 			return;
@@ -238,6 +281,10 @@ void InGameScene::Update()
 		//	バトル終了していてまだプレイヤーが死亡していなかったら
 		if (Battle::BattleSystem::GetInstance()->IsFinish())
 		{
+			CLI_ENGINE->GetView()->AddLine("プレイヤーは勝利した!");
+			CLI_ENGINE->GetView()->Render();
+			CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
+
 			m_state = Game::GameState::Field;
 			CLI_ENGINE->GetView()->ClearLines();
 			this->RenderMapWithPlayer();

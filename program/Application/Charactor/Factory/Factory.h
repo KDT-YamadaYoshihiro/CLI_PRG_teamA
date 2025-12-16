@@ -17,6 +17,7 @@ namespace Chara
 		HERO = 0,
 		GOBLIN,
 		WOLF,
+		BOSS,
 		MAX
 	};
 
