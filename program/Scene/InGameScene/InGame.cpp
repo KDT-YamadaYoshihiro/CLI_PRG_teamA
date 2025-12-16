@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <stdlib.h>
 #include "InGame.h"
 
@@ -243,7 +243,7 @@ void InGameScene::Update()
 				CreateEnemy();
 
 				//	エンカウント通知
-				CLI_ENGINE->GetView()->AddLine("敵が飛び出してきた！");
+				CLI_ENGINE->GetView()->AddLine("");
 				CLI_ENGINE->GetView()->Render();
 				CLI_ENGINE->GetTimer()->Sleep(std::chrono::seconds(1));
 			}

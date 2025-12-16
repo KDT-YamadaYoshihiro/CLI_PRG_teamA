@@ -6,7 +6,7 @@
 #endif // !NO_ENCOUNT 
 
 #ifdef _DEBUG
-#define NO_ENCOUNT 1
+#define NO_ENCOUNT 0
 #else
 #define NO_ENCOUNT 0
 #endif // _DEBUG
@@ -20,7 +20,7 @@ class EncountSystem
 private:
 
 	// エンカウント率
-	float m_encountRate = 0.0; 
+	float m_encountRate = 0.1; 
 
 public:
 	// エンカウント判定
