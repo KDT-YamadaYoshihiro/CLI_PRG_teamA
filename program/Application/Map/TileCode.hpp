@@ -7,6 +7,7 @@ namespace Game::MapSystem
 	{
 		Road = 0,	//	道
 		Wall,	//	壁
-		Stair	//	階段
+		Stair,	//	階段
+		Boss,	//	ボスの作成
 	};
 }

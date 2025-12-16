@@ -33,6 +33,12 @@ class InGameScene : public SceneBase
 	/// </summary>
 	void CreateEnemy();
 
+	/// <summary>
+	/// ボスの生成
+	/// </summary>
+	void CreateBoss();
+
+
 public:
 	// コンストラクタ・デストラクタ
 	InGameScene();
@@ -79,7 +85,7 @@ private:
 	/// <summary>
 	/// 今のマップの番号
 	/// </summary>
-	int m_mapNum = 1;
+	int m_mapNum = 10;
 
 	const int STATE_MAX = 10;
 };
