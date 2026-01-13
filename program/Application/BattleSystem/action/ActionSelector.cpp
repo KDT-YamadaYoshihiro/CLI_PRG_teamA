@@ -1,6 +1,7 @@
 #include "Application/BattleSystem/action/ActionCommand.hpp"
 #include "Engine/Engine.hpp"
 #include "System/Input/Key.hpp"
+#include "../Magic/Magic.h"
 
 #include<iostream>
 
