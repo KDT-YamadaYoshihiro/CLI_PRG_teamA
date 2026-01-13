@@ -1,6 +1,19 @@
 #pragma once
 #include "../../../System/Utility/Random.hpp"
 
+#ifdef NO_ENCOUNT
+#undef NO_ENCOUNT
+#endif // !NO_ENCOUNT 
+
+#ifdef _DEBUG
+#define NO_ENCOUNT 0
+#else
+#define NO_ENCOUNT 0
+#endif // _DEBUG
+
+
+
+
 // エンカウントシステム
 class EncountSystem
 {
@@ -24,8 +37,11 @@ public:
 
 		float roll2 = Random::Range(0.0f, 1.0f);
 
+#if NO_ENCOUNT == 0
 		// エンカウント率を増加させる
-		m_encountRate += 0.05f; 
+		m_encountRate += 0.005f;
+#endif // NO_ENCOUNT
+
 
 		if (roll2 < m_encountRate)
 		{

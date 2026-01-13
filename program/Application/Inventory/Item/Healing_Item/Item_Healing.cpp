@@ -1,5 +1,6 @@
 #include "Item_Healing.h"
 #include "Application/Charactor/Player/Player.hpp"
+#include "Engine/Engine.hpp"
 
 void Inventory::Item_Healing::Use(Chara::CharaBase* character)
 {
@@ -12,5 +13,6 @@ void Inventory::Item_Healing::Use(Chara::CharaBase* character)
 
 	// プレイヤーの体力を回復する
 	character->Heal(m_heal);
-
+	std::string heal = std::to_string(m_heal);
+	CLI_ENGINE->GetView()->AddLine(character->GetName() + "は" + heal + "回復した。");
 }

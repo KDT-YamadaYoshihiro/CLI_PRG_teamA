@@ -127,7 +127,7 @@ Battle::ActionResult Battle::ActionSelector::SelectItem(std::span<const std::str
 	//	選択するまで無限ループ
 	while (true)
 	{
-		CLI_ENGINE->GetView()->AddLine("------魔法一覧------");
+		CLI_ENGINE->GetView()->AddLine("------アイテム一覧------");
 		for (size_t id = 0; id < ItemNames.size(); id++)
 		{
 			//	IDと魔法名を表示

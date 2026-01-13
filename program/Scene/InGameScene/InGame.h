@@ -33,6 +33,12 @@ class InGameScene : public SceneBase
 	/// </summary>
 	void CreateEnemy();
 
+	/// <summary>
+	/// ボスの生成
+	/// </summary>
+	void CreateBoss();
+
+
 public:
 	// コンストラクタ・デストラクタ
 	InGameScene();
@@ -73,6 +79,7 @@ private:
 	/// </summary>
 	EncountSystem encount;
 
+	std::unique_ptr<Inventory::InventoryManager> m_inventoryManager;
 
 
 	/// <summary>

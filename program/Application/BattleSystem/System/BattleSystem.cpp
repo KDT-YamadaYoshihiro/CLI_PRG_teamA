@@ -11,9 +11,9 @@
 #include "../Magic/Magic.h"
 
 /// <summary>
-/// ƒoƒgƒ‹’†‚Ìó‘ÔXV
+/// ãƒãƒˆãƒ«ä¸­ã®çŠ¶æ…‹æ›´æ–°
 /// </summary>
-void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara::Enemy*>& enemys)
+void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara::Enemy*>& enemys,Inventory::InventoryManager* inventoryManager)
 {
 	m_isFinishd = false;
 
@@ -25,49 +25,50 @@ void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara
 		return;
 	}
 
-	//	‘SÁ‚µ
+	//	å…¨æ¶ˆã—
 	CLI_ENGINE->GetView()->ClearLines();
 
 	CLI_ENGINE->GetView()->AddLine("-----------------");
 
-	//	ƒvƒŒƒCƒ„[‚ÌƒXƒe[ƒ^ƒX•\¦
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹è¡¨ç¤º
 	CLI_ENGINE->GetView()->AddLine(player->GetStatusString() + "\n");
-	//	“GƒXƒe[ƒ^ƒX•\¦
+	//	æ•µã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹è¡¨ç¤º
 	for (auto& enemy : enemys)
 	{
 		CLI_ENGINE->GetView()->AddLine(enemy->GetStatusString());
 	}
 
 	CLI_ENGINE->GetView()->AddLine("\n-----------------");
-	CLI_ENGINE->GetView()->AddLine("ƒvƒŒƒCƒ„[‚Ìƒ^[ƒ“");
+	CLI_ENGINE->GetView()->AddLine("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¿ãƒ¼ãƒ³");
 
-	//	ƒeƒXƒg—p‚Ìƒf[ƒ^
-	std::vector<std::string> Items;
-	Items.push_back("ƒ|[ƒVƒ‡ƒ“");
-	Items.push_back("ƒ|[ƒVƒ‡ƒ“");
-	Items.push_back("ƒ|[ƒVƒ‡ƒ“");
-	Items.push_back("ƒnƒCƒ|[ƒVƒ‡ƒ“");
+	//	ãƒ†ã‚¹ãƒˆç”¨ã®ãƒ‡ãƒ¼ã‚¿
+	//std::vector<std::string> Items;
+	//Items.push_back("ãƒãƒ¼ã‚·ãƒ§ãƒ³");
+	//Items.push_back("ãƒãƒ¼ã‚·ãƒ§ãƒ³");
+	//Items.push_back("ãƒãƒ¼ã‚·ãƒ§ãƒ³");
+	//Items.push_back("ãƒã‚¤ãƒãƒ¼ã‚·ãƒ§ãƒ³");
+
 
 	std::vector<std::string> magic; 
-	magic.push_back("ƒtƒ@ƒCƒA");
-	magic.push_back("ƒTƒ“ƒ_[");
-	magic.push_back("ƒtƒŠ[ƒU");
+	magic.push_back("ãƒ•ã‚¡ã‚¤ã‚¢");
+	magic.push_back("ã‚µãƒ³ãƒ€ãƒ¼");
+	magic.push_back("ãƒ•ãƒªãƒ¼ã‚¶");
 
-	//	ƒvƒŒƒCƒ„[‚Ìs“®‘I‘ğ
-	auto action = ActionSelector::SelectCommand(magic, Items);
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®è¡Œå‹•é¸æŠ
+	auto action = ActionSelector::SelectCommand(magic, inventoryManager->GetAllNames());
 
-	//	•s—v‚È•¶š—ñ‚Ìíœ
+	//	ä¸è¦ãªæ–‡å­—åˆ—ã®å‰Šé™¤
 	CLI_ENGINE->GetView()->ClearLines();
 
-	//	ƒvƒŒƒCƒ„[‚ÌƒXƒe[ƒ^ƒX•\¦
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹è¡¨ç¤º
 	CLI_ENGINE->GetView()->AddLine(player->GetStatusString() + "\n");
-	//	“GƒXƒe[ƒ^ƒX•\¦
+	//	æ•µã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹è¡¨ç¤º
 	for (auto& enemy : enemys)
 	{
 		CLI_ENGINE->GetView()->AddLine(enemy->GetStatusString());
 	}
 
-	//	s“®‚Ì‘I‘ğ‚É‚æ‚Á‚Ä“à—e‚ğ•ÏX‚·‚é
+	//	è¡Œå‹•ã®é¸æŠã«ã‚ˆã£ã¦å†…å®¹ã‚’å¤‰æ›´ã™ã‚‹
 	switch (action.command)
 	{
 	case Battle::ePlayerCommand::Attack:
@@ -77,6 +78,7 @@ void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara
 		Magic::MagicAction::MagicAttack(player, enemys, action.selectID);
 		break;
 	case Battle::ePlayerCommand::Item:
+		Battle::Action::ItemUse(player, inventoryManager,action.selectID);
 		break;
 
 	default:
@@ -84,55 +86,55 @@ void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara
 	};
 
 
-	//	“G‚Ì¶‘¶”»’è
-	//	‘S–Å‚µ‚Ä‚¢‚é‚Æ‚«
+	//	æ•µã®ç”Ÿå­˜åˆ¤å®š
+	//	å…¨æ»…ã—ã¦ã„ã‚‹ã¨ã
 	if (enemys.empty())
 	{
-		//	ƒoƒgƒ‹‚ğI—¹‚·‚é
+		//	ãƒãƒˆãƒ«ã‚’çµ‚äº†ã™ã‚‹
 		m_isFinishd = true;
 		return;
 	}
 
 	CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
 
-	//	“G‚Ìs“®iUŒ‚j
+	//	æ•µã®è¡Œå‹•ï¼ˆæ”»æ’ƒï¼‰
 	for (auto& enemy : enemys)
 	{
-		//	“G‚ÌUŒ‚‚Æƒ_ƒ[ƒWŒvZ
+		//	æ•µã®æ”»æ’ƒã¨ãƒ€ãƒ¡ãƒ¼ã‚¸è¨ˆç®—
 		auto damage = Battle::BattleCalc::CalcDamage(enemy->GetAttack(),player->GetDefence());
 		player->ApplyDamage(damage);
 
-		//	UŒ‚ƒƒO‚ğ—¬‚·
-		std::string log = "\n" + enemy->GetName() + "‚ÌUŒ‚";
+		//	æ”»æ’ƒãƒ­ã‚°ã‚’æµã™
+		std::string log = "\n" + enemy->GetName() + "ã®æ”»æ’ƒ";
 		CLI_ENGINE->GetView()->AddLine(log);
 		CLI_ENGINE->GetView()->Render();
 		CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
 		log.clear();
-		//	”í’eƒƒO‚ğ—¬‚·
-		log = player->GetName() + "‚É" + std::to_string(damage) + "‚Ìƒ_ƒ[ƒW\n";
+		//	è¢«å¼¾ãƒ­ã‚°ã‚’æµã™
+		log = player->GetName() + "ã«" + std::to_string(damage) + "ã®ãƒ€ãƒ¡ãƒ¼ã‚¸\n";
 		CLI_ENGINE->GetView()->AddLine(log);
 		CLI_ENGINE->GetView()->Render();
 		CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
 	}
 
-	//	•\¦
+	//	è¡¨ç¤º
 	CLI_ENGINE->GetView()->Render();
 
-	//	ƒvƒŒƒCƒ„[‚Ì‚ª€–S‚µ‚Ä‚¢‚½‚ç
-	//	ƒoƒgƒ‹I—¹
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãŒæ­»äº¡ã—ã¦ã„ãŸã‚‰
+	//	ãƒãƒˆãƒ«çµ‚äº†
 	if (player->IsDead())
 	{
 		m_isFinishd = true;
 		return;
 	}
 
-	//	ã‚É–ß‚é
+	//	ä¸Šã«æˆ»ã‚‹
 
 
-	//	ƒEƒFƒCƒg‚ğ‚©‚¯‚é
+	//	ã‚¦ã‚§ã‚¤ãƒˆã‚’ã‹ã‘ã‚‹
 	CLI_ENGINE->GetTimer()->Sleep(std::chrono::seconds(1));
 
-	//	ƒfƒoƒbƒN—p
+	//	ãƒ‡ãƒãƒƒã‚¯ç”¨
 #ifdef _DEBUG
 	if (_kbhit())
 	{
