@@ -1,6 +1,6 @@
-#include "Application/BattleSystem/System/BattleSystem.hpp"
+﻿#include "Application/BattleSystem/System/BattleSystem.hpp"
 #include "Engine/Engine.hpp"
-#include "Application/BattleSystem/calc/BattleCalc.hpp"
+#include"Application/BattleSystem/action/Calc/BattleCalc.hpp"
 #include "System/Input/Key.hpp"
 #include "System/Time/Time.hpp"
 
@@ -106,12 +106,14 @@ void Battle::BattleSystem::Update(Chara::Player* player, const std::vector<Chara
 
 		//	攻撃ログを流す
 		std::string log = "\n" + enemy->GetName() + "の攻撃";
+
 		CLI_ENGINE->GetView()->AddLine(log);
 		CLI_ENGINE->GetView()->Render();
 		CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
 		log.clear();
 		//	被弾ログを流す
 		log = player->GetName() + "に" + std::to_string(damage) + "のダメージ\n";
+
 		CLI_ENGINE->GetView()->AddLine(log);
 		CLI_ENGINE->GetView()->Render();
 		CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));

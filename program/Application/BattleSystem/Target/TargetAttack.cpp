@@ -1,28 +1,28 @@
-#include "TargetAttack.h"
+ï»¿#include "TargetAttack.h"
 #include "Application/Charactor/Player/Player.hpp"
 #include "Application/Charactor/Enemy/Enemy.h"
-#include "Application/BattleSystem/Calc/BattleCalc.hpp"
+#include"Application/BattleSystem/action/Calc/BattleCalc.hpp"
 #include "Engine/Engine.hpp"
 #include "Application/Inventory/Inventory/InventoryManager.hpp"
 
 void Battle::Action::Attack(Chara::Player* player, std::vector<Chara::Enemy*> enemyList)
 {
-	// cin‚ğg—p‚µ‚Ä“ü—Í
+	// cinã‚’ä½¿ç”¨ã—ã¦å…¥åŠ›
 	int number = enemyList.size();
 
 	if (enemyList.size() > 1)
 	{
 		std::string count = std::to_string(enemyList.size() - 1);
-		// ‘ÎÛ‚Ì‘I‘ğˆÄ“à
-		CLI_ENGINE->GetView()->AddLine("‘ÎÛ‚ğ‚O‚©‚ç" + count + "‚Ì’†‚©‚ç‘I‚ñ‚Å‚­‚¾‚³‚¢");
+		// å¯¾è±¡ã®é¸æŠæ¡ˆå†…
+		CLI_ENGINE->GetView()->AddLine("å¯¾è±¡ã‚’ï¼ã‹ã‚‰" + count + "ã®ä¸­ã‹ã‚‰é¸ã‚“ã§ãã ã•ã„");
 		CLI_ENGINE->GetView()->Render();
 		std::cin >> number;
-		// ‘I‘ğ”ÍˆÍ“à‚É‚È‚é‚Ü‚Åƒ‹[ƒv
+		// é¸æŠç¯„å›²å†…ã«ãªã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—
 		while (number >= enemyList.size())
 		{
-			// ‘ÎÛ‚Ì‘I‘ğˆÄ“à
-			//CLI_ENGINE->GetView()->AddLine("‘I‘ğ”ÍˆÍŠO‚Å‚·B‚à‚¤ˆê“x“ü—Í‚µ‚Ä‚­‚¾‚³‚¢");
-			std::cout << "‘I‘ğ”ÍˆÍŠO‚Å‚·B‚à‚¤ˆê“x“ü—Í‚µ‚Ä‚­‚¾‚³‚¢" << std::endl;
+			// å¯¾è±¡ã®é¸æŠæ¡ˆå†…
+			//CLI_ENGINE->GetView()->AddLine("é¸æŠç¯„å›²å¤–ã§ã™ã€‚ã‚‚ã†ä¸€åº¦å…¥åŠ›ã—ã¦ãã ã•ã„");
+			std::cout << "é¸æŠç¯„å›²å¤–ã§ã™ã€‚ã‚‚ã†ä¸€åº¦å…¥åŠ›ã—ã¦ãã ã•ã„" << std::endl;
 			//CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
 			std::cin >> number;
 		}
@@ -33,14 +33,14 @@ void Battle::Action::Attack(Chara::Player* player, std::vector<Chara::Enemy*> en
 	}
 
 
-    // ƒ_ƒ[ƒWŒvZ
+    // ãƒ€ãƒ¡ãƒ¼ã‚¸è¨ˆç®—
 	int damage = Battle::BattleCalc::CalcDamage(player->GetAttack(),enemyList[number]->GetDefence());
-	// ŒvZ’l‚ğ‘ÎÛ‚É—^‚¦‚éB
+	// è¨ˆç®—å€¤ã‚’å¯¾è±¡ã«ä¸ãˆã‚‹ã€‚
 	enemyList[number]->ApplyDamage(damage);
-	// •\¦—pƒ_ƒ[ƒW’l‚ğì¬
+	// è¡¨ç¤ºç”¨ãƒ€ãƒ¡ãƒ¼ã‚¸å€¤ã‚’ä½œæˆ
 	std::string log_damage = std::to_string(damage);
-	// ƒƒO‚ğo‚·
-	CLI_ENGINE->GetView()->AddLine("\n" + player->GetName() + "‚Í" + enemyList[number]->GetName() + "‚É" + log_damage + "‚ğ—^‚¦‚½B");
+	// ãƒ­ã‚°ã‚’å‡ºã™
+	CLI_ENGINE->GetView()->AddLine("\n" + player->GetName() + "ã¯" + enemyList[number]->GetName() + "ã«" + log_damage + "ã‚’ä¸ãˆãŸã€‚");
 	CLI_ENGINE->GetView()->Render();
 	CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
 
@@ -48,12 +48,12 @@ void Battle::Action::Attack(Chara::Player* player, std::vector<Chara::Enemy*> en
 
 void Battle::Action::ItemUse(Chara::Player* player, Inventory::InventoryManager* inventoryManager, int use_number)
 {
-	// ƒƒO‚ğo‚·
-	CLI_ENGINE->GetView()->AddLine("\n" + player->GetName() + "‚Í" + inventoryManager->GetAllNames()[use_number] + "‚ğg—p‚µ‚½B");
+	// ãƒ­ã‚°ã‚’å‡ºã™
+	CLI_ENGINE->GetView()->AddLine("\n" + player->GetName() + "ã¯" + inventoryManager->GetAllNames()[use_number] + "ã‚’ä½¿ç”¨ã—ãŸã€‚");
 	CLI_ENGINE->GetView()->Render();
 	CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
 
-	// ‘I‘ğƒAƒCƒeƒ€‚ğg—p
+	// é¸æŠã‚¢ã‚¤ãƒ†ãƒ ã‚’ä½¿ç”¨
 	inventoryManager->UseItem(use_number, player);
 
 }

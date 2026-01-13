@@ -1,27 +1,27 @@
-#include "Magic.h"
+ï»¿#include "Magic.h"
 #include "Application/Charactor/Player/Player.hpp"
 #include "Application/Charactor/Enemy/Enemy.h"
-#include "Application/BattleSystem/Calc/BattleCalc.hpp"
+#include "Application/BattleSystem/action/Calc/BattleCalc.hpp"
 #include "Engine/Engine.hpp"
 
 
 void Magic::MagicAction::MagicAttack(Chara::Player* player, std::vector<Chara::Enemy*> enemylist,int index)
 {
-	// cin‚ğg—p‚µ‚Ä“ü—Í
+	// cinã‚’ä½¿ç”¨ã—ã¦å…¥åŠ›
 	int number = enemylist.size();
 	if (enemylist.size() > 1)
 	{
 		std::string count = std::to_string(enemylist.size() - 1);
-		// ‘ÎÛ‚Ì‘I‘ğˆÄ“à
-		CLI_ENGINE->GetView()->AddLine("‘ÎÛ‚ğ‚O‚©‚ç" + count + "‚Ì’†‚©‚ç‘I‚ñ‚Å‚­‚¾‚³‚¢");
+		// å¯¾è±¡ã®é¸æŠæ¡ˆå†…
+		CLI_ENGINE->GetView()->AddLine("å¯¾è±¡ã‚’ï¼ã‹ã‚‰" + count + "ã®ä¸­ã‹ã‚‰é¸ã‚“ã§ãã ã•ã„");
 		CLI_ENGINE->GetView()->Render();
 		std::cin >> number;
-		// ‘I‘ğ”ÍˆÍ“à‚É‚È‚é‚Ü‚Åƒ‹[ƒv
+		// é¸æŠç¯„å›²å†…ã«ãªã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—
 		while (number >= enemylist.size())
 		{
-			// ‘ÎÛ‚Ì‘I‘ğˆÄ“à
-			//CLI_ENGINE->GetView()->AddLine("‘I‘ğ”ÍˆÍŠO‚Å‚·B‚à‚¤ˆê“x“ü—Í‚µ‚Ä‚­‚¾‚³‚¢");
-			std::cout << "‘I‘ğ”ÍˆÍŠO‚Å‚·B‚à‚¤ˆê“x“ü—Í‚µ‚Ä‚­‚¾‚³‚¢" << std::endl;
+			// å¯¾è±¡ã®é¸æŠæ¡ˆå†…
+			//CLI_ENGINE->GetView()->AddLine("é¸æŠç¯„å›²å¤–ã§ã™ã€‚ã‚‚ã†ä¸€åº¦å…¥åŠ›ã—ã¦ãã ã•ã„");
+			std::cout << "é¸æŠç¯„å›²å¤–ã§ã™ã€‚ã‚‚ã†ä¸€åº¦å…¥åŠ›ã—ã¦ãã ã•ã„" << std::endl;
 			//CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
 			std::cin >> number;
 		}
@@ -31,18 +31,18 @@ void Magic::MagicAction::MagicAttack(Chara::Player* player, std::vector<Chara::E
 		number = 0;
 	}
 
-	// –‚–@—p‚Ìƒ_ƒ[ƒWŒvZ
+	// é­”æ³•ç”¨ã®ãƒ€ãƒ¡ãƒ¼ã‚¸è¨ˆç®—
 	static Magic::Manager manager;
 	Data magicData = manager.GetMagicData(index);
 
-	// ŒvZ’l‚ğ‘ÎÛ‚É—^‚¦‚éB
+	// è¨ˆç®—å€¤ã‚’å¯¾è±¡ã«ä¸ãˆã‚‹ã€‚
 	int damage = Battle::BattleCalc::CalcMagicDamage(player->GetMagicAttack(), magicData.Power, enemylist[number]->GetDefence());
 
 	enemylist[number]->ApplyDamage(damage);
-	// •\¦—pƒ_ƒ[ƒW’l‚ğì¬
+	// è¡¨ç¤ºç”¨ãƒ€ãƒ¡ãƒ¼ã‚¸å€¤ã‚’ä½œæˆ
 	std::string log_damage = std::to_string(damage);
-	// ƒƒO‚ğo‚·
-	CLI_ENGINE->GetView()->AddLine("\n" + player->GetName() + "‚Í" + enemylist[number]->GetName() + "‚É" + magicData.Name + "‚Å" + log_damage + "‚ğ—^‚¦‚½B");
+	// ãƒ­ã‚°ã‚’å‡ºã™
+	CLI_ENGINE->GetView()->AddLine("\n" + player->GetName() + "ã¯" + enemylist[number]->GetName() + "ã«" + magicData.Name + "ã§" + log_damage + "ã‚’ä¸ãˆãŸã€‚");
 	CLI_ENGINE->GetView()->Render();
 	CLI_ENGINE->GetTimer()->Sleep(std::chrono::milliseconds(500));
 

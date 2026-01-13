@@ -69,6 +69,42 @@
     <ClCompile Include="program\System\CSV\MapLoder.cpp">
       <Filter>Program</Filter>
     </ClCompile>
+    <ClCompile Include="program\Application\BattleSystem\action\Executor\CommandExecutor.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Application\BattleSystem\System\BattleSystem.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Application\BattleSystem\Target\TargetAttack.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Application\Charactor\base\CharactorBase.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Application\Charactor\Factory\Factory.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Application\Inventory\Item\Healing_Item\Item_Healing.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Scene\GameClearScene\GameClear.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Scene\GameOverScene\GameOver.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Scene\InGameScene\InGame.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Scene\TitleScene\Title.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Application\BattleSystem\Magic\Magic.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Application\BattleSystem\Magic\Manager\MagicManager.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="program\System\Utility\Singleton.hpp">
@@ -119,7 +155,7 @@
     <ClInclude Include="program\Application\Charactor\Player\Player.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="program\Application\BattleSystem\Calc\BattleCalc.hpp">
+    <ClInclude Include="program\Application\BattleSystem\action\Calc\BattleCalc.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="program\Application\Charactor\base\CharactorBase.hpp">
@@ -144,6 +180,51 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="program\System\CSV\MapLoder.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\BattleSystem\action\Executor\CommandExecutor.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\BattleSystem\Encount\EncountSystem.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\BattleSystem\System\BattleSystem.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\BattleSystem\Target\TargetAttack.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\Charactor\Factory\Factory.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\Inventory\Item\base\Item.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\Inventory\Item\Healing_Item\Item_Healing.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\State\enum\StateEnum.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Scene\GameClearScene\GameClear.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Scene\GameOverScene\GameOver.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Scene\InGameScene\InGame.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Scene\TitleScene\Title.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\System\Utility\Random.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\BattleSystem\Magic\Magic.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Application\BattleSystem\Magic\Manager\MagicManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

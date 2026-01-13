@@ -136,6 +136,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="program\Application\BattleSystem\action\Executor\CommandExecutor.cpp" />
+    <ClCompile Include="program\Application\BattleSystem\Magic\Magic.cpp" />
+    <ClCompile Include="program\Application\BattleSystem\Magic\Manager\MagicManager.cpp" />
     <ClCompile Include="program\Application\BattleSystem\System\BattleSystem.cpp" />
     <ClCompile Include="program\Application\BattleSystem\Target\TargetAttack.cpp" />
     <ClCompile Include="program\Application\Charactor\base\CharactorBase.cpp" />
@@ -164,12 +166,14 @@
   <ItemGroup>
     <ClInclude Include="program\Application\BattleSystem\action\Executor\CommandExecutor.hpp" />
     <ClInclude Include="program\Application\BattleSystem\Encount\EncountSystem.h" />
+    <ClInclude Include="program\Application\BattleSystem\Magic\Magic.h" />
+    <ClInclude Include="program\Application\BattleSystem\Magic\Manager\MagicManager.h" />
     <ClInclude Include="program\Application\BattleSystem\System\BattleSystem.hpp" />
     <ClInclude Include="program\Application\BattleSystem\Target\TargetAttack.h" />
     <ClInclude Include="program\Application\Charactor\Factory\Factory.h" />
     <ClInclude Include="program\Application\Charactor\Player\Controller\PlayerController.hpp" />
     <ClInclude Include="program\Application\Charactor\Player\Player.hpp" />
-    <ClInclude Include="program\Application\BattleSystem\Calc\BattleCalc.hpp" />
+    <ClInclude Include="program\Application\BattleSystem\action\Calc\BattleCalc.hpp" />
     <ClInclude Include="program\Application\Charactor\base\CharactorBase.hpp" />
     <ClInclude Include="program\Application\Charactor\status\CharaStatus.hpp" />
     <ClInclude Include="program\Application\Inventory\Inventory\InventoryManager.hpp" />
